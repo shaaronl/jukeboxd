@@ -9,9 +9,13 @@
     "format": "npx prettier . --write",
     "lint": "npx eslint ."
   },
-  "workspaces":[
-      "packages/*"
+  "workspaces": [
+    "packages/*"
   ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "3.2.5"
+  },
+  "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
 }
