@@ -5,7 +5,8 @@ const ArtistSchema = new mongoose.Schema(
     "spotify_id": {type: String, unique:true},
     "artist_name": String,
     "artist_image": String,
-    "followers": Number
+    "followers": Number,
+    "popularity": Number
   },
   { collection: "artists" }
 );

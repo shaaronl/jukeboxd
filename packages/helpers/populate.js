@@ -10,7 +10,7 @@ curl -X POST "https://accounts.spotify.com/api/token" \
      -H "Content-Type: application/x-www-form-urlencoded" \
      -d "grant_type=client_credentials&client_id=your-client-id&client_secret=your-client-secret"
 */
-const access_token = "";
+const access_token = "BQCZqPYp_9bMddB-ZQQdaO8cNnWIQjqtv3UHtBdXfbJUsL3lL1yyXUM2V9orR5Mtkm5c3XvDkoa1zEzzA3xAeTkHzHdsvQ2BmMb-Ax22btLVsjJPUfw";
 
 // drop all the collections at the start
 mongoose
@@ -310,7 +310,8 @@ async function getAlbums() {
                 "album_cover": albumInfo.images[0].url,
                 "spotify_link": albumInfo.external_urls.spotify,
                 // maybe to hold the id of the reviews?
-                "reviews": []
+                "reviews": [],
+                "popularity": albumInfo.popularity,
             })
             await newAlbum.save();
         } catch (error) {
@@ -341,7 +342,8 @@ async function createNewArtist(id) {
         "spotify_id": data.id,
         "artist_name": data.name,
         "artist_image": data.images[0].url,
-        "followers": data.followers.total
+        "followers": data.followers.total,
+        "popularity": data.popularity
        });
     await newArtist.save();
 }
