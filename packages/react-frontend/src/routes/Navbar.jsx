@@ -15,7 +15,7 @@ export default function Navbar({ withLogo }) {
               <Link to="/">SIGN IN</Link>
             </li>
             <li>
-              <Link to="/">CREATE ACCOUNT</Link>
+              <Link to="/CreateAccount">CREATE ACCOUNT</Link>
             </li>
             <li>
               <Link to="/">USERNAME</Link>
