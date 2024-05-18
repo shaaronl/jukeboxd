@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
 
 const url = process.env.MONGO_URI;
 let connection;
@@ -10,7 +12,16 @@ let connection;
  */
 const connectDB = async () => {
   if (!connection) {
-    connection = await mongoose.connect(url);
+    try {
+      connection = await mongoose.connect(url, {
+        dbName: "Jukeboxd",
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      });
+      console.log("MongoDB connected successfully");
+    } catch (error) {
+      console.error("Error connecting to MongoDB:", error);
+    }
     return connection;
   }
 };
