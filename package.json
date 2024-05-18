@@ -20,6 +20,7 @@
   },
   "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
   "dependencies": {
+    "cors": "^2.8.5",
     "vite": "^5.2.11"
   }
 }

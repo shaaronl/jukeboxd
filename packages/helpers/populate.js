@@ -15,7 +15,7 @@ const access_token =
 
 // drop all the collections at the start
 mongoose
-  .connect("mongodb://localhost:27017/jukeboxd", {
+  .connect("mongodb://localhost:27017/Jukeboxd", {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
