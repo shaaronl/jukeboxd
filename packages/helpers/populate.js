@@ -11,15 +11,13 @@ curl -X POST "https://accounts.spotify.com/api/token" \
      -d "grant_type=client_credentials&client_id=your-client-id&client_secret=your-client-secret"
 */
 const access_token =
-  "BQC1m30odpbAswkEMkMCHfNEEnPyWvVc5l0f2Fj62-5MdHFLLohGriFHNMTKaPVaFQUTEbQAIlJy1hyHEIxBZFe_qMlIxFycqN7PTM6ubUMC_0K5hls";
-
-// drop all the collections at the start
-mongoose
-  .connect("mongodb://localhost:27017/jukeboxd", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .catch((error) => console.log(error));
+  // drop all the collections at the start
+  mongoose
+    .connect("mongodb://localhost:27017/Jukeboxd", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    })
+    .catch((error) => console.log(error));
 
 const db = mongoose.connection;
 await db.dropDatabase();
