@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-dotenv.config();
+import "dotenv/config";
 
 const url = process.env.MONGO_URI;
 let connection;
@@ -13,6 +12,7 @@ let connection;
 const connectDB = async () => {
   if (!connection) {
     try {
+      console.log(url);
       connection = await mongoose.connect(url, {
         dbName: "Jukeboxd",
         useNewUrlParser: true,
