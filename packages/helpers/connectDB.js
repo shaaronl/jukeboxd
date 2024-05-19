@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import "dotenv/config";
+import dotenv from "dotenv";
+dotenv.config();
 
 const url = process.env.MONGO_URI;
 let connection;
