@@ -8,7 +8,9 @@ export default function CreateAccount({ onClose }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch('/api/create-account', {
+        console.log(username);
+        console.log(password);
+        const response = await fetch('http://localhost:8000/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -16,7 +18,7 @@ export default function CreateAccount({ onClose }) {
             body: JSON.stringify({ username, password })
         });
         const result = await response.json();
-        if (result.success) {
+        if (result) {
             alert("Account created successfully!");
         } else {
             alert("Error creating account: " + result.message);
