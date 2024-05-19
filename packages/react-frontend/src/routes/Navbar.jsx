@@ -1,7 +1,19 @@
 import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import CreateAccount from './CreateAccount';
 import './Navbar.css'; 
 
 export default function Navbar({ withLogo }) {
+  const [showModal, setShowModal] = useState(false);
+
+    const handleOpenModal = () => {
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
     return (
       // condition for loading page w/o mini logo
         <nav className="navbar"> 
@@ -15,7 +27,8 @@ export default function Navbar({ withLogo }) {
               <Link to="/">SIGN IN</Link>
             </li>
             <li>
-              <Link to="/CreateAccount">CREATE ACCOUNT</Link>
+               <button onClick={handleOpenModal} className="open-modal-button">CREATE ACCOUNT</button>
+                {showModal && <CreateAccount onClose={handleCloseModal} />}
             </li>
             <li>
               <Link to="/">USERNAME</Link>
