@@ -15,6 +15,7 @@ console.log(process.env.MONGO_URI)
 const connectDB = async () => {
   if (!connection) {
     try {
+      console.log(url);
       connection = await mongoose.connect(url, {
         dbName: "Jukeboxd",
         useNewUrlParser: true,

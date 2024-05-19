@@ -5,7 +5,6 @@ import connectDB from "../helpers/connectDB.js";
 import bcrypt from "bcrypt"; // Import to encrypt passwords
 
 mongoose.set("debug", true);
-
 await connectDB();
 
 /* Users */
