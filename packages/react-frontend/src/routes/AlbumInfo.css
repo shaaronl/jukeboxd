@@ -1,0 +1,39 @@
+.content {
+    padding-top: 120px;
+    display: grid;
+    grid-template-columns: auto 1fr; 
+    gap: 20px;
+}
+
+img {
+    width: 400px;
+    height: auto;
+}
+
+.album-title {
+    font-size: 50px;
+}
+
+.track-list {
+    grid-column: 1; 
+    grid-row: 2; 
+}
+
+.popularity,
+.spotify-link,
+.artistname {
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+}
+
+a {
+    color: #1DB954;
+}
