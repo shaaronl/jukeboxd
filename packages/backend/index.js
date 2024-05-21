@@ -57,6 +57,72 @@ app.get("/albums", async (req, res) => {
   }
 });
 
+/* Artists */
+
+// Getting the artists
+app.get("/artists", async (req, res) => {
+  try {
+    const { spotify_id } = req.query;
+
+    if (spotify_id) {
+      // If a Spotify ID is provided, retrieve the specific artist
+      const artist =
+        await userServices.findArtistBySpotifyId(spotify_id);
+      if (!artist) {
+        return res
+          .status(404)
+          .json({ message: "Artist not found" });
+      }
+      return res.json(artist);
+    } else {
+      // If no Spotify ID is provided, retrieve all artists
+      const artists = await userServices.findAllArtists();
+      if (!artists || artists.length === 0) {
+        return res
+          .status(404)
+          .json({ message: "No artists found" });
+      }
+      return res.json(artists);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+/* Songs */
+
+// Getting the songs
+app.get("/songs", async (req, res) => {
+  try {
+    const { spotify_id } = req.query;
+
+    if (spotify_id) {
+      // If a Spotify ID is provided, retrieve the specific songs
+      const song =
+        await userServices.findSongsBySpotifyId(spotify_id);
+      if (!song) {
+        return res
+          .status(404)
+          .json({ message: "Song not found" });
+      }
+      return res.json(song);
+    } else {
+      // If no Spotify ID is provided, retrieve all songs
+      const songs = await userServices.findAllSongs();
+      if (!songs || songs.length === 0) {
+        return res
+          .status(404)
+          .json({ message: "No songs found" });
+      }
+      return res.json(songs);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 /* User Accounts */
 
 // Get all users
