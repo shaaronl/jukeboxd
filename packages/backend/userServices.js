@@ -22,20 +22,24 @@ async function findAllUsers() {
 
 async function addUser(username, password) {
   if (!username || !password) {
-    throw new Error('All fields are required');
+    throw new Error("All fields are required");
   }
 
   // Check if the username or email already exists
   const existingUser = await User.findOne({ username });
   if (existingUser) {
-    throw new Error('Username already taken');
+    throw new Error("Username already taken");
   }
-
+  // added a salt to the password
+  const salt = await bcrypt.genSalt(10);
   // Hash the password
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(password, salt);
 
   // Create a new user
-  const newUser = new User({ username, password: hashedPassword });
+  const newUser = new User({
+    username,
+    password: hashedPassword
+  });
   await newUser.save();
 
   return newUser;
