@@ -22,7 +22,7 @@ export default function Album() {
                         <div className="gallery-item" key={album._id}>
                             <Link to={`/album/${album._id}`} className="album-link" > {}
                                 <img src={album.album_cover} alt={`Album ${album.album_name}`} />
-                                <span>{album.album_name}</span>
+                                <span classname = "album-name">{album.album_name}</span>
                             </Link>
                         </div>
                     ))}

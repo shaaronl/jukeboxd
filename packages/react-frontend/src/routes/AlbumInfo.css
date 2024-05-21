@@ -29,7 +29,12 @@ img {
 
 .album-title {
     font-size: 70px;
+    margin: 5px 0;
+    max-width: 700px; 
+    overflow-wrap: break-word; 
+    word-break: normal; /* so words are not broken mid-word */
 }
+
 .album-details{
     font-size: 24px;
 }
