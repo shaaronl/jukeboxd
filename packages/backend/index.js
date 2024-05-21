@@ -44,13 +44,27 @@ app.get("/album/:id", async (req, res) => {
 // Getting all albums
 app.get("/albums", async (req, res) => {
   try {
+    const { spotify_id } = req.query;
+
+    if (spotify_id) {
+      // If a Spotify ID is provided, retrieve the specific artist
+      const album = await userServices.findAlbumBySpotifyId(spotify_id);
+      if (!album) {
+        return res
+          .status(404)
+          .json({ message: "Album not found" });
+      }
+      return res.json(album);
+    } else {
+
     const albums = await userServices.findAllAlbums();
-    if (!albums) {
+    if (!albums || albums.length === 0) {
       return res
         .status(404)
         .json({ message: "Album not found" });
     }
-    res.json(albums);
+    return res.json(albums);
+  }
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -66,8 +80,7 @@ app.get("/artists", async (req, res) => {
 
     if (spotify_id) {
       // If a Spotify ID is provided, retrieve the specific artist
-      const artist =
-        await userServices.findArtistBySpotifyId(spotify_id);
+      const artist = await userServices.findArtistBySpotifyId(spotify_id);
       if (!artist) {
         return res
           .status(404)
@@ -99,8 +112,7 @@ app.get("/songs", async (req, res) => {
 
     if (spotify_id) {
       // If a Spotify ID is provided, retrieve the specific songs
-      const song =
-        await userServices.findSongsBySpotifyId(spotify_id);
+      const song = await userServices.findSongsBySpotifyId(spotify_id);
       if (!song) {
         return res
           .status(404)

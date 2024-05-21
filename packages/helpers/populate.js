@@ -10,14 +10,14 @@ curl -X POST "https://accounts.spotify.com/api/token" \
      -H "Content-Type: application/x-www-form-urlencoded" \
      -d "grant_type=client_credentials&client_id=your-client-id&client_secret=your-client-secret"
 */
-const access_token =
-  // drop all the collections at the start
-  mongoose
-    .connect("mongodb://localhost:27017/Jukeboxd", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    })
-    .catch((error) => console.log(error));
+const access_token = "";
+// drop all the collections at the start
+mongoose
+  .connect("mongodb://localhost:27017/jukeboxd", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .catch((error) => console.log(error));
 
 const db = mongoose.connection;
 await db.dropDatabase();
@@ -71,10 +71,6 @@ const albumsList = [
     artistName: "Lana Del Rey"
   },
   { albumName: "Gumbo", artistName: "Young Nudy" },
-  {
-    albumName: "PARANOÏA, ANGELS, TRUE LOVE",
-    artistName: "Christine and the Queens"
-  },
   { albumName: "Gag Order", artistName: "Kesha" },
   {
     albumName: "Weathervanes",
@@ -383,7 +379,11 @@ const albumsList = [
   },
   { albumName: "Growth", artistName: "Kareem Ali" },
   { albumName: "Love Is The King", artistName: "Jeff Tweedy" },
-  { albumName: "Live Forever", artistName: "Bartees Strange" }
+  { albumName: "Live Forever", artistName: "Bartees Strange" },
+  {
+    albumName: "HIT ME HARD AND SOFT",
+    artistName: "Billie Eilish"
+  }
 ];
 
 async function getAlbums() {
@@ -498,7 +498,8 @@ async function createNewArtist(id) {
     artist_name: data.name,
     artist_image: data.images[0].url,
     followers: data.followers.total,
-    popularity: data.popularity
+    popularity: data.popularity,
+    genres: data.genres
   });
   await newArtist.save();
 }

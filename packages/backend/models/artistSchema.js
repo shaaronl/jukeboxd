@@ -2,11 +2,12 @@ import mongoose from "mongoose";
 
 const ArtistSchema = new mongoose.Schema(
   {
-    "spotify_id": {type: String, unique:true},
-    "artist_name": String,
-    "artist_image": String,
-    "followers": Number,
-    "popularity": Number
+    spotify_id: { type: String, unique: true },
+    artist_name: String,
+    artist_image: String,
+    followers: Number,
+    popularity: Number,
+    genres: [String]
   },
   { collection: "artists" }
 );
