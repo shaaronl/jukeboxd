@@ -30,10 +30,9 @@ async function addUser(username, password) {
   if (existingUser) {
     throw new Error("Username already taken");
   }
-  // added a salt to the password
-  const salt = await bcrypt.genSalt(10);
+
   // Hash the password
-  const hashedPassword = await bcrypt.hash(password, salt);
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   // Create a new user
   const newUser = new User({

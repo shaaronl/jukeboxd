@@ -1,5 +1,9 @@
 import dotenv from "dotenv";
 dotenv.config();
+import connectDB from "../helpers/connectDB.js";
+import User from "./models/userSchema.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 // function to generate Access tokens
 // takes in a username
@@ -47,20 +51,24 @@ export function authenticateUser(req, res, next) {
 }
 
 export async function loginUser(req, res) {
-  const { username, pwd } = req.body; // from form
+  const username = req.body.username;
+  const pwd = req.body.password;
   await connectDB();
   const retrievedUser = await User.findOne({ username });
 
+  console.log(pwd);
   if (!retrievedUser) {
     // invalid username
     res.status(401).send("Unauthorized");
   } else {
     bcrypt
-      .compare(pwd, retrievedUser.hashedPassword)
+      .compare(pwd, retrievedUser.password)
       .then((matched) => {
         if (matched) {
           generateAccessToken(username).then((token) => {
-            res.status(200).send({ token: token });
+            res
+              .status(200)
+              .send({ token: token, username: username });
           });
         } else {
           // invalid password

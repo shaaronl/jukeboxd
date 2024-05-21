@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import userServices from "./userServices.js";
-import { loginUser } from "../helpers/auth.js";
+import { loginUser } from "./auth.js";
 
 const app = express();
 const port = 8000;
