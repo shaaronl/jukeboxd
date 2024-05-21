@@ -6,6 +6,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    /* added this b/c it the albums were all skewed towards the left, but could just be only affecting me */
+    padding-left: 94px;
 }
 .gallery-item {
     width: calc(33.33% - 10px); 
