@@ -24,7 +24,7 @@ app.listen(port, () => {
 /* Albums */
 
 // Getting a single album
-app.get("/album/:id", async (req, res) => {
+app.get("/albums/:id", async (req, res) => {
   try {
     const album = await userServices.findAlbumById(
       req.params.id

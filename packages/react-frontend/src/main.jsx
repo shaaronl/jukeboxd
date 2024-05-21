@@ -34,12 +34,10 @@ const router = createBrowserRouter([
     path: "CreateAccount",
     element: <CreateAccount />
   },
-  //
   {
     path: "CreateReview",
     element: <CreateReview />
   },
-  //
   {
     path: "Album/:id", 
     element: <AlbumInfo />
