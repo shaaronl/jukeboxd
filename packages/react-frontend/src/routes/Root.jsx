@@ -1,7 +1,7 @@
 import "../index.css";
 import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
-import "./FooterFiles/termscond.css"
+
 export default function Root() {
     return (
         <div class ="loading-text">
