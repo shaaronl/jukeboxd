@@ -1,0 +1,42 @@
+.content {
+    padding-top: 120px; 
+}
+.gallery-container {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* added this b/c it the albums were all skewed towards the left, but could just be only affecting me */
+    padding-left: 94px;
+}
+.gallery-item {
+    width: calc(33.33% - 10px); 
+    margin-bottom: 25px; 
+    text-align: center;
+    flex: 0 0 calc(33.33% - 10px);
+}
+.gallery-item img {
+    width: 300px; 
+    height: auto;
+    border-radius: 5px;
+    transition: transform 0.2s ease;
+}
+.gallery-item img:hover {
+    transform: scale(1.05);
+}
+.gallery-item span {
+    display: block;
+    margin-top: 5px;
+    font-size: 25px;
+    color: #ffffff;
+    font-family: 'Bebas Neue', sans-serif;
+}
+.album-link {
+    text-decoration: none;
+}
+.album-name{
+    max-width: 270px; 
+    margin: 5px 0;
+    overflow-wrap: break-word; 
+    word-break: normal; /* so words are not broken mid-word */
+}

@@ -8,10 +8,11 @@ import {
 import "./index.css";
 import ErrorPage from "./ErrorPage";
 import Album from "./routes/Album";
+import AlbumInfo from "./routes/AlbumInfo";
 import MyReviews from "./routes/MyReviews.jsx";
 import CreateReview from "./routes/CreateReview.jsx";
 import CreateAccount from "./routes/CreateAccount.jsx";
-import FooterContainer from "./routes/Footer/container.jsx";
+
 
 // import App from './App.jsx';
 
@@ -33,15 +34,14 @@ const router = createBrowserRouter([
     path: "CreateAccount",
     element: <CreateAccount />
   },
-  //
   {
     path: "CreateReview",
     element: <CreateReview />
   },
   {
-    path: "Footer",
-    element: <FooterContainer />
-  }
+    path: "Album/:id", 
+    element: <AlbumInfo />
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
