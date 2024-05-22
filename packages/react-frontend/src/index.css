@@ -1,47 +1,50 @@
-/* GLOBAL VAR */
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Music&display=swap');
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  /* font-family: 'BebasNeue', sans-serif;
-  line-height: 1.5;
-  font-weight: 400; */
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #771f1f;
   background-image: linear-gradient(45deg, #8A0404, #240101);
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 body {
   margin: 0;
   display: flex;
-  justify-content: center;
-  align-items: center; 
+  flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
 }
-/* text on loading page */
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .loading-text {
   display: flex;
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center; 
-  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  text-align: center;
+  padding: 0px;
 }
-h1,h2{
+
+h1, h2 {
   margin: 0;
   padding: 0.5;
 }
+
 h2 {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 4.3em;
@@ -50,9 +53,52 @@ h2 {
 
 #logo-main {
   background-image: linear-gradient(45deg, #E4BABA, #7E6767);
-  -webkit-background-clip: text; 
-  -webkit-text-fill-color: transparent; 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 240px; 
+  font-size: 240px;
   font-weight: bold;
+}
+
+footer {
+  background-color: #8A0404;
+  padding-top: 6px; /* Only top padding */
+  width: 100%;
+  box-sizing: content-box; /* Ensures padding is included in the width */
+  margin-top: 10%; /* Pushes footer to the bottom */
+  padding-bottom: 10px; /* Ensure no padding at the bottom */
+  left: 0;
+  right: 0;
+  position: relative;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+.footer-column {
+  flex: 1;
+  text-align: left;
+}
+
+.footer-column h3 {
+  margin-bottom: 10px;
+}
+
+.footer-column a {
+  display: block;
+  color: #181818;
+  text-decoration: none;
+  margin-bottom: 5px;
+  font-family: 'Music';
+  
+}
+
+.footer-column a:hover {
+  text-decoration: underline;
 }
