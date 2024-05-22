@@ -3,9 +3,11 @@ import Navbar from "./Navbar";
 import Rating from "@mui/material/Rating";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import "./CreateReview.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function CreateReview() {
+  const navigate = useNavigate();
+
   const { id } = useParams(); // Get the album id from the URL
   const [album, setAlbum] = useState({});
   const [artist, setArtist] = useState("");
@@ -67,10 +69,28 @@ export default function CreateReview() {
     setReviewText(e.target.value);
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(rating);
-    console.log(reviewText);
+    const response = await fetch(
+      `http://localhost:8000/review/${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          rating: rating,
+          content: reviewText,
+          username: localStorage.getItem("username")
+        })
+      }
+    );
+    if (!response) {
+      throw Error("Error adding review");
+    } else {
+      console.log("here");
+      navigate(`/album/${album._id}`);
+    }
   }
 
   if (!album || !artist) return <div>Loading...</div>;

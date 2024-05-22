@@ -28,7 +28,6 @@ export default function Navbar({ withLogo }) {
   const token = localStorage.getItem("token");
   const username = localStorage.getItem("username");
 
-  console.log(token, username);
   return (
     // condition for loading page w/o mini logo
     <nav className="navbar">

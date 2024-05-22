@@ -10,7 +10,15 @@ const AlbumSchema = new mongoose.Schema({
   album_cover: String,
   spotify_link: String,
   // maybe to hold the id of the reviews?
-  reviews: [{ type: mongoose.Types.ObjectId }],
+  reviews: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Reviews"
+      }
+    ],
+    default: []
+  },
   popularity: Number
 });
 
