@@ -21,7 +21,59 @@ app.listen(port, () => {
 
 /** Routes **/
 
-/* Albums */
+// getting reviews by album id 
+app.get("/reviews/albums/:id", async (req, res) => {
+  try {
+    const review = await userServices.findReviewsByAlbumId(
+      req.params.id
+    );
+    if (!review) {
+      return res
+        .status(404)
+        .json({ message: "review not found" });
+    }
+    res.json(review);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// getting reviews by user id -- currently not working.
+app.get("/reviews/users/:id", async (req, res) => {
+  try {
+    const review = await userServices.findReviewsByWrittenBy(
+      req.params.id
+    );
+    if (!review) {
+      return res
+        .status(404)
+        .json({ message: "review not found" });
+    }
+    res.json(review);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+//getting all reviews 
+app.get("/reviews/", async (req, res) => {
+  try {
+    const review = await userServices.findAllReviews(
+      req.params.id
+    );
+    if (!review) {
+      return res
+        .status(404)
+        .json({ message: "Reviews not found" });
+    }
+    res.json(review);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
 
 // Getting a single album
 app.get("/albums/:id", async (req, res) => {

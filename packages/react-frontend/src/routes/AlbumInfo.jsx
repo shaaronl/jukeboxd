@@ -73,6 +73,21 @@ export default function AlbumInfo() {
   if (error) return <div>Error: {error}</div>;
   if (!album || !artist) return <div>Loading...</div>;
 
+  function fetchReviewById(id){
+    return fetch(`http://localhost:8000/reviews/${id}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error('Error fetching album:', error);
+        throw error;
+      });
+  }
+
+
   return (
     <div className="album-info">
       <Navbar withLogo={true} />

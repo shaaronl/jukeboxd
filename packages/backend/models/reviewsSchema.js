@@ -8,10 +8,10 @@ const ReviewsSchema = new mongoose.Schema(
         "rating": Number,
         "content": String,
         "likes": Number,
-        "album_id": {type: ObjectId},
+        "album_id":{type: ObjectId},
     }
     );
   
-  const reviews = mongoose.model("Reviews", ReviewsSchema);
+  const Reviews = mongoose.model("Reviews", ReviewsSchema);
   
-  export default ReviewsSchema;
+  export default Reviews;
