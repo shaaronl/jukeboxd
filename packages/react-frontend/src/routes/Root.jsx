@@ -1,5 +1,7 @@
 import "../index.css";
 import Navbar from "./Navbar";
+import { Link } from "react-router-dom";
+import "./FooterFiles/termscond.css"
 export default function Root() {
     return (
         <div class ="loading-text">
@@ -11,22 +13,21 @@ export default function Root() {
                 <div className="footer-container">
                 <div className="footer-column">
                         <h3>Help</h3>
-                        <a href="#">Story</a>
-                        <a href="#">Etc</a>
+                        <a href="#">Creating An Account</a>
+                        <a href="#">General</a>
                     </div>
                     <div className="footer-column">
                         <h3>About Us</h3>
-                        <a href="#">Story</a>
-                        <a href="#">Etc</a>
+                        <a href="#">Our Story</a>
                     </div>
                     <div className="footer-column">
                         <h3>FAQs</h3>
                         <a href="#">Click here</a>
                     </div>
                     <div className="footer-column">
+                      
                         <h3>Terms and Conditions</h3>
-                        <a href="#">Story</a>
-                        <a href="#">Etc</a>
+                        <Link to="/terms-and-conditions">Click Here</Link> 
                     </div>
                     <div className="footer-column">
                         <h3>Contact Us</h3>
