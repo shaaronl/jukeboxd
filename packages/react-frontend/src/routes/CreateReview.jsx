@@ -1,12 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import Rating from "@mui/material/Rating";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import "./CreateReview.css";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function CreateReview() {
+  const navigate = useNavigate();
+
+  const { id } = useParams(); // Get the album id from the URL
+  const [album, setAlbum] = useState({});
+  const [artist, setArtist] = useState("");
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
+
+  useEffect(() => {
+    fetchAlbumById(id)
+      .then((data) => {
+        console.log(data);
+        setAlbum(data);
+        fetchArtistBySpotifyId(data.artists[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [id]);
+
+  // took from albuminfo. Get the album by id first to get image and other data
+  function fetchAlbumById(id) {
+    return fetch(`http://localhost:8000/albums/${id}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `Network response was not ok: ${response.statusText}`
+          );
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        console.error("Error fetching album:", error);
+        throw error;
+      });
+  }
+
+  // also taken from albumInfo
+  async function fetchArtistBySpotifyId(spotifyId) {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/artists?spotify_id=${spotifyId}`
+      );
+      if (!response.ok) {
+        throw new Error(
+          `Network response was not ok: ${response.statusText}`
+        );
+      }
+      const artistData = await response.json();
+      setArtist(artistData);
+    } catch (error) {
+      console.error("Error fetching artist:", error);
+    }
+  }
 
   function updateRating(value) {
     setRating(value);
@@ -16,40 +69,48 @@ export default function CreateReview() {
     setReviewText(e.target.value);
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(rating);
-    console.log(reviewText);
+    const response = await fetch(
+      `http://localhost:8000/review/${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          rating: rating,
+          content: reviewText,
+          username: localStorage.getItem("username")
+        })
+      }
+    );
+    if (!response) {
+      throw Error("Error adding review");
+    } else {
+      console.log("here");
+      navigate(`/album/${album._id}`);
+    }
   }
 
-  // note dummy data for now till we find out how we're gonna pass info in
-  const albumData = {
-    _id: { $oid: "664591cc2febc53240b7275b" },
-    spotify_id: "07w0rG5TETcyihsEIZR3qG",
-    album_name: "SOS",
-    release_date: "2022-12-09",
-    artists: ["7tYKF4w9nC0nq9CsPZTHyP"],
-    // artist name isn't actually a field, but Idk if that's passed in or we need to look in database for it
-    artist_name: "SZA",
-    album_cover:
-      "https://i.scdn.co/image/ab67616d0000b27370dbc9f47669d120ad874ec1"
-  };
+  if (!album || !artist) return <div>Loading...</div>;
+
   return (
     <div>
       <Navbar withLogo={true} />
       <div className="createReview">
         <img
-          src={albumData.album_cover}
-          alt={albumData.album_name + "cover"}
+          src={album.album_cover}
+          alt={album.album_name + "cover"}
           className="coverImage"
         />
         <form className="reviewRight" onSubmit={handleSubmit}>
           <p>I STREAMED...</p>
-          <h2 className="albumName">{albumData.album_name}</h2>
+          <h2 className="albumName">{album.album_name}</h2>
           <p>
-            {albumData.release_date.split("-")[0] +
+            {album.release_date.split("-")[0] +
               " " +
-              albumData.artist_name}
+              artist.artist_name}
           </p>
           <textarea
             placeholder="Add a review"
