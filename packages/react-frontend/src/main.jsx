@@ -35,13 +35,13 @@ const router = createBrowserRouter([
     element: <CreateAccount />
   },
   {
-    path: "CreateReview",
+    path: "CreateReview/:id",
     element: <CreateReview />
   },
   {
-    path: "Album/:id", 
+    path: "Album/:id",
     element: <AlbumInfo />
-  },
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
