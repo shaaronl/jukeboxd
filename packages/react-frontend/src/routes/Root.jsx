@@ -1,6 +1,7 @@
 import "../index.css";
 import Navbar from "./Navbar";
-import FooterContainer from "./Footer/container";
+import { FooterContainer } from "./Footer/container";
+
 export default function Root() {
     return (
         <div class ="loading-text">
