@@ -127,7 +127,7 @@ async function findSongsBySpotifyId(spotify_id) {
 
 async function findReviewsByAlbumId(album_id){
   try {
-    const review = await Reviews.findOne({album_id});
+    const review = await Reviews.find({album_id});
     return review;
   } catch (error) {
     console.error("Error finding album:", error);
@@ -147,9 +147,9 @@ async function findAllReviews() {
 }
 
 // function to find reviews by userId
-async function findReviewsByWrittenBy(written_by) {
+async function findReviewsByWrittenBy(userId) {
   try {
-    const reviews = await Reviews.findById({written_by});
+    const reviews = await Reviews.find({written_by:userId});
     console.log("Found reviews:", reviews);
     return reviews;
   } catch (error) {
