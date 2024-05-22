@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CreateAccount from "./CreateAccount";
 import "./Navbar.css";
 import SignIn from "./SignIn";
@@ -8,6 +8,13 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 export default function Navbar({ withLogo }) {
   const [showModal, setShowModal] = useState(false);
   const [showModalSignIn, setShowModalSignIn] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [username, setUsername] = useState(localStorage.getItem("username"));
+
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+    setUsername(localStorage.getItem("username"));
+  }, []);
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -25,12 +32,15 @@ export default function Navbar({ withLogo }) {
     setShowModalSignIn(false);
   };
 
-  const token = localStorage.getItem("token");
-  const username = localStorage.getItem("username");
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    setToken(null);
+    setUsername(null);
+    window.location.href = "/"; //directing back to home page after logout  
+  };
 
-  console.log(token, username);
   return (
-    // condition for loading page w/o mini logo
     <nav className="navbar">
       {withLogo && (
         <div className="navbar-logo">
@@ -40,7 +50,8 @@ export default function Navbar({ withLogo }) {
         </div>
       )}
       <ul className="navbar-links">
-        {token === null || token == "null" ? (
+        {!token || token === "null" ? (
+        // everything that shows up when not logged in:
           <>
             <li>
               <button
@@ -49,49 +60,39 @@ export default function Navbar({ withLogo }) {
               >
                 SIGN IN
               </button>
-              {showModalSignIn && (
-                <SignIn onClose={handleCloseModalSignIn} />
-              )}
+              {showModalSignIn && <SignIn onClose={handleCloseModalSignIn} />}
             </li>
             <li>
-              <button
-                onClick={handleOpenModal}
-                className="open-modal-button"
-              >
+              <button onClick={handleOpenModal} className="open-modal-button">
                 CREATE ACCOUNT
               </button>
-              {showModal && (
-                <CreateAccount onClose={handleCloseModal} />
-              )}
+              {showModal && <CreateAccount onClose={handleCloseModal} />}
+            </li>
+            <li>
+              <Link to="/Albums">ALBUMS</Link>
             </li>
           </>
-        ) : (
-          <li>
-            <Link to="/">
-              <AccountCircleIcon></AccountCircleIcon>
-              {username}
-            </Link>
-          </li>
-        )}
-
-        <li>
-          <Link to="/Albums">ALBUMS</Link>
-        </li>
-        <li>
-          <Link to="/MyReviews">MY REVIEWS</Link>
-        </li>
-        {(token !== null || token !== "null") && (
-          <li>
-            <Link
-              onClick={() => {
-                localStorage.setItem("token", null);
-                localStorage.setItem("username", null);
-                window.location.reload();
-              }}
-            >
-              LOGOUT
-            </Link>
-          </li>
+        ) : ( 
+        // everything that shows when logged in:
+          <>
+            <li>
+              <Link to="/">
+                <AccountCircleIcon />
+                {username}
+              </Link>
+            </li>
+            <li>
+              <Link to="/Albums">ALBUMS</Link>
+            </li>
+            <li>
+              <Link to="/MyReviews">MY REVIEWS</Link>
+            </li>
+            <li>
+              <Link onClick={handleLogout} className="logout-button">
+                LOGOUT
+              </Link>
+            </li>
+          </>
         )}
       </ul>
     </nav>
