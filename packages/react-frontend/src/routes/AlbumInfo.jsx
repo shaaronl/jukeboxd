@@ -7,19 +7,36 @@ import { Link } from "react-router-dom";
 export default function AlbumInfo() {
   const { id } = useParams(); // Get the album id from the URL
   const [album, setAlbum] = useState(null);
-  const [error, setError] = useState(null);
   const [artist, setArtist] = useState(null);
   const [songs, setSongs] = useState([]); // State to hold the song data
+  const [reviews, setReviews] = useState([]); // state to hold array of reviews
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchAlbumById(id)
       .then((data) => {
         setAlbum(data);
+        fetchReviewsByAlbumId(data._id);
         setArtist(data.artists[0]);
         setSongs(data.track_list); // Pass the track_list to fetchSongBySpotifyId
       })
       .catch((error) => setError(error.message));
   }, [id]);
+
+
+  async function fetchReviewsByAlbumId(albumId) {
+    try {
+      const response = await fetch(`http://localhost:8000/reviews/albums/${albumId}`);
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      const reviewData = await response.json();
+      setReviews(reviewData);
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+      setError(error.message);
+    }
+  }
 
   function fetchAlbumById(id) {
     return fetch(`http://localhost:8000/albums/${id}`)
@@ -37,8 +54,34 @@ export default function AlbumInfo() {
       });
   }
 
+  function calculateAverage(reviews){
+      if(reviews.length === 0) return 0;
+      // .reduce , iterates through array of reviews and sums up all ratings
+      const totalRating = reviews.reduce((sum, review)=> sum + review.rating, 0);
+      return totalRating / reviews.length;
+  }
+
+  function getStarRating(rating){
+    
+    const fullStars = Math.floor(rating);
+    const halfStar = rating % 1 >= 0.5 ? 1: 0;
+    const emptyStars = 5 - (fullStars + halfStar)
+    // half star is just going to be empty for now
+    return '★'.repeat(fullStars) + (halfStar ? '★' : '') + '☆'.repeat(emptyStars);
+  }
+
   if (error) return <div>Error: {error}</div>;
   if (!album || !artist) return <div>Loading...</div>;
+
+
+  // Calculate the average rating
+  const avgRating = reviews.length > 0
+    ? (reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length).toFixed(1)
+    : "No reviews";
+
+  const starRating = avgRating !== "No reviews" 
+    ? getStarRating(parseFloat(avgRating))
+    : '☆☆☆☆☆';
 
   return (
     <div className="album-info">
@@ -65,8 +108,10 @@ export default function AlbumInfo() {
           <div className="album-details">
             <h2 className="album-title">{album.album_name}</h2>
             <p>
-              {album.release_year} {artist.artist_name} |{" "}
-              <span className="rating-stars"> 3.0 ★★★☆☆ </span>
+              {album.release_date.split("-")[0] + " "}{artist.artist_name} |{"  "}
+              <span className="rating-stars">
+                {starRating} {avgRating !== "No reviews" && avgRating}
+              </span>
             </p>
             <p>{album.description}</p>
             <Link to={`/CreateReview/${album._id}`}>
@@ -77,64 +122,20 @@ export default function AlbumInfo() {
           </div>
           <div className="reviews">
             <h3>Reviews</h3>
-            <div className="review">
-              <span className="rating-stars">★★☆☆☆</span>
-              <p>mediocre at best.</p>
-            </div>
-            <div className="review">
-              <span className="rating-stars">★★★★★</span>
-              <p>I loved this album!!</p>
-            </div>
-            <div className="review">
-              <span className="rating-stars">☆☆☆☆☆</span>
-              <p>wish i didn't have ears...</p>
-            </div>
-            <div className="review">
-              <span className="rating-stars">★★★★★</span>
-              <p>
-                When I first listened to this album, I was
-                immediately struck by its depth and complexity.
-                It's not often that you come across an album
-                that manages to capture such a wide range of
-                emotions and experiences in a way that feels
-                both personal and universal. From the first
-                track to the last, this album takes you on a
-                journey through love, loss, joy, and sorrow, and
-                it does so with a level of artistry that is
-                truly remarkable. The opening track, "Ethereal
-                Beginnings," sets the tone perfectly. With its
-                haunting melodies and introspective lyrics, it
-                draws you in and prepares you for what's to
-                come. The artist's voice is both powerful and
-                fragile, conveying a sense of vulnerability that
-                is incredibly moving. As the album progresses,
-                we are treated to a variety of musical styles
-                and influences, from the upbeat and infectious
-                "Dance of the Heart" to the raw and gritty
-                "Broken Dreams." One of the standout tracks for
-                me is "Solitude in the City." This song
-                perfectly encapsulates the feeling of being
-                alone in a crowd, with its poignant lyrics and
-                beautiful instrumental arrangement. The use of
-                strings and piano in this track is particularly
-                effective, adding a layer of depth and emotion
-                that is simply stunning. Another highlight is
-                "Requiem for Love," a powerful ballad that
-                explores the pain of lost love. The artist's
-                vocal performance on this track is nothing short
-                of breathtaking, and the orchestral backing adds
-                a sense of grandeur and drama that elevates the
-                song to another level. It's a track that I found
-                myself returning to again and again, each time
-                finding something new to appreciate. The
-                production on this album is also top-notch. Each
-                track is meticulously crafted, with a level of
-                attention to detail that is truly impressive.
-                The sound quality is crisp and clear, allowing
-                you to fully appreciate the intricate
-                arrangements and subtle nuances in the music.
-              </p>
-            </div>
+            {reviews.length === 0 ? (
+              <p>No reviews yet. Be the first to review!</p>
+            ) : (
+              reviews.map((review) => (
+                <div key={review._id} className="review">
+                  <span className="rating-stars">
+                    {Array.from({ length: 5 }, (_, i) =>
+                      i < review.rating ? "★" : "☆"
+                    ).join("")}
+                  </span>
+                  <p>{review.content}</p>
+                </div>
+              ))
+            )}
           </div>
           <div className="popularity">
             <h3>Popularity</h3>
