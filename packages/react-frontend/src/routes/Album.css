@@ -40,3 +40,25 @@
     overflow-wrap: break-word; 
     word-break: normal; /* so words are not broken mid-word */
 }
+
+.filter-container {
+    position: absolute;
+    top: 150px; /* Distance from the top */
+    left: 140px; /* Distance from the right */
+}
+
+select {
+    padding: 10px;
+    height: 40px;
+    border: 2px solid #fffcfc; /* Border style */
+    background-color: transparent; /* Background color */
+    font-size: 16px; /* Font size */
+    color: #fffcfc;
+    outline: none; /* Remove default outline */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: border-color 0.3s ease-in-out; /* Transition effect on border color change */
+}
+
+select:hover {
+    background-color: rgba(255, 255, 255, 0.283);
+}
