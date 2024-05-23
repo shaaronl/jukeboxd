@@ -1,37 +1,85 @@
-import { Link } from 'react-router-dom';
-import React, { useState } from "react";
-import CreateAccount from './CreateAccount';
-import './Navbar.css'; 
+import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import CreateAccount from "./CreateAccount";
+import "./Navbar.css";
+import SignIn from "./SignIn";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 export default function Navbar({ withLogo }) {
   const [showModal, setShowModal] = useState(false);
+  const [showModalSignIn, setShowModalSignIn] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [username, setUsername] = useState(localStorage.getItem("username"));
 
-    const handleOpenModal = () => {
-        setShowModal(true);
-    };
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+    setUsername(localStorage.getItem("username"));
+  }, []);
 
-    const handleCloseModal = () => {
-        setShowModal(false);
-    };
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
 
-    return (
-      // condition for loading page w/o mini logo
-        <nav className="navbar"> 
-          {withLogo && (
-            <div className="navbar-logo"> 
-              <Link id = 'small-logo' to="/">JUKEBOXD</Link>
-            </div>
-          )}
-          <ul className="navbar-links"> 
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleOpenModalSignIn = () => {
+    setShowModalSignIn(true);
+  };
+
+  const handleCloseModalSignIn = () => {
+    setShowModalSignIn(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    setToken(null);
+    setUsername(null);
+    window.location.href = "/"; //directing back to home page after logout  
+  };
+
+  return (
+    <nav className="navbar">
+      {withLogo && (
+        <div className="navbar-logo">
+          <Link id="small-logo" to="/">
+            JUKEBOXD
+          </Link>
+        </div>
+      )}
+      <ul className="navbar-links">
+        {!token || token === "null" ? (
+        // everything that shows up when not logged in:
+          <>
             <li>
-              <Link to="/">SIGN IN</Link>
+              <button
+                onClick={handleOpenModalSignIn}
+                className="open-modal-button"
+              >
+                SIGN IN
+              </button>
+              {showModalSignIn && <SignIn onClose={handleCloseModalSignIn} />}
             </li>
             <li>
-               <button onClick={handleOpenModal} className="open-modal-button">CREATE ACCOUNT</button>
-                {showModal && <CreateAccount onClose={handleCloseModal} />}
+              <button onClick={handleOpenModal} className="open-modal-button">
+                CREATE ACCOUNT
+              </button>
+              {showModal && <CreateAccount onClose={handleCloseModal} />}
             </li>
             <li>
-              <Link to="/">USERNAME</Link>
+              <Link to="/Albums">ALBUMS</Link>
+            </li>
+          </>
+        ) : ( 
+        // everything that shows when logged in:
+          <>
+            <li>
+              <Link to="/">
+                <AccountCircleIcon />
+                {username}
+              </Link>
             </li>
             <li>
               <Link to="/Albums">ALBUMS</Link>
@@ -39,7 +87,14 @@ export default function Navbar({ withLogo }) {
             <li>
               <Link to="/MyReviews">MY REVIEWS</Link>
             </li>
-          </ul>
-        </nav>
-    );
+            <li>
+              <Link onClick={handleLogout} className="logout-button">
+                LOGOUT
+              </Link>
+            </li>
+          </>
+        )}
+      </ul>
+    </nav>
+  );
 }

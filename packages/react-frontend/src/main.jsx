@@ -8,10 +8,12 @@ import {
 import "./index.css";
 import ErrorPage from "./ErrorPage";
 import Album from "./routes/Album";
+import AlbumInfo from "./routes/AlbumInfo";
 import MyReviews from "./routes/MyReviews.jsx";
 import CreateReview from "./routes/CreateReview.jsx";
 import CreateAccount from "./routes/CreateAccount.jsx";
-import { FooterContainer } from "./routes/Footer/container.jsx";
+import { TermsAndConditions } from "./routes/FooterFiles/termscond.jsx";
+
 
 // import App from './App.jsx';
 
@@ -35,13 +37,17 @@ const router = createBrowserRouter([
   },
   
   {
-    path: "CreateReview",
+    path: "CreateReview/:id",
     element: <CreateReview />
   }
   ,
   {
-    path: "Footer",
-    element: <FooterContainer />
+    path: "Album/:id",
+    element: <AlbumInfo />
+  },
+  {
+    path: "terms-and-conditions",
+    element: <TermsAndConditions/>
   }
 ]);
 
