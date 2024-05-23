@@ -1,24 +1,19 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 export default function TermsAndConditions(){
   return (
 <>
-  <style
-    dangerouslySetInnerHTML={{
-      __html:
-        "\n  [data-custom-class='body'], [data-custom-class='body'] * {\n          background: transparent !important;\n        }\n[data-custom-class='title'], [data-custom-class='title'] * {\n          font-family: Arial !important;\nfont-size: 26px !important;\ncolor: #000000 !important;\n        }\n[data-custom-class='subtitle'], [data-custom-class='subtitle'] * {\n          font-family: Arial !important;\ncolor: #595959 !important;\nfont-size: 14px !important;\n        }\n[data-custom-class='heading_1'], [data-custom-class='heading_1'] * {\n          font-family: Arial !important;\nfont-size: 19px !important;\ncolor: #000000 !important;\n        }\n[data-custom-class='heading_2'], [data-custom-class='heading_2'] * {\n          font-family: Arial !important;\nfont-size: 17px !important;\ncolor: #000000 !important;\n        }\n[data-custom-class='body_text'], [data-custom-class='body_text'] * {\n          color: #595959 !important;\nfont-size: 14px !important;\nfont-family: Arial !important;\n        }\n[data-custom-class='link'], [data-custom-class='link'] * {\n          color: #3030F1 !important;\nfont-size: 14px !important;\nfont-family: Arial !important;\nword-break: break-word !important;\n        }\n"
-    }}
-  />
-  <span
-    style={{
-      display: "block",
-      margin: "0 auto 3.125rem",
-      width: "11.125rem",
-      height: "2.375rem",
-      background: "url(data:image/svg+xml"
-    }}
-  />
-  <div data-custom-class="body">
+
+  <div data-custom-class="body" style={{backgroundColor: "rgba(105,6,5,25)"}}>
+  <div style={{display: "flex", justifyContent: "center", alignItems: "center", width: "100%"}}><Link to="/" 
+                style={{
+                    color: "grey",         // Change text color
+                    textDecoration: "none", // Remove underline
+                    fontSize: "20px",       // Change font size
+                    fontWeight: "bold",     // Change font weight
+                    padding: "20px",        // Add padding if desired
+                }}>Return Back To Homepage</Link> </div>
     <div align="center" style={{ textAlign: "left" }}>
       <div
         className="MsoNormal"
@@ -79,7 +74,7 @@ export default function TermsAndConditions(){
       >
         <span
           style={{
-            fontSize: "11.0pt",
+            fontSize: "12.0pt",
             lineHeight: "115%",
             fontFamily: "Arial",
             color: "#595959",
@@ -178,7 +173,7 @@ export default function TermsAndConditions(){
             </span>
           </span>
         </span>{" "}
-        at <bdt className="question">__________</bdt>
+        at <bdt className="question">San Luis Obsipo</bdt>
         <bdt className="block-component" />,{" "}
         <bdt className="question">San Luis Obispo</bdt>
         <span style={{ fontSize: 15 }}>
