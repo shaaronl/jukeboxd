@@ -119,3 +119,20 @@ footer {
   color: rgb(106, 4, 4);         /* Adjust color as needed */
   
 }
+.record-wrapper {
+  display: inline-block;
+  transform: scale(0.75); /* Adjust the scale to make the note bigger */
+ /* vertical-align: normal; /* Align it with the surrounding text */
+  margin-left: -0.2em;   /* Adjust to fine-tune spacing */
+  margin-right: -0.26em;  /* Adjust to fine-tune spacing */
+  position: relative;     /* Required for adjusting vertical position */
+
+  top: 0.09em;
+  
+}
+
+.record {
+  font-size: inherit; /* Inherit font size from parent to keep proportions */
+  color: rgb(134, 34, 34);         /* Adjust color as needed */
+  
+}

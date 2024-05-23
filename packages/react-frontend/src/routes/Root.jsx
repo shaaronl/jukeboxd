@@ -2,6 +2,7 @@ import "../index.css";
 import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
 import { MdMusicNote } from "react-icons/md";
+import { PiVinylRecordDuotone } from "react-icons/pi";
 
 export default function Root() {
     return (
@@ -9,7 +10,10 @@ export default function Root() {
         <div class ="loading-text">
            <Navbar withLogo={false} /> 
            <h1 id="logo-main">
-                JUKEBOX
+                JUKEB                
+                <span className="record-wrapper">
+                    <PiVinylRecordDuotone className="record" />
+                </span>X
                 <span className="music-note-wrapper">
                     <MdMusicNote className="music-note" />
                 </span>
