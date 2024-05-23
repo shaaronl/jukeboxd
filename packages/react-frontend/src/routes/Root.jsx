@@ -1,7 +1,5 @@
 import "../index.css";
 import Navbar from "./Navbar";
-import { FooterContainer } from "./Footer/container";
-
 import { Link } from "react-router-dom";
 import { MdMusicNote } from "react-icons/md";
 
