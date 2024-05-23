@@ -15,55 +15,11 @@ export default function AlbumInfo() {
     fetchAlbumById(id)
       .then((data) => {
         setAlbum(data);
-        fetchArtistBySpotifyId(data.artists[0]);
-        fetchSongBySpotifyId(data.track_list); // Pass the track_list to fetchSongBySpotifyId
+        setArtist(data.artists[0]);
+        setSongs(data.track_list); // Pass the track_list to fetchSongBySpotifyId
       })
       .catch((error) => setError(error.message));
   }, [id]);
-
-  async function fetchArtistBySpotifyId(spotifyId) {
-    try {
-      const response = await fetch(
-        `http://localhost:8000/artists?spotify_id=${spotifyId}`
-      );
-      if (!response.ok) {
-        throw new Error(
-          `Network response was not ok: ${response.statusText}`
-        );
-      }
-      const artistData = await response.json();
-      setArtist(artistData);
-    } catch (error) {
-      console.error("Error fetching artist:", error);
-      setError(error.message);
-    }
-  }
-
-  async function fetchSongBySpotifyId(spotifyIds) {
-    try {
-      // Initialize an array to store song data
-      const songsData = [];
-      // Loop through each Spotify ID in the array
-      for (const spotifyId of spotifyIds) {
-        const response = await fetch(
-          `http://localhost:8000/songs?spotify_id=${spotifyId}`
-        );
-        if (!response.ok) {
-          throw new Error(
-            `Network response was not ok: ${response.statusText}`
-          );
-        }
-        const songData = await response.json();
-        // Push the fetched song data into the array
-        songsData.push(songData);
-      }
-      // Set the song data in the component state
-      setSongs(songsData);
-    } catch (error) {
-      console.error("Error fetching songs:", error);
-      setError(error.message);
-    }
-  }
 
   function fetchAlbumById(id) {
     return fetch(`http://localhost:8000/albums/${id}`)

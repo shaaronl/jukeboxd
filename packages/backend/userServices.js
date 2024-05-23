@@ -50,7 +50,20 @@ async function addUser(username, password) {
 // function to find an album by its ID
 async function findAlbumById(id) {
   try {
-    const album = await Album.findById(id);
+    const album = await Album.findById(id).populate([
+      // fill in the tracklist spotify_id with song objects
+      {
+        path: "track_list",
+        model: "Song",
+        foreignField: "spotify_id"
+      },
+      // fills in the artist id with artist objects
+      {
+        path: "artists",
+        model: "Artist",
+        foreignField: "spotify_id"
+      }
+    ]);
     return album;
   } catch (error) {
     console.error("Error finding album:", error);
