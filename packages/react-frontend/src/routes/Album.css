@@ -36,7 +36,7 @@
 }
 .album-name{
     max-width: 270px; 
-    margin: 5px 0;
+    margin: 5px auto;
     overflow-wrap: break-word; 
     word-break: normal; /* so words are not broken mid-word */
 }
