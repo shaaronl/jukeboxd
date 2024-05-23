@@ -40,10 +40,10 @@ img {
 }
 
 /* songs list formatting */
-.track-list {
+/* .track-list {
     grid-column: 1; 
     grid-row: 2; 
-}
+} */
 .song-list ul {
     list-style-type: none;
     padding: 0;
@@ -79,7 +79,8 @@ a {
 
 .reviews {
     margin-top: 20px;
-    max-width: 700px; 
+    width: 100%; 
+    max-width: 700px;
 }
 
 .reviews h3 {
@@ -91,10 +92,12 @@ a {
 }
 
 .review {
-    background-color: #4f4f4f;
+    background-color: rgba(194, 122, 122, 0.2);
     padding: 20px;
     margin-bottom: 10px;
     border-radius: 5px;
+    width: 100%; /* Ensure the review takes the full width of the parent */
+    box-sizing: border-box;
 }
 
 .review .rating-stars {
