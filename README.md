@@ -1,3 +1,1 @@
-# jukebox
-
-Contributing:
+# jukebox development branch

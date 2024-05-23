@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors";
 import userServices from "./userServices.js";
 import { loginUser } from "./auth.js";
+import Album from "./models/albumSchema.js";
+import User from "./models/userSchema.js";
+import Reviews from "./models/reviewsSchema.js";
 
 const app = express();
 const port = 8000;
@@ -100,7 +103,8 @@ app.get("/albums", async (req, res) => {
 
     if (spotify_id) {
       // If a Spotify ID is provided, retrieve the specific artist
-      const album = await userServices.findAlbumBySpotifyId(spotify_id);
+      const album =
+        await userServices.findAlbumBySpotifyId(spotify_id);
       if (!album) {
         return res
           .status(404)
@@ -108,15 +112,14 @@ app.get("/albums", async (req, res) => {
       }
       return res.json(album);
     } else {
-
-    const albums = await userServices.findAllAlbums();
-    if (!albums || albums.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "Album not found" });
+      const albums = await userServices.findAllAlbums();
+      if (!albums || albums.length === 0) {
+        return res
+          .status(404)
+          .json({ message: "Album not found" });
+      }
+      return res.json(albums);
     }
-    return res.json(albums);
-  }
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -132,7 +135,8 @@ app.get("/artists", async (req, res) => {
 
     if (spotify_id) {
       // If a Spotify ID is provided, retrieve the specific artist
-      const artist = await userServices.findArtistBySpotifyId(spotify_id);
+      const artist =
+        await userServices.findArtistBySpotifyId(spotify_id);
       if (!artist) {
         return res
           .status(404)
@@ -164,7 +168,8 @@ app.get("/songs", async (req, res) => {
 
     if (spotify_id) {
       // If a Spotify ID is provided, retrieve the specific songs
-      const song = await userServices.findSongsBySpotifyId(spotify_id);
+      const song =
+        await userServices.findSongsBySpotifyId(spotify_id);
       if (!song) {
         return res
           .status(404)
@@ -276,3 +281,50 @@ app.post("/api/sign-in", async (req, res) => {
 
 // when the user trys to login it calls this
 app.post("/login", loginUser);
+
+// creating a review
+app.post("/review/:id", async (req, res) => {
+  try {
+    const reviewToAdd = req.body;
+    console.log(reviewToAdd);
+    // get the user of the person trying to write review
+    // note: the username is gotten from the frontend which isn't secure, to update once we get auth running
+    let user = await userServices.findUserByName(
+      reviewToAdd.username
+    );
+    // get the album the user wants to write a review on
+    let album = await userServices.findAlbumById(req.params.id);
+
+    // make a new review with the review schema
+    let newReview = new Reviews({
+      written_by: user._id,
+      rating: reviewToAdd.rating,
+      content: reviewToAdd.content,
+      likes: 0,
+      album_id: album._id
+    });
+    let reviewId;
+
+    await newReview.save().then((review) => {
+      reviewId = review._id;
+    });
+
+    console.log(reviewId);
+    // add the review to both the user and the album
+    await User.updateOne(
+      { _id: user._id },
+      { $push: { reviews: reviewId } },
+      { upsert: true }
+    );
+    await Album.updateOne(
+      { _id: album._id },
+      { $push: { reviews: reviewId } },
+      { upsert: true }
+    );
+    res.status(201);
+    res.send(newReview);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});

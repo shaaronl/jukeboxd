@@ -77,7 +77,9 @@ async function findAlbumBySpotifyId(spotify_id) {
     const album = await Album.findOne({ spotify_id });
     return album; // Return the found artist or null if not found
   } catch (error) {
-    throw new Error(`Error finding album by Spotify ID: ${error.message}`);
+    throw new Error(
+      `Error finding album by Spotify ID: ${error.message}`
+    );
   }
 }
 
@@ -100,7 +102,9 @@ async function findArtistBySpotifyId(spotify_id) {
     const artist = await Artist.findOne({ spotify_id });
     return artist; // Return the found artist or null if not found
   } catch (error) {
-    throw new Error(`Error finding artist by Spotify ID: ${error.message}`);
+    throw new Error(
+      `Error finding artist by Spotify ID: ${error.message}`
+    );
   }
 }
 
@@ -121,7 +125,19 @@ async function findSongsBySpotifyId(spotify_id) {
     const song = await Song.findOne({ spotify_id });
     return song;
   } catch (error) {
-    throw new Error(`Error finding song by Spotify ID: ${error.message}`);
+    throw new Error(
+      `Error finding song by Spotify ID: ${error.message}`
+    );
+  }
+}
+
+async function findUserByName(username) {
+  try {
+    const user = await await User.findOne({ username });
+    return user;
+  } catch (error) {
+    console.error("Error finding user:", error);
+    throw error;
   }
 }
 
@@ -171,5 +187,6 @@ export default {
   findArtistBySpotifyId,
   findAlbumBySpotifyId,
   findAllSongs,
-  findSongsBySpotifyId
+  findSongsBySpotifyId,
+  findUserByName
 };

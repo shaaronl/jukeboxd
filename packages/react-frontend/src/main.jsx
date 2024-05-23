@@ -7,12 +7,12 @@ import {
 } from "react-router-dom";
 import "./index.css";
 import ErrorPage from "./ErrorPage";
-
 import Album from "./routes/Album";
 import AlbumInfo from "./routes/AlbumInfo";
 import MyReviews from "./routes/MyReviews.jsx";
 import CreateReview from "./routes/CreateReview.jsx";
 import CreateAccount from "./routes/CreateAccount.jsx";
+
 
 // import App from './App.jsx';
 
@@ -35,13 +35,13 @@ const router = createBrowserRouter([
     element: <CreateAccount />
   },
   {
-    path: "CreateReview",
+    path: "CreateReview/:id",
     element: <CreateReview />
   },
   {
-    path: "Album/:id", 
+    path: "Album/:id",
     element: <AlbumInfo />
-  },
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
