@@ -12,7 +12,7 @@ implemented with express and run with nodemon
 ## CONNECTING TO MONGODB
 1. create new ".env" file in ".\backend" folder
 2. add yourself as a database user at "https://cloud.mongodb.com/v2/663e9db2ff55c119c46a8e9c#/security/database/users". your username and password for your URI in step 3 will be the info you enter to add database access. when selecting role make sure to add youself as an admin
-2. get your connection string from your MongoDB account to connect to
+3. get your connection string from your MongoDB account to connect to
 the Jukeboxd cluster and add the following to your .env file:
 ``MONGO_URI= mongodb+srv://<your-username>:<your-password>@jukeboxd.xhqiury.mongodb.net/?retryWrites=true&w=majority&appName=Jukeboxd``
 

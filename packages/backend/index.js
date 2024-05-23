@@ -310,12 +310,7 @@ app.post("/review/:id", async (req, res) => {
     });
 
     console.log(reviewId);
-    // add the review to both the user and the album
-    await User.updateOne(
-      { _id: user._id },
-      { $push: { reviews: reviewId } },
-      { upsert: true }
-    );
+    // add the review to just the album
     await Album.updateOne(
       { _id: album._id },
       { $push: { reviews: reviewId } },
