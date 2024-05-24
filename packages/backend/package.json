@@ -21,9 +21,9 @@
     "mongoose": "^8.4.0"
   },
   "devDependencies": {
-    "@eslint/js": "latest",
-    "eslint": "latest",
-    "eslint-plugin-react": "latest",
+    "@eslint/js": "9.3.0",
+    "eslint": "8.57.0",
+    "eslint-plugin-react": "7.34.1",
     "globals": "^15.3.0",
     "nodemon": "^3.1.0"
   }
