@@ -1,15 +1,20 @@
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CreateAccount from "./CreateAccount";
 import "./Navbar.css";
 import SignIn from "./SignIn";
+import PropTypes from "prop-types";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 export default function Navbar({ withLogo }) {
   const [showModal, setShowModal] = useState(false);
   const [showModalSignIn, setShowModalSignIn] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem("token"));
-  const [username, setUsername] = useState(localStorage.getItem("username"));
+  const [token, setToken] = useState(
+    localStorage.getItem("token")
+  );
+  const [username, setUsername] = useState(
+    localStorage.getItem("username")
+  );
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -37,7 +42,7 @@ export default function Navbar({ withLogo }) {
     localStorage.removeItem("username");
     setToken(null);
     setUsername(null);
-    window.location.href = "/"; //directing back to home page after logout  
+    window.location.href = "/"; //directing back to home page after logout
   };
 
   return (
@@ -51,7 +56,7 @@ export default function Navbar({ withLogo }) {
       )}
       <ul className="navbar-links">
         {!token || token === "null" ? (
-        // everything that shows up when not logged in:
+          // everything that shows up when not logged in:
           <>
             <li>
               <button
@@ -60,20 +65,27 @@ export default function Navbar({ withLogo }) {
               >
                 SIGN IN
               </button>
-              {showModalSignIn && <SignIn onClose={handleCloseModalSignIn} />}
+              {showModalSignIn && (
+                <SignIn onClose={handleCloseModalSignIn} />
+              )}
             </li>
             <li>
-              <button onClick={handleOpenModal} className="open-modal-button">
+              <button
+                onClick={handleOpenModal}
+                className="open-modal-button"
+              >
                 CREATE ACCOUNT
               </button>
-              {showModal && <CreateAccount onClose={handleCloseModal} />}
+              {showModal && (
+                <CreateAccount onClose={handleCloseModal} />
+              )}
             </li>
             <li>
               <Link to="/Albums">ALBUMS</Link>
             </li>
           </>
-        ) : ( 
-        // everything that shows when logged in:
+        ) : (
+          // everything that shows when logged in:
           <>
             <li>
               <Link to="/">
@@ -88,7 +100,10 @@ export default function Navbar({ withLogo }) {
               <Link to="/MyReviews">MY REVIEWS</Link>
             </li>
             <li>
-              <Link onClick={handleLogout} className="logout-button">
+              <Link
+                onClick={handleLogout}
+                className="logout-button"
+              >
                 LOGOUT
               </Link>
             </li>
@@ -98,3 +113,8 @@ export default function Navbar({ withLogo }) {
     </nav>
   );
 }
+
+// Define prop types for the component
+Navbar.propTypes = {
+  withLogo: PropTypes.bool.isRequired
+};

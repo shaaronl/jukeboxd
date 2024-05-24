@@ -15,15 +15,6 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
       maxlength: 60
-    },
-    reviews: {
-      type: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Reviews"
-        }
-      ],
-      default: []
     }
   },
   { collection: "users" }

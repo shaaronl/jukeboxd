@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\"",
     "start": "cd packages/react-frontend && npm run dev",
     "format": "npx prettier . --write",
     "lint": "npx eslint ."
@@ -22,6 +22,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "styled-components": "^6.1.11",
     "vite": "^5.2.11"
   }
 }

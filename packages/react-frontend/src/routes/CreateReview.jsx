@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import Rating from "@mui/material/Rating";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
@@ -17,9 +17,8 @@ export default function CreateReview() {
   useEffect(() => {
     fetchAlbumById(id)
       .then((data) => {
-        console.log(data);
         setAlbum(data);
-        fetchArtistBySpotifyId(data.artists[0]);
+        setArtist(data.artists[0]);
       })
       .catch((error) => {
         console.log(error);
@@ -41,24 +40,6 @@ export default function CreateReview() {
         console.error("Error fetching album:", error);
         throw error;
       });
-  }
-
-  // also taken from albumInfo
-  async function fetchArtistBySpotifyId(spotifyId) {
-    try {
-      const response = await fetch(
-        `http://localhost:8000/artists?spotify_id=${spotifyId}`
-      );
-      if (!response.ok) {
-        throw new Error(
-          `Network response was not ok: ${response.statusText}`
-        );
-      }
-      const artistData = await response.json();
-      setArtist(artistData);
-    } catch (error) {
-      console.error("Error fetching artist:", error);
-    }
   }
 
   function updateRating(value) {

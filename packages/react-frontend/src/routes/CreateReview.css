@@ -1,7 +1,9 @@
 .createReview {
   display: grid;
+  padding-top: 100px;
   grid-template-columns: 1fr 2fr;
   grid-template-rows: 2fr 1fr;
+  gap: 70px; /* gap between album cover and content */
 }
 
 .coverImage {
@@ -50,4 +52,7 @@
 
 .reviewRight button:hover {
   background-color: #d9d9d9;
+}
+textarea {
+  color: #000;
 }

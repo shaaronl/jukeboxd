@@ -3,7 +3,9 @@ import Album from "./models/albumSchema.js"; // Import the Album model
 import Artist from "./models/artistSchema.js"; // Import the Artist model
 import Song from "./models/songSchema.js"; // Import the Song model
 import User from "./models/userSchema.js"; // Import the User Model
+import Reviews from "./models/reviewsSchema.js"; //Import the Reviews model
 import connectDB from "../helpers/connectDB.js";
+
 import bcrypt from "bcrypt"; // Import to encrypt passwords
 
 mongoose.set("debug", true);
@@ -50,7 +52,20 @@ async function addUser(username, password) {
 // function to find an album by its ID
 async function findAlbumById(id) {
   try {
-    const album = await Album.findById(id);
+    const album = await Album.findById(id).populate([
+      // fill in the tracklist spotify_id with song objects
+      {
+        path: "track_list",
+        model: "Song",
+        foreignField: "spotify_id"
+      },
+      // fills in the artist id with artist objects
+      {
+        path: "artists",
+        model: "Artist",
+        foreignField: "spotify_id"
+      }
+    ]);
     return album;
   } catch (error) {
     console.error("Error finding album:", error);
@@ -139,8 +154,44 @@ async function findUserByName(username) {
   }
 }
 
+async function findReviewsByAlbumId(album_id) {
+  try {
+    const review = await Reviews.find({ album_id });
+    return review;
+  } catch (error) {
+    console.error("Error finding album:", error);
+    throw error;
+  }
+}
+// function to find all reviews
+async function findAllReviews() {
+  try {
+    const reviews = await Reviews.find();
+    console.log("Found reviews:", reviews);
+    return reviews;
+  } catch (error) {
+    console.error("Error finding reviews:", error);
+    throw error;
+  }
+}
+
+// function to find reviews by userId
+async function findReviewsByWrittenBy(userId) {
+  try {
+    const reviews = await Reviews.find({ written_by: userId });
+    console.log("Found reviews:", reviews);
+    return reviews;
+  } catch (error) {
+    console.error("Error finding reviews:", error);
+    throw error;
+  }
+}
+
 export default {
   addUser,
+  findReviewsByAlbumId,
+  findReviewsByWrittenBy,
+  findAllReviews,
   findAlbumById,
   findAllAlbums,
   findAllUsers,
