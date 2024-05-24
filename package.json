@@ -10,7 +10,9 @@
     "lint": "npx eslint ."
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "express-backend",
+    "react-frontend"
   ],
   "author": "",
   "license": "ISC",
