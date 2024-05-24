@@ -24,7 +24,7 @@ app.listen(port, () => {
 
 /** Routes **/
 
-// getting reviews by album id 
+// getting reviews by album id
 app.get("/reviews/albums/:id", async (req, res) => {
   try {
     const review = await userServices.findReviewsByAlbumId(
@@ -60,7 +60,7 @@ app.get("/reviews/users/:id", async (req, res) => {
   }
 });
 
-//getting all reviews 
+//getting all reviews
 app.get("/reviews/", async (req, res) => {
   try {
     const review = await userServices.findAllReviews(
