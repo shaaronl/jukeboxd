@@ -1,18 +1,17 @@
 .content {
-    padding-top: 220px;
-    display: grid;
-    grid-template-columns: auto 1fr; 
-    gap: 100px /* gap between album cover and content */
+  padding-top: 220px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 100px; /* gap between album cover and content */
 }
 
 /* right section : album title, arrtist, ratings, reviews */
 .right-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
-
 
 /* left section : album cover, songs list */
 .left-section {
@@ -23,20 +22,20 @@
 
 /* album cover img */
 img {
-    width: 300px;
-    height: auto;
+  width: 300px;
+  height: auto;
 }
 
 .album-title {
-    font-size: 70px;
-    margin: 5px 0;
-    max-width: 700px; 
-    overflow-wrap: break-word; 
-    word-break: normal; /* so words are not broken mid-word */
+  font-size: 70px;
+  margin: 5px 0;
+  max-width: 700px;
+  overflow-wrap: break-word;
+  word-break: normal; /* so words are not broken mid-word */
 }
 
-.album-details{
-    font-size: 24px;
+.album-details {
+  font-size: 24px;
 }
 
 /* songs list formatting */
@@ -45,82 +44,88 @@ img {
     grid-row: 2; 
 } */
 .song-list ul {
-    list-style-type: none;
-    padding: 0;
-    max-width: 300px; 
+  list-style-type: none;
+  padding: 0;
+  max-width: 300px;
 }
-  
+
 .song-list li {
-    margin: 5px 0;
-    word-wrap: break-word; /* wraps the song name, if too long */
-    word-break: break-all; 
+  margin: 5px 0;
+  word-wrap: break-word; /* wraps the song name, if too long */
+  word-break: break-all;
 }
-  
+
 .popularity,
 .spotify-link,
 .artistname {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 ul {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 
 li {
-    margin: 5px 0;
+  margin: 5px 0;
 }
 
 a {
-    color: #1DB954;
+  color: #1db954;
 }
 
 /* formatting for reviews  */
 
 .reviews {
-    margin-top: 20px;
-    width: 100%; 
-    max-width: 700px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 700px;
 }
 
 .reviews h3 {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    margin-bottom: 10px;
-    margin: 5px 0;
-    word-wrap: break-word; /* wraps the review name, if too long */
-    word-break: break-all; 
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  margin-bottom: 10px;
+  margin: 5px 0;
+  word-wrap: break-word; /* wraps the review name, if too long */
+  word-break: break-all;
 }
 
 .review {
-    background-color: rgba(194, 122, 122, 0.2);
-    padding: 20px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    width: 100%; /* Ensure the review takes the full width of the parent */
-    box-sizing: border-box;
+  background-color: rgba(194, 122, 122, 0.2);
+  padding: 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  width: 100%; /* Ensure the review takes the full width of the parent */
+  box-sizing: border-box;
 }
 
 .review .rating-stars {
-    display: block;
-    margin-bottom: 5px;
+  display: block;
+  margin-bottom: 5px;
 }
 .rate-review-btn {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    background-color: rgb(161, 19, 19);
-    border-color: rgb(161, 19, 19);
-    font-size: 20px;
-    padding: 10px 20px;  /* Adjust the padding for size */
-    width: 200px;       /* Set a specific width */
-    height: 50px;       /* Set a specific height */
-    border-radius: 6px; 
-    color: white;     
-    cursor: pointer;    
-    transition: background-color 0.3s ease; 
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  background-color: rgb(161, 19, 19);
+  border-color: rgb(161, 19, 19);
+  font-size: 20px;
+  padding: 10px 20px; /* Adjust the padding for size */
+  width: 200px; /* Set a specific width */
+  height: 50px; /* Set a specific height */
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .rate-review-btn:hover {
-    background-color: rgb(250, 77, 77); /* Darker color on hover */
+  background-color: rgb(
+    250,
+    77,
+    77
+  ); /* Darker color on hover */
 }
-.rating-stars{
-    color: rgb(253, 192, 38);
+.rating-stars {
+  color: rgb(253, 192, 38);
 }

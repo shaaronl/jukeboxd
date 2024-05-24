@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./SignIn.css";
+import PropTypes from "prop-types";
 
 export default function SignIn({ onClose }) {
   const [username, setUsername] = useState("");
@@ -74,3 +75,8 @@ export default function SignIn({ onClose }) {
     </div>
   );
 }
+
+// Define prop types for the component
+SignIn.propTypes = {
+  onClose: PropTypes.func.isRequired
+};

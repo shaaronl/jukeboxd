@@ -1,61 +1,62 @@
 /* Navbar.css */
 
 .navbar {
-    position: absolute;
-    top: 10px;
-    right: 130px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
+  position: absolute;
+  top: 10px;
+  right: 130px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
 }
 
 .navbar-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 90px;
-    margin-right: 510px;
-    
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 90px;
+  margin-right: 510px;
 }
-nav ul{
-    list-style-type: none;
-    display: flex;
-    justify-content: space-between;
+nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
 }
 /* style individual links in nav bar */
 nav ul li a {
-    font-weight: bold;
-    font-size: 16px; 
-    color: white; 
-    text-decoration: none; 
-    padding-right: 25px;
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+  text-decoration: none;
+  padding-right: 25px;
 }
 nav ul li a:hover {
-    color: #E4BABA; /* changes color on hover */
+  color: #e4baba; /* changes color on hover */
 }
 
 /* styling the small clickable logo */
-#small-logo{ 
-    background-image: linear-gradient(45deg, #E4BABA, #7E6767); /* Apply gradient */
-    -webkit-background-clip: text; /* Clip the background to the text */
-    -webkit-text-fill-color: transparent; /* Make text fill transparent to see the gradient */
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 70px; 
-    font-weight: bold;
-
+#small-logo {
+  background-image: linear-gradient(
+    45deg,
+    #e4baba,
+    #7e6767
+  ); /* Apply gradient */
+  -webkit-background-clip: text; /* Clip the background to the text */
+  -webkit-text-fill-color: transparent; /* Make text fill transparent to see the gradient */
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 70px;
+  font-weight: bold;
 }
 
 /* styling for overlays */
 .open-modal-button {
-    padding-right: 25px;
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+  padding-right: 25px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .open-modal-button:hover {
-    color: #E4BABA; /* changes color on hover */
+  color: #e4baba; /* changes color on hover */
 }
-
