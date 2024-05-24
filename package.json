@@ -11,7 +11,7 @@
   },
   "workspaces": [
     "packages/*",
-    "express-backend",
+    "backend",
     "react-frontend"
   ],
   "author": "",
