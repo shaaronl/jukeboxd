@@ -42,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: "Album/:id",
     element: <AlbumInfo />
+  },
+  {
+    path: "reviews/:username",
+    element: <MyReviews />
   }
   // {
   //   path: "terms-and-conditions",

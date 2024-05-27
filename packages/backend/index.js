@@ -318,3 +318,30 @@ app.post("/review/:id", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+// get user info and reviews of user
+app.get("/reviews/:users", async (req, res) => {
+  try {
+    let username = req.params.users;
+    const user = await userServices.findUserByName(username);
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "User not found" });
+    }
+
+    const reviews = await userServices.findReviewsByWrittenBy(
+      user._id
+    );
+    if (!reviews) {
+      return res
+        .status(404)
+        .json({ message: "Reviews not found" });
+    }
+
+    return res.json({ user: user, reviews: reviews });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});

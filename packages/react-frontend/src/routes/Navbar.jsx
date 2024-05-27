@@ -97,7 +97,9 @@ export default function Navbar({ withLogo }) {
               <Link to="/Albums">ALBUMS</Link>
             </li>
             <li>
-              <Link to="/MyReviews">MY REVIEWS</Link>
+              <Link to={`/reviews/${username}`}>
+                MY REVIEWS
+              </Link>
             </li>
             <li>
               <Link

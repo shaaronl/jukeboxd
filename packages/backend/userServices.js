@@ -178,8 +178,13 @@ async function findAllReviews() {
 // function to find reviews by userId
 async function findReviewsByWrittenBy(userId) {
   try {
-    const reviews = await Reviews.find({ written_by: userId });
-    console.log("Found reviews:", reviews);
+    // also populate the album
+    const reviews = await Reviews.find({
+      written_by: userId
+    }).populate({
+      path: "album_id",
+      model: "Album"
+    });
     return reviews;
   } catch (error) {
     console.error("Error finding reviews:", error);
