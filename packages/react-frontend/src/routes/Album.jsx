@@ -7,7 +7,7 @@ import "./Album.css";
 async function fetchArtistBySpotifyId(spotifyId) {
   try {
     const response = await fetch(
-      `http://localhost:8000/artists?spotify_id=${spotifyId}`
+      `http://jukeboxd-music.azurewebsites.net/artists?spotify_id=${spotifyId}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch artist data");
@@ -30,7 +30,7 @@ export default function Album() {
   const [selectedGenre, setSelectedGenre] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8000/albums")
+    fetch("http://jukeboxd-music.azurewebsites.net/albums")
       .then((response) => response.json())
       .then((data) => {
         setAlbums(data);

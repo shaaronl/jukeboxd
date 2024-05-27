@@ -16,10 +16,14 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.listen(port, () => {
-  console.log(
-    `Example app listening at http://localhost:${port}`
-  );
+// app.listen(port, () => {
+//   console.log(
+//     `Example app listening at http://jukeboxd-music.azurewebsites.net`
+//   );
+// });
+
+app.listen(process.env.PORT || port, () => {
+  console.log("Example app listening at http://jukeboxd-music.azurewebsites.net ");
 });
 
 /** Routes **/
@@ -289,14 +293,16 @@ app.post("/review/:id", async (req, res) => {
     console.log(reviewToAdd);
     // get the user of the person trying to write review
     // note: the username is gotten from the frontend which isn't secure, to update once we get auth running
-    let user = await userServices.findUserByName(
+    const user = await userServices.findUserByName(
       reviewToAdd.username
     );
     // get the album the user wants to write a review on
-    let album = await userServices.findAlbumById(req.params.id);
+    const album = await userServices.findAlbumById(
+      req.params.id
+    );
 
     // make a new review with the review schema
-    let newReview = new Reviews({
+    const newReview = new Reviews({
       written_by: user._id,
       rating: reviewToAdd.rating,
       content: reviewToAdd.content,

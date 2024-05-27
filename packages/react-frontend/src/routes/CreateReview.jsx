@@ -27,7 +27,7 @@ export default function CreateReview() {
 
   // took from albuminfo. Get the album by id first to get image and other data
   function fetchAlbumById(id) {
-    return fetch(`http://localhost:8000/albums/${id}`)
+    return fetch(`http://jukeboxd-music.azurewebsites.net/albums/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(
@@ -53,7 +53,7 @@ export default function CreateReview() {
   async function handleSubmit(e) {
     e.preventDefault();
     const response = await fetch(
-      `http://localhost:8000/review/${id}`,
+      `http://jukeboxd-music.azurewebsites.net/review/${id}`,
       {
         method: "POST",
         headers: {

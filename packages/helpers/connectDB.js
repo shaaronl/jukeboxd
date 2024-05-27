@@ -5,7 +5,7 @@ dotenv.config();
 const url = process.env.MONGO_URI;
 let connection;
 
-console.log(process.env.MONGO_URI)
+console.log(process.env.MONGO_URI);
 
 /**
  * Makes a connection to a MongoDB database. If a connection already exists, does nothing
