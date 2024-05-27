@@ -23,7 +23,9 @@ app.get("/", (req, res) => {
 // });
 
 app.listen(process.env.PORT || port, () => {
-  console.log("Example app listening at http://jukeboxd-music.azurewebsites.net ");
+  console.log(
+    "Example app listening at http://jukeboxd-music.azurewebsites.net "
+  );
 });
 
 /** Routes **/
