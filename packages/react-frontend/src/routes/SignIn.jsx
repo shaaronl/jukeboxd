@@ -12,7 +12,7 @@ export default function SignIn({ onClose }) {
     console.log(username);
     console.log(password);
     const response = await fetch(
-      "http://localhost:8000/login",
+      "http://jukeboxd-music.azurewebsites.net/login",
       {
         method: "POST",
         headers: {
