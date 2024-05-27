@@ -1,7 +1,9 @@
 import Navbar from "./Navbar";
 
 function fetchUsers() {
-  const promise = fetch("http://jukeboxd-music.azurewebsites.net/albums/id");
+  const promise = fetch(
+    "http://jukeboxd-music.azurewebsites.net/albums/id"
+  );
   return promise;
 }
 
