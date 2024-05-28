@@ -392,7 +392,11 @@ app.put("/review/:id", async (req, res) => {
       reviewToUpdate,
       req.body
     );
-
+    if (!review) {
+      return res
+        .status(404)
+        .json({ message: "Couldn't update review" });
+    }
     res.status(201);
     res.send(review);
   } catch (error) {
