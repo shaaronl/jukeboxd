@@ -33,6 +33,32 @@ export default function MyReviews() {
     console.log(user, reviews);
   }, []);
 
+  async function handleDelete(reviewId) {
+    console.log(reviewId);
+    try {
+      const response = await fetch(
+        `http://localhost:8000/reviews/user/${reviewId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+
+      if (response.status != 204) {
+        throw new Error("Character not found");
+      } else {
+        const updated = reviews.filter((review) => {
+          return review._id !== reviewId;
+        });
+        setReviews(updated);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   if (!user || !reviews) return <div>Loading...</div>;
 
   return (
@@ -52,6 +78,7 @@ export default function MyReviews() {
               rightUser={
                 localStorage.getItem("username") == username
               }
+              handleDelete={() => handleDelete(review._id)}
             ></Review>
           ))}
         </div>

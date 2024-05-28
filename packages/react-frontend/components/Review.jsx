@@ -2,6 +2,7 @@ import Rating from "@mui/material/Rating";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import IconButton from "@mui/material/IconButton";
 import "./Review.css";
 
 export default function Review(props) {
@@ -36,8 +37,10 @@ export default function Review(props) {
         <h3>{review.content}</h3>
         {rightUser && (
           <div className="modifyIcons">
-            <EditIcon></EditIcon>
-            <DeleteIcon></DeleteIcon>
+            <EditIcon />
+            <DeleteIcon
+              onClick={() => props.handleDelete(review._id)}
+            />
           </div>
         )}
       </div>

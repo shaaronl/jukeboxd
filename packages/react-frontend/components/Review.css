@@ -18,6 +18,10 @@
 .modifyIcons > * {
   padding: 0.3em;
 }
+
+.modifyIcons {
+  color: white;
+}
 .reviewContent {
   margin-left: 1em;
 }

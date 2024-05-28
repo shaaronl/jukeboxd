@@ -345,3 +345,23 @@ app.get("/reviews/:users", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+app.delete("/reviews/user/:reviewId", async (req, res) => {
+  try {
+    let reviewId = req.params.reviewId;
+    console.log(reviewId);
+    let response =
+      await userServices.deleteReviewById(reviewId);
+
+    if (response === undefined) {
+      res.status(404).send("Resource not found.");
+    } else {
+      res.status(204).json({
+        message: `Item with ID ${reviewId} deleted successfully`
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
