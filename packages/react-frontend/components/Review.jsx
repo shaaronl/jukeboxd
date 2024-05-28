@@ -4,6 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
 import "./Review.css";
+import { Link } from "react-router-dom";
 
 export default function Review(props) {
   let review = props.review;
@@ -37,7 +38,9 @@ export default function Review(props) {
         <h3>{review.content}</h3>
         {rightUser && (
           <div className="modifyIcons">
-            <EditIcon />
+            <Link to={`/UpdateReview/${review._id}`}>
+              <EditIcon />
+            </Link>
             <DeleteIcon
               onClick={() => props.handleDelete(review._id)}
             />

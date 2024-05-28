@@ -195,9 +195,22 @@ async function findReviewsByWrittenBy(userId) {
 // function to delete a review by review id
 async function deleteReviewById(reviewId) {
   try {
-    // also populate the album
     const result = await Reviews.findByIdAndDelete(reviewId);
     return result;
+  } catch (error) {
+    console.error("Error finding reviews:", error);
+    throw error;
+  }
+}
+
+// find review by review id
+async function findReviewById(reviewId) {
+  try {
+    const review = await Reviews.findById(reviewId).populate({
+      path: "album_id",
+      model: "Album"
+    });
+    return review;
   } catch (error) {
     console.error("Error finding reviews:", error);
     throw error;
@@ -218,5 +231,6 @@ export default {
   findAllSongs,
   findSongsBySpotifyId,
   findUserByName,
-  deleteReviewById
+  deleteReviewById,
+  findReviewById
 };

@@ -346,6 +346,7 @@ app.get("/reviews/:users", async (req, res) => {
   }
 });
 
+// deletes review by id
 app.delete("/reviews/user/:reviewId", async (req, res) => {
   try {
     let reviewId = req.params.reviewId;
@@ -360,6 +361,23 @@ app.delete("/reviews/user/:reviewId", async (req, res) => {
         message: `Item with ID ${reviewId} deleted successfully`
       });
     }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// get review by id
+app.get("/reviews/user/:reviewId", async (req, res) => {
+  try {
+    let reviewId = req.params.reviewId;
+    let review = await userServices.findReviewById(reviewId);
+    if (!review) {
+      return res
+        .status(404)
+        .json({ message: "Review not found" });
+    }
+    res.json(review);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

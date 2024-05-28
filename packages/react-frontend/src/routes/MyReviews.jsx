@@ -12,7 +12,6 @@ export default function MyReviews() {
 
   useEffect(() => {
     async function fetchData() {
-      console.log(username);
       try {
         let response = await fetch(
           `http://localhost:8000/reviews/${username}`
