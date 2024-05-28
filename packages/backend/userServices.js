@@ -217,6 +217,23 @@ async function findReviewById(reviewId) {
   }
 }
 
+//find and update a review by id
+async function updateReviewById(reviewId, newReview) {
+  try {
+    const review = await Reviews.findOneAndUpdate(
+      { _id: reviewId },
+      {
+        rating: newReview.rating,
+        content: newReview.content
+      }
+    );
+    return review;
+  } catch (error) {
+    console.error("Error finding review:", error);
+    throw error;
+  }
+}
+
 export default {
   addUser,
   findReviewsByAlbumId,
@@ -232,5 +249,6 @@ export default {
   findSongsBySpotifyId,
   findUserByName,
   deleteReviewById,
-  findReviewById
+  findReviewById,
+  updateReviewById
 };

@@ -383,3 +383,20 @@ app.get("/reviews/user/:reviewId", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+//updating a review
+app.put("/review/:id", async (req, res) => {
+  try {
+    const reviewToUpdate = req.params.id;
+    let review = await userServices.updateReviewById(
+      reviewToUpdate,
+      req.body
+    );
+
+    res.status(201);
+    res.send(review);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});

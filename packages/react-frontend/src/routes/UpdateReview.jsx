@@ -6,6 +6,7 @@ import "./CreateReview.css";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function UpdateReview() {
+  const navigate = useNavigate();
   const { id } = useParams(); // Get the review id from the URL
   const [review, setReview] = useState(null);
   const [rating, setRating] = useState(0);
@@ -56,9 +57,9 @@ export default function UpdateReview() {
       }
     );
     if (!response) {
-      throw Error("Error adding review");
+      throw Error("Error updating review");
     } else {
-      console.log("here");
+      navigate(`/reviews/${localStorage.getItem("username")}`);
     }
   }
 
@@ -82,7 +83,7 @@ export default function UpdateReview() {
           <textarea
             placeholder="Add a review"
             onChange={updateReviewText}
-            value={review.content}
+            defaultValue={review.content}
           ></textarea>
           <p className="ratingText" htmlFor="rating">
             Rating
