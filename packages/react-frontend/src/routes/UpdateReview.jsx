@@ -25,6 +25,8 @@ export default function UpdateReview() {
         }
         let data = await response.json();
         setReview(data);
+        setRating(data.rating);
+        setReviewText(data.content);
       } catch {
         console.error("Error fetching review");
       }

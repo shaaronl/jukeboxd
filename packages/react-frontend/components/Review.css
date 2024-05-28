@@ -21,7 +21,12 @@
 
 .modifyIcons {
   color: white;
+  display: flex;
 }
 .reviewContent {
   margin-left: 1em;
+}
+
+.modifyIcons > *:hover {
+  background-color: grey;
 }

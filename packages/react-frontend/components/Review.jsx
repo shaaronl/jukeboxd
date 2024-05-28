@@ -41,9 +41,11 @@ export default function Review(props) {
             <Link to={`/UpdateReview/${review._id}`}>
               <EditIcon />
             </Link>
-            <DeleteIcon
-              onClick={() => props.handleDelete(review._id)}
-            />
+            <div>
+              <DeleteIcon
+                onClick={() => props.handleDelete(review._id)}
+              />
+            </div>
           </div>
         )}
       </div>
