@@ -22,7 +22,7 @@ jobs:
           node-version: '20.x'
 
       - name: npm install, build, and test
-        run: 
+        run: |
           npm install --workspaces=false
           npm run -w backend build --if-present
 		      npm run -w backend test --if-present
