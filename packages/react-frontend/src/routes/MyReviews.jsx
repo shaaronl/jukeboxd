@@ -2,6 +2,8 @@ import Navbar from "./Navbar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Review from "../../components/Review";
+import "./MyReview.css";
 
 export default function MyReviews() {
   const { username } = useParams();
@@ -28,19 +30,31 @@ export default function MyReviews() {
       }
     }
     fetchData();
+    console.log(user, reviews);
   }, []);
+
+  if (!user || !reviews) return <div>Loading...</div>;
 
   return (
     // copy pasted from loading page - fix later
     <div className="loading-text">
       <Navbar withLogo={true} />
-      <div className="userSide">
-        <AccountCircleIcon></AccountCircleIcon>
-        <h1>{user.username}</h1>
-      </div>
-      <div className="reviewsSide">
-        <h1>Reviews</h1>
-        
+      <div className="reviewsPage">
+        <div className="userSide">
+          <AccountCircleIcon></AccountCircleIcon>
+          <h1>{user.username}</h1>
+        </div>
+        <div className="reviewsSide">
+          {reviews.map((review) => (
+            <Review
+              key={review._id}
+              review={review}
+              rightUser={
+                localStorage.getItem("username") == username
+              }
+            ></Review>
+          ))}
+        </div>
       </div>
     </div>
   );

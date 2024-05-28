@@ -1,0 +1,23 @@
+.userReview {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: 0.5em;
+  margin: 1em;
+  width: 100%;
+}
+
+.userReview img {
+  height: 100px;
+  width: 100px;
+}
+
+.modifyIcons {
+  float: right;
+}
+
+.modifyIcons > * {
+  padding: 0.3em;
+}
+.reviewContent {
+  margin-left: 1em;
+}
