@@ -42,7 +42,9 @@ export default function AlbumInfo() {
   }
 
   function fetchAlbumById(id) {
-    return fetch(`http://jukeboxd-music.azurewebsites.net/albums/${id}`)
+    return fetch(
+      `http://jukeboxd-music.azurewebsites.net/albums/${id}`
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error(
