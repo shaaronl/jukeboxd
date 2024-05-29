@@ -56,17 +56,7 @@ export default function AlbumInfo() {
         throw error;
       });
   }
-
-  // function calculateAverage(reviews) {
-  //   if (reviews.length === 0) return 0;
-  //   // .reduce , iterates through array of reviews and sums up all ratings
-  //   const totalRating = reviews.reduce(
-  //     (sum, review) => sum + review.rating,
-  //     0
-  //   );
-  //   return totalRating / reviews.length;
-  // }
-
+  // any suggestions for how to get a half filled star?
   function getStarRating(rating) {
     const fullStars = Math.floor(rating);
     const halfStar = rating % 1 >= 0.5 ? 1 : 0;
@@ -93,11 +83,12 @@ export default function AlbumInfo() {
         ).toFixed(1)
       : "No reviews";
 
+  //currently just using filled/ empty stars but would like to change that
   const starRating =
     avgRating !== "No reviews"
       ? getStarRating(parseFloat(avgRating))
       : "☆☆☆☆☆";
-
+          
   return (
     <div className="album-info">
       <Navbar withLogo={true} />
