@@ -1,8 +1,9 @@
 /* GLOBAL VAR */
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400&display=swap");
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -13,7 +14,7 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #771f1f;
-  background-image: linear-gradient(45deg, #8A0404, #240101);
+  background-image: linear-gradient(45deg, #8a0404, #240101);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,39 +22,39 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 body {
   margin: 0;
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
 /* text on loading page */
 .loading-text {
   display: flex;
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
 }
-h1,h2{
+h1,
+h2 {
   margin: 0;
   padding: 0.5;
 }
 h2 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: "Bebas Neue", sans-serif;
   font-size: 4.3em;
   line-height: 1.1;
 }
 
 #logo-main {
-  background-image: linear-gradient(45deg, #E4BABA, #7E6767);
-  -webkit-background-clip: text; 
-  -webkit-text-fill-color: transparent; 
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 240px; 
+  background-image: linear-gradient(45deg, #e4baba, #7e6767);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 240px;
   font-weight: bold;
 }
 
@@ -92,14 +93,18 @@ footer {
   color: #dfbebe;
   text-decoration: none;
   margin-bottom: 5px;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
   font-size: 18px;
   font-weight: 400;
-  
 }
 
 .footer-column a:hover {
-  text-decoration:color-mix(in hsl shorter hue, color percentage, color percentage);
+  text-decoration: color-mix(
+    in hsl shorter hue,
+    color percentage,
+    color percentage
+  );
   color: rgb(104, 69, 69);
 }
 .terms-and-conditions-bg {
@@ -107,32 +112,32 @@ footer {
 }
 .music-note-wrapper {
   display: inline-block;
-  transform: scale(0.56); /* Adjust the scale to make the note bigger */
+  transform: scale(
+    0.56
+  ); /* Adjust the scale to make the note bigger */
   vertical-align: super; /* Align it with the surrounding text */
-  margin-left: -0.35em;   /* Adjust to fine-tune spacing */
-  margin-right: -0.43em;  /* Adjust to fine-tune spacing */
-  
+  margin-left: -0.35em; /* Adjust to fine-tune spacing */
+  margin-right: -0.43em; /* Adjust to fine-tune spacing */
 }
 
 .music-note {
   font-size: inherit; /* Inherit font size from parent to keep proportions */
-  color: rgb(106, 4, 4);         /* Adjust color as needed */
-  
+  color: rgb(106, 4, 4); /* Adjust color as needed */
 }
 .record-wrapper {
   display: inline-block;
-  transform: scale(0.75); /* Adjust the scale to make the note bigger */
- /* vertical-align: normal; /* Align it with the surrounding text */
-  margin-left: -0.2em;   /* Adjust to fine-tune spacing */
-  margin-right: -0.26em;  /* Adjust to fine-tune spacing */
-  position: relative;     /* Required for adjusting vertical position */
+  transform: scale(
+    0.75
+  ); /* Adjust the scale to make the note bigger */
+  /* vertical-align: normal; /* Align it with the surrounding text */
+  margin-left: -0.2em; /* Adjust to fine-tune spacing */
+  margin-right: -0.26em; /* Adjust to fine-tune spacing */
+  position: relative; /* Required for adjusting vertical position */
 
   top: 0.09em;
-  
 }
 
 .record {
   font-size: inherit; /* Inherit font size from parent to keep proportions */
-  color: rgb(134, 34, 34);         /* Adjust color as needed */
-  
+  color: rgb(134, 34, 34); /* Adjust color as needed */
 }

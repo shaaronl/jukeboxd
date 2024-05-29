@@ -4,17 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\"",
     "start": "cd packages/react-frontend && npm run dev",
     "format": "npx prettier . --write",
     "lint": "npx eslint ."
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "backend",
+    "react-frontend"
   ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "eslint-config-prettier": "9.1.0",
+    "eslint-config-react": "1.1.7",
     "nodemon": "^3.1.0",
     "prettier": "3.2.5"
   },

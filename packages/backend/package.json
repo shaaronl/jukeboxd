@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx nodemon backend.js"
+    "dev": "npx nodemon backend.js",
+    "lint": "npx eslint . && npx prettier --check ."
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +21,10 @@
     "mongoose": "^8.4.0"
   },
   "devDependencies": {
+    "@eslint/js": "9.3.0",
+    "eslint": "8.57.0",
+    "eslint-plugin-react": "7.34.1",
+    "globals": "^15.3.0",
     "nodemon": "^3.1.0"
   }
 }

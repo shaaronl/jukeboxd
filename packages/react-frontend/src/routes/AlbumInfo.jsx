@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import "./AlbumInfo.css";
@@ -23,12 +23,15 @@ export default function AlbumInfo() {
       .catch((error) => setError(error.message));
   }, [id]);
 
-
   async function fetchReviewsByAlbumId(albumId) {
     try {
-      const response = await fetch(`http://localhost:8000/reviews/albums/${albumId}`);
+      const response = await fetch(
+        `http://localhost:8000/reviews/albums/${albumId}`
+      );
       if (!response.ok) {
-        throw new Error(`Network response was not ok: ${response.statusText}`);
+        throw new Error(
+          `Network response was not ok: ${response.statusText}`
+        );
       }
       const reviewData = await response.json();
       setReviews(reviewData);
@@ -54,34 +57,46 @@ export default function AlbumInfo() {
       });
   }
 
-  function calculateAverage(reviews){
-      if(reviews.length === 0) return 0;
-      // .reduce , iterates through array of reviews and sums up all ratings
-      const totalRating = reviews.reduce((sum, review)=> sum + review.rating, 0);
-      return totalRating / reviews.length;
-  }
+  // function calculateAverage(reviews) {
+  //   if (reviews.length === 0) return 0;
+  //   // .reduce , iterates through array of reviews and sums up all ratings
+  //   const totalRating = reviews.reduce(
+  //     (sum, review) => sum + review.rating,
+  //     0
+  //   );
+  //   return totalRating / reviews.length;
+  // }
 
-  function getStarRating(rating){
-    
+  function getStarRating(rating) {
     const fullStars = Math.floor(rating);
-    const halfStar = rating % 1 >= 0.5 ? 1: 0;
-    const emptyStars = 5 - (fullStars + halfStar)
+    const halfStar = rating % 1 >= 0.5 ? 1 : 0;
+    const emptyStars = 5 - (fullStars + halfStar);
     // half star is just going to be empty for now
-    return '★'.repeat(fullStars) + (halfStar ? '★' : '') + '☆'.repeat(emptyStars);
+    return (
+      "★".repeat(fullStars) +
+      (halfStar ? "★" : "") +
+      "☆".repeat(emptyStars)
+    );
   }
 
   if (error) return <div>Error: {error}</div>;
   if (!album || !artist) return <div>Loading...</div>;
 
-
   // Calculate the average rating
-  const avgRating = reviews.length > 0
-    ? (reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length).toFixed(1)
-    : "No reviews";
+  const avgRating =
+    reviews.length > 0
+      ? (
+          reviews.reduce(
+            (sum, review) => sum + review.rating,
+            0
+          ) / reviews.length
+        ).toFixed(1)
+      : "No reviews";
 
-  const starRating = avgRating !== "No reviews" 
-    ? getStarRating(parseFloat(avgRating))
-    : '☆☆☆☆☆';
+  const starRating =
+    avgRating !== "No reviews"
+      ? getStarRating(parseFloat(avgRating))
+      : "☆☆☆☆☆";
 
   return (
     <div className="album-info">
@@ -108,9 +123,11 @@ export default function AlbumInfo() {
           <div className="album-details">
             <h2 className="album-title">{album.album_name}</h2>
             <p>
-              {album.release_date.split("-")[0] + " "}{artist.artist_name} |{"  "}
+              {album.release_date.split("-")[0] + " "}
+              {artist.artist_name} |{"  "}
               <span className="rating-stars">
-                {starRating} {avgRating !== "No reviews" && avgRating}
+                {starRating}{" "}
+                {avgRating !== "No reviews" && avgRating}
               </span>
             </p>
             <p>{album.description}</p>

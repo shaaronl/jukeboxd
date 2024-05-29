@@ -24,7 +24,7 @@ app.listen(port, () => {
 
 /** Routes **/
 
-// getting reviews by album id 
+// getting reviews by album id
 app.get("/reviews/albums/:id", async (req, res) => {
   try {
     const review = await userServices.findReviewsByAlbumId(
@@ -60,7 +60,7 @@ app.get("/reviews/users/:id", async (req, res) => {
   }
 });
 
-//getting all reviews 
+//getting all reviews
 app.get("/reviews/", async (req, res) => {
   try {
     const review = await userServices.findAllReviews(
@@ -289,14 +289,16 @@ app.post("/review/:id", async (req, res) => {
     console.log(reviewToAdd);
     // get the user of the person trying to write review
     // note: the username is gotten from the frontend which isn't secure, to update once we get auth running
-    let user = await userServices.findUserByName(
+    const user = await userServices.findUserByName(
       reviewToAdd.username
     );
     // get the album the user wants to write a review on
-    let album = await userServices.findAlbumById(req.params.id);
+    const album = await userServices.findAlbumById(
+      req.params.id
+    );
 
     // make a new review with the review schema
-    let newReview = new Reviews({
+    const newReview = new Reviews({
       written_by: user._id,
       rating: reviewToAdd.rating,
       content: reviewToAdd.content,
@@ -309,13 +311,6 @@ app.post("/review/:id", async (req, res) => {
       reviewId = review._id;
     });
 
-    console.log(reviewId);
-    // add the review to just the album
-    await Album.updateOne(
-      { _id: album._id },
-      { $push: { reviews: reviewId } },
-      { upsert: true }
-    );
     res.status(201);
     res.send(newReview);
   } catch (error) {
