@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
+import Rating from "@mui/material/Rating";
 import "./AlbumInfo.css";
 import { Link } from "react-router-dom";
 
@@ -57,32 +58,9 @@ export default function AlbumInfo() {
       });
   }
 
-  // function calculateAverage(reviews) {
-  //   if (reviews.length === 0) return 0;
-  //   // .reduce , iterates through array of reviews and sums up all ratings
-  //   const totalRating = reviews.reduce(
-  //     (sum, review) => sum + review.rating,
-  //     0
-  //   );
-  //   return totalRating / reviews.length;
-  // }
-
-  function getStarRating(rating) {
-    const fullStars = Math.floor(rating);
-    const halfStar = rating % 1 >= 0.5 ? 1 : 0;
-    const emptyStars = 5 - (fullStars + halfStar);
-    // half star is just going to be empty for now
-    return (
-      "★".repeat(fullStars) +
-      (halfStar ? "★" : "") +
-      "☆".repeat(emptyStars)
-    );
-  }
-
   if (error) return <div>Error: {error}</div>;
   if (!album || !artist) return <div>Loading...</div>;
 
-  // Calculate the average rating
   const avgRating =
     reviews.length > 0
       ? (
@@ -92,11 +70,6 @@ export default function AlbumInfo() {
           ) / reviews.length
         ).toFixed(1)
       : "No reviews";
-
-  const starRating =
-    avgRating !== "No reviews"
-      ? getStarRating(parseFloat(avgRating))
-      : "☆☆☆☆☆";
 
   return (
     <div className="album-info">
@@ -126,7 +99,7 @@ export default function AlbumInfo() {
               {album.release_date.split("-")[0] + " "}
               {artist.artist_name} |{"  "}
               <span className="rating-stars">
-                {starRating}{" "}
+                <Rating name="album-rating" value={parseFloat(avgRating)} precision={0.5}/>
                 {avgRating !== "No reviews" && avgRating}
               </span>
             </p>
