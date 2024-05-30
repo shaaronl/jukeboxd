@@ -40,14 +40,14 @@ export default function Footer(){
           <Link to="/faqs">Click here</Link>
         </div>
         <div className="footer-column">
-          <h3>Navigate</h3>
-          <Link to="/">Home</Link>
-          <Link to="/Albums">Albums</Link>
-        </div>
-        <div className="footer-column">
           <h3>Help</h3>
           <Link to="/help">Creating An Account</Link>
           <Link to="/help">General</Link>       
+        </div>
+        <div className="footer-column">
+          <h3>Terms and Conditions</h3>
+          <Link to="/">User Agreement</Link>
+        
         </div>
 
       </div>
