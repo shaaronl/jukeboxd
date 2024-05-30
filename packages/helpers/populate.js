@@ -13,7 +13,7 @@ curl -X POST "https://accounts.spotify.com/api/token" \
 const access_token = "";
 // drop all the collections at the start
 mongoose
-  .connect("mongodb://localhost:27017/jukeboxd", {
+  .connect("mongodb://jukeboxd-music.azurewebsites.net/jukeboxd", {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
