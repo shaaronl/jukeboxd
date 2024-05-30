@@ -19,12 +19,6 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-// app.listen(port, () => {
-//   console.log(
-//     `Example app listening at http://jukeboxd-music.azurewebsites.net`
-//   );
-// });
-
 app.listen(process.env.PORT || port, () => {
   console.log(
     "Example app listening at http://jukeboxd-music.azurewebsites.net "
