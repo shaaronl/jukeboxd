@@ -234,6 +234,21 @@ async function updateReviewById(reviewId, newReview) {
   }
 }
 
+async function updateUserImage(username, imageAdress) {
+  try {
+    const user = await User.findOneAndUpdate(
+      {
+        username: username
+      },
+      { profilePic: imageAddress }
+    );
+    return user;
+  } catch (error) {
+    console.error("Error finding user:", error);
+    throw error;
+  }
+}
+
 export default {
   addUser,
   findReviewsByAlbumId,
@@ -250,5 +265,6 @@ export default {
   findUserByName,
   deleteReviewById,
   findReviewById,
-  updateReviewById
+  updateReviewById,
+  updateUserImage
 };

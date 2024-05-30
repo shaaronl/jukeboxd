@@ -404,3 +404,26 @@ app.put("/review/:id", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+// update the user's profile picture
+app.put("/user/picture/:username", async (req, res) => {
+  try {
+    const userToUpdate = req.params.username;
+    console.log(userToUpdate, req.body.imageAddress);
+    return;
+    let user = await userServices.updateUserImage(
+      userToUpdate,
+      req.body.imageAddress
+    );
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "Couldn't update user" });
+    }
+    res.status(201);
+    res.send(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});

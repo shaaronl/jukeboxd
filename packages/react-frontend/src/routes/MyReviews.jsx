@@ -4,11 +4,15 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Review from "../../components/Review";
 import "./MyReview.css";
+import Avatar from "@mui/material/Avatar";
 
 export default function MyReviews() {
   const { username } = useParams();
   const [user, setUser] = useState(null);
   const [reviews, setReviews] = useState(null);
+  const [changeImageDisplay, setChangeImageDisplay] =
+    useState(false);
+  const [imageAddress, setImageAddress] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -33,7 +37,6 @@ export default function MyReviews() {
   }, []);
 
   async function handleDelete(reviewId) {
-    console.log(reviewId);
     try {
       const response = await fetch(
         `http://localhost:8000/reviews/user/${reviewId}`,
@@ -58,6 +61,25 @@ export default function MyReviews() {
     }
   }
 
+  async function handleChangeImage() {
+    // change the user's image in the database
+    const response = await fetch(
+      `http://localhost:8000/user/picture/${localStorage.getItem("username")}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          imageAddress: imageAddress
+        })
+      }
+    );
+    if (!response) {
+      throw Error("Error updating user picture");
+    }
+  }
+
   if (!user || !reviews) return <div>Loading...</div>;
 
   return (
@@ -66,8 +88,32 @@ export default function MyReviews() {
       <Navbar withLogo={true} />
       <div className="reviewsPage">
         <div className="userSide">
-          <AccountCircleIcon></AccountCircleIcon>
+          <Avatar
+            alt={username}
+            src="https://preview.redd.it/a-picture-is-worth-a-1-000-questions-for-the-culture-v0-f65u21w2uc3d1.jpeg?auto=webp&s=9d6ec8822653dc1d8fb7ccc1a639bbec81cdced1"
+          />
           <h1>{user.username}</h1>
+          <button
+            onClick={() =>
+              setChangeImageDisplay(!changeImageDisplay)
+            }
+          >
+            Change Profile Picture
+          </button>
+          {changeImageDisplay && (
+            <div className="imageURLInput">
+              <input
+                type="text"
+                placeholder="Image address"
+                onChange={(e) =>
+                  setImageAddress(e.target.value)
+                }
+              ></input>
+              <button onClick={() => handleChangeImage()}>
+                Save
+              </button>
+            </div>
+          )}
         </div>
         <div className="reviewsSide">
           {reviews.map((review) => (

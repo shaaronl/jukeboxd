@@ -4,7 +4,7 @@ import CreateAccount from "./CreateAccount";
 import "./Navbar.css";
 import SignIn from "./SignIn";
 import PropTypes from "prop-types";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Avatar from "@mui/material/Avatar";
 
 export default function Navbar({ withLogo }) {
   const [showModal, setShowModal] = useState(false);
@@ -89,7 +89,10 @@ export default function Navbar({ withLogo }) {
           <>
             <li>
               <Link to="/">
-                <AccountCircleIcon />
+                <Avatar
+                  alt={username}
+                  src="https://preview.redd.it/a-picture-is-worth-a-1-000-questions-for-the-culture-v0-f65u21w2uc3d1.jpeg?auto=webp&s=9d6ec8822653dc1d8fb7ccc1a639bbec81cdced1"
+                />
                 {username}
               </Link>
             </li>
