@@ -93,13 +93,15 @@ export default function MyReviews() {
         <div className="userSide">
           <Avatar alt={username} src={user.profilePic} />
           <h1>{user.username}</h1>
-          <button
-            onClick={() =>
-              setChangeImageDisplay(!changeImageDisplay)
-            }
-          >
-            Change Profile Picture
-          </button>
+          {localStorage.getItem("username") == username && (
+            <button
+              onClick={() =>
+                setChangeImageDisplay(!changeImageDisplay)
+              }
+            >
+              Change Profile Picture
+            </button>
+          )}
           {changeImageDisplay && (
             <div className="imageURLInput">
               <input
