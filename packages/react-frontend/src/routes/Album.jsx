@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import "./Album.css";
-
+import Footer from "./FooterFiles/Footer";
 // Assume you have a function to fetch artist data from an API
 async function fetchArtistBySpotifyId(spotifyId) {
   try {
@@ -82,6 +82,7 @@ export default function Album() {
   }, [selectedGenre, selectedYear, albums]);
 
   return (
+    <>
     <div>
       <Navbar withLogo={true} />
       <div className="content">
@@ -135,5 +136,7 @@ export default function Album() {
         )}
       </div>
     </div>
+    <Footer />
+    </>
   );
 }

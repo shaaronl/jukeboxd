@@ -28,7 +28,7 @@ body {
   justify-content: center;
   align-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 120vh;
 }
 /* text on loading page */
 .loading-text {
@@ -36,7 +36,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
 }
 h1,
 h2 {

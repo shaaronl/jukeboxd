@@ -4,10 +4,11 @@ footer {
     width: 99vw;
     box-sizing: content-box; /* Ensures padding is included in the width */
     margin-top: 10%; /* Pushes footer to the bottom */
-    padding-bottom: 14px; /* Ensure no padding at the bottom */
+    padding-bottom: 14  px; /* Ensure no padding at the bottom */
     left: 0;
     right: 0;
     position: relative;
+    float: bottom;
     bottom: 0;
   }
   
