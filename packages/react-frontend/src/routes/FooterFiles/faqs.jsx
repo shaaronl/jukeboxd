@@ -10,6 +10,7 @@ export default function Faqs() {
 
   return (
     <>
+   
     <div className="loading-text">
       <Navbar withLogo={true} />
       <span className="about-us">
@@ -45,9 +46,9 @@ export default function Faqs() {
     
         <h3>Q: Can I use Jukebox'd to find out if my neighbor's dog has better music taste than me?</h3>
         <p>A: Only if your neighbor's dog has an account. If not, you might have to sneak a peek at their playlist during the next walk in the park.</p>
-     
+        
       </span>
-    
+     
     </div>
     <Footer />
     </>

@@ -4,7 +4,7 @@ footer {
     width: 99vw;
     box-sizing: content-box; /* Ensures padding is included in the width */
     margin-top: 10%; /* Pushes footer to the bottom */
-    padding-bottom: 10px; /* Ensure no padding at the bottom */
+    padding-bottom: 14px; /* Ensure no padding at the bottom */
     left: 0;
     right: 0;
     position: relative;
@@ -46,7 +46,7 @@ footer {
       color percentage,
       color percentage
     );
-    color: rgb(104, 69, 69);
+    color: rgb(166, 106, 106);
   }
   
 .about-us {
@@ -60,7 +60,11 @@ footer {
     position: relative; /* Required for adjusting vertical position */
     text-indent: 30px;
     top: 9.5em;
+    
   }
   .terms-and-conditions-bg {
     background-color: #f0f0f0;
   }
+  
+  
+  
