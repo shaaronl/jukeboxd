@@ -322,7 +322,7 @@ app.post("/review/:id", async (req, res) => {
 // get user info and reviews of user
 app.get("/reviews/:users", async (req, res) => {
   try {
-    let username = req.params.users;
+    const username = req.params.users;
     const user = await userServices.findUserByName(username);
     if (!user) {
       return res
@@ -349,9 +349,8 @@ app.get("/reviews/:users", async (req, res) => {
 // deletes review by id
 app.delete("/reviews/user/:reviewId", async (req, res) => {
   try {
-    let reviewId = req.params.reviewId;
-    console.log(reviewId);
-    let response =
+    const reviewId = req.params.reviewId;
+    const response =
       await userServices.deleteReviewById(reviewId);
 
     if (response === undefined) {

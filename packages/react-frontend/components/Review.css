@@ -27,6 +27,10 @@
   margin-left: 1em;
 }
 
+.reviewContent h3 {
+  word-wrap: break-word;
+}
+
 .modifyIcons > *:hover {
   background-color: grey;
 }

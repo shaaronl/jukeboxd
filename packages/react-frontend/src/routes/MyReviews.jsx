@@ -18,7 +18,7 @@ export default function MyReviews() {
   useEffect(() => {
     async function fetchData() {
       try {
-        let response = await fetch(
+        const response = await fetch(
           `http://localhost:8000/reviews/${username}`
         );
         if (!response.ok) {
@@ -26,7 +26,7 @@ export default function MyReviews() {
             `Network response was not ok: ${response.statusText}`
           );
         }
-        let data = await response.json();
+        const data = await response.json();
         setUser(data.user);
         setReviews(data.reviews);
       } catch {

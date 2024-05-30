@@ -7,8 +7,8 @@ import "./Review.css";
 import { Link } from "react-router-dom";
 
 export default function Review(props) {
-  let review = props.review;
-  let rightUser = props.rightUser;
+  const review = props.review;
+  const rightUser = props.rightUser;
 
   return (
     <div className="userReview">
