@@ -1,5 +1,4 @@
 import Navbar from "./Navbar";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Review from "../../components/Review";
