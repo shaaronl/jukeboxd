@@ -178,11 +178,73 @@ async function findAllReviews() {
 // function to find reviews by userId
 async function findReviewsByWrittenBy(userId) {
   try {
-    const reviews = await Reviews.find({ written_by: userId });
-    console.log("Found reviews:", reviews);
+    // also populate the album
+    const reviews = await Reviews.find({
+      written_by: userId
+    }).populate({
+      path: "album_id",
+      model: "Album"
+    });
     return reviews;
   } catch (error) {
     console.error("Error finding reviews:", error);
+    throw error;
+  }
+}
+
+// function to delete a review by review id
+async function deleteReviewById(reviewId) {
+  try {
+    const result = await Reviews.findByIdAndDelete(reviewId);
+    return result;
+  } catch (error) {
+    console.error("Error finding reviews:", error);
+    throw error;
+  }
+}
+
+// find review by review id
+async function findReviewById(reviewId) {
+  try {
+    const review = await Reviews.findById(reviewId).populate({
+      path: "album_id",
+      model: "Album"
+    });
+    return review;
+  } catch (error) {
+    console.error("Error finding reviews:", error);
+    throw error;
+  }
+}
+
+//find and update a review by id
+async function updateReviewById(reviewId, newReview) {
+  try {
+    const review = await Reviews.findOneAndUpdate(
+      { _id: reviewId },
+      {
+        rating: newReview.rating,
+        content: newReview.content
+      }
+    );
+    return review;
+  } catch (error) {
+    console.error("Error finding review:", error);
+    throw error;
+  }
+}
+
+async function updateUserImage(username, imageAddress) {
+  try {
+    const user = await User.findOneAndUpdate(
+      {
+        username: username
+      },
+      { profilePic: imageAddress }
+    );
+    return user;
+  } catch (error) {
+    console.error("Error finding user:", error);
     throw error;
   }
 }
@@ -200,5 +262,9 @@ export default {
   findAlbumBySpotifyId,
   findAllSongs,
   findSongsBySpotifyId,
-  findUserByName
+  findUserByName,
+  deleteReviewById,
+  findReviewById,
+  updateReviewById,
+  updateUserImage
 };
