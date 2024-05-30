@@ -34,7 +34,7 @@ export default function MyReviews() {
     }
     fetchData();
     setChanged(false);
-  }, [changed]);
+  }, [changed, username]);
 
   async function handleDelete(reviewId) {
     try {
