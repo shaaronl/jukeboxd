@@ -2,9 +2,9 @@ import Rating from "@mui/material/Rating";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import IconButton from "@mui/material/IconButton";
 import "./Review.css";
 import { Link } from "react-router-dom";
+/* eslint-disable react/prop-types */ // TODO: upgrade to latest eslint tooling
 
 export default function Review(props) {
   const review = props.review;
