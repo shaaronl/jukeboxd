@@ -305,11 +305,8 @@ app.post("/review/:id", async (req, res) => {
       likes: 0,
       album_id: album._id
     });
-    let reviewId;
 
-    await newReview.save().then((review) => {
-      reviewId = review._id;
-    });
+    await newReview.save();
 
     res.status(201);
     res.send(newReview);
@@ -369,8 +366,8 @@ app.delete("/reviews/user/:reviewId", async (req, res) => {
 // get review by id
 app.get("/reviews/user/:reviewId", async (req, res) => {
   try {
-    let reviewId = req.params.reviewId;
-    let review = await userServices.findReviewById(reviewId);
+    const reviewId = req.params.reviewId;
+    const review = await userServices.findReviewById(reviewId);
     if (!review) {
       return res
         .status(404)
@@ -387,7 +384,7 @@ app.get("/reviews/user/:reviewId", async (req, res) => {
 app.put("/review/:id", async (req, res) => {
   try {
     const reviewToUpdate = req.params.id;
-    let review = await userServices.updateReviewById(
+    const review = await userServices.updateReviewById(
       reviewToUpdate,
       req.body
     );
@@ -408,7 +405,7 @@ app.put("/review/:id", async (req, res) => {
 app.put("/user/picture/:username", async (req, res) => {
   try {
     const userToUpdate = req.params.username;
-    let user = await userServices.updateUserImage(
+    const user = await userServices.updateUserImage(
       userToUpdate,
       req.body.imageAddress
     );
