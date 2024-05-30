@@ -40,6 +40,8 @@ export function authenticateUser(req, res, next) {
       (error, decoded) => {
         if (decoded) {
           // allowed to continue to the route
+          req.user = decoded;
+          console.log("decoded!")
           next();
         } else {
           console.log("JWT error:", error);
@@ -81,24 +83,3 @@ export async function loginUser(req, res) {
   }
 }
 
-// addAuthHeader is a helper funciton that add the correct Authorization header.
-// takes in other headers as arguments, so that they could be included too
-/* example:
-const promise = fetch(`${API_PREFIX}/users`, {
-  method: "POST",
-  headers: addAuthHeader({
-    "Content-Type": "application/json"
-  }),
-  body: JSON.stringify(person)
-});
-*/
-function addAuthHeader(otherHeaders = {}) {
-  if (localStorage.getItem("token") === "INVALID TOKEN") {
-    return otherHeaders;
-  } else {
-    return {
-      ...otherHeaders,
-      Authorization: `Bearer ${localStorage.getItem("token")}`
-    };
-  }
-}

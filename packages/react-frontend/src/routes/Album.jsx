@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import "./Album.css";
 
 // Assume you have a function to fetch artist data from an API
 async function fetchArtistBySpotifyId(spotifyId) {
+  const token = localStorage.getItem("token");
+
   try {
-    const response = await fetch(
-      `http://localhost:8000/artists?spotify_id=${spotifyId}`
-    );
+    const response = await fetch(`http://localhost:8000/artists?spotify_id=${spotifyId}`, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    });
     if (!response.ok) {
       throw new Error("Failed to fetch artist data");
     }
@@ -20,7 +26,9 @@ async function fetchArtistBySpotifyId(spotifyId) {
   }
 }
 
+
 export default function Album() {
+  const navigate = useNavigate();
   const [albums, setAlbums] = useState([]);
   const [filteredAlbums, setFilteredAlbums] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -30,15 +38,25 @@ export default function Album() {
   const [selectedGenre, setSelectedGenre] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8000/albums")
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      navigate("/");
+    }
+
+    fetch("http://localhost:8000/albums", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    })
       .then((response) => response.json())
       .then((data) => {
         setAlbums(data);
         setFilteredAlbums(data);
       })
-      .catch((error) =>
-        console.error("Error fetching albums:", error)
-      );
+      .catch((error) => console.error("Error fetching albums:", error));
   }, []);
 
   useEffect(() => {
@@ -51,28 +69,20 @@ export default function Album() {
         const filtered = await Promise.all(
           albums.map(async (album) => {
             for (const spotifyId of album.artists) {
-              const artist =
-                await fetchArtistBySpotifyId(spotifyId);
-              if (
-                artist &&
-                artist.genres.includes(selectedGenre)
-              ) {
+              const artist = await fetchArtistBySpotifyId(spotifyId);
+              if (artist && artist.genres.includes(selectedGenre)) {
                 return true;
               }
             }
             return false;
           })
         );
-        filteredData = albums.filter(
-          (_, index) => filtered[index]
-        );
+        filteredData = albums.filter((_, index) => filtered[index]);
       }
 
       // Filter by year
       if (selectedYear !== "") {
-        filteredData = filteredData.filter((album) =>
-          album.release_date.startsWith(selectedYear)
-        );
+        filteredData = filteredData.filter((album) => album.release_date.startsWith(selectedYear));
       }
 
       setFilteredAlbums(filteredData);
