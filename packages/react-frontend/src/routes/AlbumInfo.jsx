@@ -120,7 +120,7 @@ export default function AlbumInfo() {
                   <span className="rating-stars">
                     <Rating value={parseFloat(review.rating)} precision={0.1} readOnly/>
                   </span>
-                  <p classname = "review">{review.content}</p>
+                  <p className = "review">{review.content}</p>
                 </div>
               ))
             )}
