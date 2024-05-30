@@ -3,26 +3,12 @@ import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import "./Album.css";
 
-async function fetchArtistBySpotifyId(spotifyId) {
-  try {
-    const response = await fetch(
-      `http://localhost:8000/artists?spotify_id=${spotifyId}`
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch artist data");
-    }
-    const artistData = await response.json();
-    return artistData;
-  } catch (error) {
-    console.error("Error fetching artist data:", error);
-    return null; // Return null if an error occurs
-  }
-}
-
 // Function to fetch reviews and calculate floored average rating
 async function fetchReviewsAndCalculateRatings() {
   try {
-    const response = await fetch("http://localhost:8000/reviews");
+    const response = await fetch(
+      "http://localhost:8000/reviews"
+    );
     if (!response.ok) {
       throw new Error("Failed to fetch reviews");
     }
@@ -81,24 +67,16 @@ export default function Album() {
       setLoading(true); // Start loading
 
       // Fetch average ratings
-      const averageRatings = await fetchReviewsAndCalculateRatings();
+      const averageRatings =
+        await fetchReviewsAndCalculateRatings();
 
       let filteredData = albums;
 
       // Filter by genre
       if (selectedGenre !== "") {
-        const filtered = await Promise.all(
-          albums.map(async (album) => {
-            for (const spotifyId of album.artists) {
-              const artist = await fetchArtistBySpotifyId(spotifyId);
-              if (artist && artist.genres.includes(selectedGenre)) {
-                return true;
-              }
-            }
-            return false;
-          })
+        filteredData = filteredData.filter((album) =>
+          album.genres.includes(selectedGenre)
         );
-        filteredData = albums.filter((_, index) => filtered[index]);
       }
 
       // Filter by year
@@ -133,7 +111,7 @@ export default function Album() {
       <Navbar withLogo={true} />
       <div className="content">
         <div className="filter-container">
-        <select
+          <select
             id="ratingFilter"
             value={selectedRating}
             onChange={(e) => setSelectedRating(e.target.value)}
@@ -169,7 +147,12 @@ export default function Album() {
               </option>
             ))}
           </select>
-          <button className = "reset-button" onClick={resetFilters}>Reset</button>
+          <button
+            className="reset-button"
+            onClick={resetFilters}
+          >
+            Reset
+          </button>
         </div>
         {loading ? (
           <div>Loading...</div>
@@ -197,4 +180,3 @@ export default function Album() {
     </div>
   );
 }
-
