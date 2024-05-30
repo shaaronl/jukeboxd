@@ -58,7 +58,7 @@ footer {
     margin-left: 8.3em; /* Adjust to fine-tune spacing */
     margin-right: 8.3em; /* Adjust to fine-tune spacing */
     position: relative; /* Required for adjusting vertical position */
-  
+    text-indent: 30px;
     top: 9.5em;
   }
   .terms-and-conditions-bg {
