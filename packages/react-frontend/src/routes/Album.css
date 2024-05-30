@@ -47,6 +47,21 @@
   left: 140px; /* Distance from the right */
 }
 
+.reset-button {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  background-color: rgb(161, 19, 19);
+  border-color: rgb(161, 19, 19);
+  font-size: 20px;
+  padding: auto;
+  width: 150px; /* Set a specific width */
+  height: 50px; /* Set a specific height */
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
 select {
   padding: 10px;
   height: 40px;

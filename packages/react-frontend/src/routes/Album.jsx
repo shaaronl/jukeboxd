@@ -122,6 +122,12 @@ export default function Album() {
     filterAlbums();
   }, [selectedGenre, selectedYear, selectedRating, albums]);
 
+  const resetFilters = () => {
+    setSelectedGenre("");
+    setSelectedYear("");
+    setSelectedRating("");
+  };
+
   return (
     <div>
       <Navbar withLogo={true} />
@@ -163,6 +169,7 @@ export default function Album() {
               </option>
             ))}
           </select>
+          <button className = "reset-button" onClick={resetFilters}>Reset</button>
         </div>
         {loading ? (
           <div>Loading...</div>
