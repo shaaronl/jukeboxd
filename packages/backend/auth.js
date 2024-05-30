@@ -66,9 +66,11 @@ export async function loginUser(req, res) {
       .then((matched) => {
         if (matched) {
           generateAccessToken(username).then((token) => {
-            res
-              .status(200)
-              .send({ token: token, username: username });
+            res.status(200).send({
+              token: token,
+              username: username,
+              profilePic: retrievedUser.profilePic
+            });
           });
         } else {
           // invalid password

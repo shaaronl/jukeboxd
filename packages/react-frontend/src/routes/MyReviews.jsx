@@ -13,6 +13,7 @@ export default function MyReviews() {
   const [changeImageDisplay, setChangeImageDisplay] =
     useState(false);
   const [imageAddress, setImageAddress] = useState(null);
+  const [changed, setChanged] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -33,8 +34,8 @@ export default function MyReviews() {
       }
     }
     fetchData();
-    console.log(user, reviews);
-  }, []);
+    setChanged(false);
+  }, [changed]);
 
   async function handleDelete(reviewId) {
     try {
@@ -78,6 +79,8 @@ export default function MyReviews() {
     if (!response) {
       throw Error("Error updating user picture");
     }
+    localStorage.setItem("profilePic", imageAddress);
+    setChanged(true);
   }
 
   if (!user || !reviews) return <div>Loading...</div>;
@@ -88,10 +91,7 @@ export default function MyReviews() {
       <Navbar withLogo={true} />
       <div className="reviewsPage">
         <div className="userSide">
-          <Avatar
-            alt={username}
-            src="https://preview.redd.it/a-picture-is-worth-a-1-000-questions-for-the-culture-v0-f65u21w2uc3d1.jpeg?auto=webp&s=9d6ec8822653dc1d8fb7ccc1a639bbec81cdced1"
-          />
+          <Avatar alt={username} src={user.profilePic} />
           <h1>{user.username}</h1>
           <button
             onClick={() =>

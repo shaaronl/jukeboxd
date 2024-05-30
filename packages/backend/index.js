@@ -409,8 +409,6 @@ app.put("/review/:id", async (req, res) => {
 app.put("/user/picture/:username", async (req, res) => {
   try {
     const userToUpdate = req.params.username;
-    console.log(userToUpdate, req.body.imageAddress);
-    return;
     let user = await userServices.updateUserImage(
       userToUpdate,
       req.body.imageAddress

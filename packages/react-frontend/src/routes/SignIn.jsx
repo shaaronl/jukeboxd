@@ -23,11 +23,11 @@ export default function SignIn({ onClose }) {
     );
     const result = await response.json();
     if (result) {
+      console.log(result);
       // Store the jwt token
       localStorage.setItem("token", result.token);
       localStorage.setItem("username", result.username);
-      console.log(localStorage.getItem("token"));
-      console.log(localStorage.getItem("username"));
+      localStorage.setItem("profilePic", result.profilePic);
       window.location.reload();
 
       alert("Login!");
