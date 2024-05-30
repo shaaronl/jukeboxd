@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
-import connectDB from "../helpers/connectDB.js";
+import connectDB from "./connectDB.js";
 import User from "./models/userSchema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
