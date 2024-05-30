@@ -5,6 +5,9 @@ import { loginUser } from "./auth.js";
 import Album from "./models/albumSchema.js";
 import User from "./models/userSchema.js";
 import Reviews from "./models/reviewsSchema.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 const port = 8000;
