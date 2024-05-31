@@ -5,7 +5,6 @@ import Album from "../backend/models/albumSchema.js";
 
 mongoose.set("debug", true);
 
-
 // run the curl to get access token, once you get the access token put it into the variable
 /*
 curl -X POST "https://accounts.spotify.com/api/token" \
