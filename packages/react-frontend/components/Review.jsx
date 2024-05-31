@@ -10,12 +10,15 @@ export default function Review(props) {
   const review = props.review;
   const rightUser = props.rightUser;
 
+  console.log(review);
   return (
     <div className="userReview">
-      <div className="albumInfo">
-        <img src={review.album_id.album_cover}></img>
-        <h1>{review.album_id.album_name}</h1>
-      </div>
+      <Link to={`/album/${review.album_id._id}`}>
+        <div className="albumInfo">
+          <img src={review.album_id.album_cover}></img>
+          <h1>{review.album_id.album_name}</h1>
+        </div>
+      </Link>
       <div className="reviewContent">
         <Rating
           name="half-rating-read"

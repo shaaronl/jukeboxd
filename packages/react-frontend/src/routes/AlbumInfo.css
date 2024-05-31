@@ -129,3 +129,25 @@ a {
 .rating-stars {
   color: rgb(253, 192, 38);
 }
+
+.reviewTop {
+  display: flex;
+  width: 100%;
+}
+
+.reviewUserName {
+  color: white;
+  text-decoration: none;
+  margin-top: auto;
+  font-size: 9pt;
+}
+
+.reviewUserName h3 {
+  margin: 0;
+}
+
+.reviewTopRight {
+  margin-left: 1em;
+  position: relative;
+  bottom: 5px;
+}
