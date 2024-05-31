@@ -156,7 +156,10 @@ async function findUserByName(username) {
 
 async function findReviewsByAlbumId(album_id) {
   try {
-    const review = await Reviews.find({ album_id });
+    const review = await Reviews.find({ album_id }).populate({
+      path: "written_by",
+      model: "User"
+    });
     return review;
   } catch (error) {
     console.error("Error finding album:", error);
