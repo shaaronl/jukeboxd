@@ -15,6 +15,7 @@ import CreateAccount from "./routes/CreateAccount.jsx";
 import About from "./routes/FooterFiles/AboutUs.jsx";
 import Faqs from "./routes/FooterFiles/faqs.jsx";
 import TermsAndConditions from "./routes/FooterFiles/termscond.jsx";
+import UpdateReview from "./routes/UpdateReview.jsx";
 
 // import App from './App.jsx';
 
@@ -56,6 +57,14 @@ const router = createBrowserRouter([
   {
     path: "terms-and-conditions",
     element: <TermsAndConditions />
+  },
+  {
+    path: "reviews/:username",
+    element: <MyReviews />
+  },
+  {
+    path: "UpdateReview/:id",
+    element: <UpdateReview />
   }
 ]);
 
