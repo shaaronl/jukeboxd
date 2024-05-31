@@ -26,7 +26,7 @@ export default function AlbumInfo() {
   async function fetchReviewsByAlbumId(albumId) {
     try {
       const response = await fetch(
-        `http://jukeboxd-music.azurewebsites.net/reviews/albums/${albumId}`
+        `https://jukeboxd-music.azurewebsites.net/reviews/albums/${albumId}`
       );
       if (!response.ok) {
         throw new Error(
@@ -43,7 +43,7 @@ export default function AlbumInfo() {
 
   function fetchAlbumById(id) {
     return fetch(
-      `http://jukeboxd-music.azurewebsites.net/albums/${id}`
+      `https://jukeboxd-music.azurewebsites.net/albums/${id}`
     )
       .then((response) => {
         if (!response.ok) {

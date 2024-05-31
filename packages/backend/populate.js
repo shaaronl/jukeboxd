@@ -2,7 +2,9 @@ import mongoose from "mongoose";
 import Artist from "../backend/models/artistSchema.js";
 import Song from "../backend/models/songSchema.js";
 import Album from "../backend/models/albumSchema.js";
+
 mongoose.set("debug", true);
+
 
 // run the curl to get access token, once you get the access token put it into the variable
 /*

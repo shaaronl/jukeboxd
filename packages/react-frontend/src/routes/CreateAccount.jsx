@@ -12,7 +12,7 @@ export default function CreateAccount({ onClose }) {
     console.log(username);
     console.log(password);
     const response = await fetch(
-      "http://jukeboxd-music.azurewebsites.net/users",
+      "https://jukeboxd-music.azurewebsites.net/users",
       {
         method: "POST",
         headers: {
