@@ -12,8 +12,10 @@ import AlbumInfo from "./routes/AlbumInfo";
 import MyReviews from "./routes/MyReviews.jsx";
 import CreateReview from "./routes/CreateReview.jsx";
 import CreateAccount from "./routes/CreateAccount.jsx";
+import About from "./routes/FooterFiles/AboutUs.jsx";
+import Faqs from "./routes/FooterFiles/faqs.jsx";
+import TermsAndConditions from "./routes/FooterFiles/termscond.jsx";
 import UpdateReview from "./routes/UpdateReview.jsx";
-// import TermsAndConditions from "./routes/FooterFiles/termscond.jsx";
 
 // import App from './App.jsx';
 
@@ -45,6 +47,18 @@ const router = createBrowserRouter([
     element: <AlbumInfo />
   },
   {
+    path: "about",
+    element: <About />
+  },
+  {
+    path: "faqs",
+    element: <Faqs />
+  },
+  {
+    path: "terms-and-conditions",
+    element: <TermsAndConditions />
+  },
+  {
     path: "reviews/:username",
     element: <MyReviews />
   },
@@ -52,10 +66,6 @@ const router = createBrowserRouter([
     path: "UpdateReview/:id",
     element: <UpdateReview />
   }
-  // {
-  //   path: "terms-and-conditions",
-  //   element: <TermsAndConditions />
-  // }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
