@@ -46,7 +46,7 @@ export default function Footer(){
         </div>
         <div className="footer-column">
           <h3>Terms and Conditions</h3>
-          <Link to="/">User Agreement</Link>
+          <Link to="/terms-and-conditions">User Agreement</Link>
         
         </div>
 

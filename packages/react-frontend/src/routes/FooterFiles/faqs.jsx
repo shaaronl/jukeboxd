@@ -15,9 +15,9 @@ export default function Faqs() {
       <Navbar withLogo={true} />
       <span className="about-us">
       <h2>FAQS</h2>
+      &nbsp;
       </span>
       <span className="about-us">
-      
       
         <h3>Q: Can I rate music that my goldfish prefers?</h3>
         <p>A: Absolutely! Goldfish have surprisingly eclectic tastes. Just don't be offended if their favorite album is "Just Keep Swimming: Greatest Hits".</p>
@@ -46,9 +46,8 @@ export default function Faqs() {
     
         <h3>Q: Can I use Jukebox'd to find out if my neighbor's dog has better music taste than me?</h3>
         <p>A: Only if your neighbor's dog has an account. If not, you might have to sneak a peek at their playlist during the next walk in the park.</p>
-        
       </span>
-     
+     &nbsp;
     </div>
     <Footer />
     </>
