@@ -25,7 +25,6 @@ app.listen(port, () => {
   );
 });
 
-
 /** Public Routes **/
 
 /* User Accounts */
@@ -101,8 +100,6 @@ app.post("/api/sign-in", async (req, res) => {
 // User Login
 app.post("/login", loginUser);
 
-
-
 /** Protected Routes **/
 app.use(authenticateUser);
 
@@ -167,7 +164,6 @@ app.post("/review/:id", async (req, res) => {
     const reviewToAdd = req.body;
     console.log(reviewToAdd);
     // get the user of the person trying to write review
-    // note: the username is gotten from the frontend which isn't secure, to update once we get auth running
     const user = await userServices.findUserByName(
       reviewToAdd.username
     );
@@ -200,7 +196,7 @@ app.post("/review/:id", async (req, res) => {
 
 /* Albums */
 // Getting a single album
-app.get("/albums/:id", authenticateUser, async (req, res) => {
+app.get("/albums/:id", async (req, res) => {
   try {
     const album = await userServices.findAlbumById(
       req.params.id
@@ -246,7 +242,6 @@ app.get("/albums", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
-
 
 /* Artists */
 // Getting the artists

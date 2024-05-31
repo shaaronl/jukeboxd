@@ -25,17 +25,22 @@ export default function AlbumInfo() {
 
   async function fetchReviewsByAlbumId(albumId) {
     const token = localStorage.getItem("token");
-  
+
     try {
-      const response = await fetch(`http://localhost:8000/reviews/albums/${albumId}`, {
-        method: "GET",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json"
+      const response = await fetch(
+        `http://localhost:8000/reviews/albums/${albumId}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+          }
         }
-      });
+      );
       if (!response.ok) {
-        throw new Error(`Network response was not ok: ${response.statusText}`);
+        throw new Error(
+          `Network response was not ok: ${response.statusText}`
+        );
       }
       const reviewData = await response.json();
       setReviews(reviewData);
@@ -47,26 +52,26 @@ export default function AlbumInfo() {
 
   function fetchAlbumById(id) {
     const token = localStorage.getItem("token");
-  
+
     return fetch(`http://localhost:8000/albums/${id}`, {
       method: "GET",
       headers: {
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json"
       }
     })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(
-          `Network response was not ok: ${response.statusText}`
-        );
-      }
-      return response.json();
-    })
-    .catch((error) => {
-      console.error("Error fetching album:", error);
-      throw error;
-    });
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `Network response was not ok: ${response.statusText}`
+          );
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        console.error("Error fetching album:", error);
+        throw error;
+      });
   }
 
   // function calculateAverage(reviews) {

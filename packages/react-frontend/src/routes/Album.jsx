@@ -8,13 +8,16 @@ async function fetchArtistBySpotifyId(spotifyId) {
   const token = localStorage.getItem("token");
 
   try {
-    const response = await fetch(`http://localhost:8000/artists?spotify_id=${spotifyId}`, {
-      method: "GET",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
+    const response = await fetch(
+      `http://localhost:8000/artists?spotify_id=${spotifyId}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
       }
-    });
+    );
     if (!response.ok) {
       throw new Error("Failed to fetch artist data");
     }
@@ -25,7 +28,6 @@ async function fetchArtistBySpotifyId(spotifyId) {
     return null; // Return null if an error occurs
   }
 }
-
 
 export default function Album() {
   const navigate = useNavigate();
@@ -47,7 +49,7 @@ export default function Album() {
     fetch("http://localhost:8000/albums", {
       method: "GET",
       headers: {
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json"
       }
     })
@@ -56,8 +58,10 @@ export default function Album() {
         setAlbums(data);
         setFilteredAlbums(data);
       })
-      .catch((error) => console.error("Error fetching albums:", error));
-  }, []);
+      .catch((error) =>
+        console.error("Error fetching albums:", error)
+      );
+  }, [navigate]);
 
   useEffect(() => {
     const filterAlbums = async () => {
@@ -69,20 +73,28 @@ export default function Album() {
         const filtered = await Promise.all(
           albums.map(async (album) => {
             for (const spotifyId of album.artists) {
-              const artist = await fetchArtistBySpotifyId(spotifyId);
-              if (artist && artist.genres.includes(selectedGenre)) {
+              const artist =
+                await fetchArtistBySpotifyId(spotifyId);
+              if (
+                artist &&
+                artist.genres.includes(selectedGenre)
+              ) {
                 return true;
               }
             }
             return false;
           })
         );
-        filteredData = albums.filter((_, index) => filtered[index]);
+        filteredData = albums.filter(
+          (_, index) => filtered[index]
+        );
       }
 
       // Filter by year
       if (selectedYear !== "") {
-        filteredData = filteredData.filter((album) => album.release_date.startsWith(selectedYear));
+        filteredData = filteredData.filter((album) =>
+          album.release_date.startsWith(selectedYear)
+        );
       }
 
       setFilteredAlbums(filteredData);

@@ -41,7 +41,6 @@ export function authenticateUser(req, res, next) {
         if (decoded) {
           // allowed to continue to the route
           req.user = decoded;
-          console.log("decoded!")
           next();
         } else {
           console.log("JWT error:", error);
@@ -82,4 +81,3 @@ export async function loginUser(req, res) {
       });
   }
 }
-

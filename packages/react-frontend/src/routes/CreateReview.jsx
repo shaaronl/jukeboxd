@@ -27,28 +27,27 @@ export default function CreateReview() {
 
   function fetchAlbumById(id) {
     const token = localStorage.getItem("token");
-  
+
     return fetch(`http://localhost:8000/albums/${id}`, {
       method: "GET",
       headers: {
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json"
       }
     })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(
-          `Network response was not ok: ${response.statusText}`
-        );
-      }
-      return response.json();
-    })
-    .catch((error) => {
-      console.error("Error fetching album:", error);
-      throw error;
-    });
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `Network response was not ok: ${response.statusText}`
+          );
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        console.error("Error fetching album:", error);
+        throw error;
+      });
   }
-  
 
   function updateRating(value) {
     setRating(value);
@@ -60,14 +59,14 @@ export default function CreateReview() {
 
   async function handleSubmit(e) {
     const token = localStorage.getItem("token");
-    
+
     e.preventDefault();
     const response = await fetch(
       `http://localhost:8000/review/${id}`,
       {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({

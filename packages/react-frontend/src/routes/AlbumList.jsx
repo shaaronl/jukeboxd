@@ -7,14 +7,13 @@ function fetchUsers() {
   const promise = fetch("http://localhost:8000/albums/id", {
     method: "GET",
     headers: {
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json"
     }
   });
 
   return promise;
 }
-
 
 // make a route
 export default function Album() {
