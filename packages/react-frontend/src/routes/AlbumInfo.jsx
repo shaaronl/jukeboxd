@@ -117,7 +117,6 @@ export default function AlbumInfo() {
             ) : (
               reviews.map((review) => (
                 <div key={review._id} className="review">
-                  <p className = "review">{review.content}</p>
                 </div>
               ))
             )}
