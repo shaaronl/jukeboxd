@@ -9,7 +9,7 @@ const ReviewsSchema = new mongoose.Schema({
   content: String,
   likes: Number,
   album_id: {
-    type: mongoose.Schema.Types.OjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Album"
   }
 });
