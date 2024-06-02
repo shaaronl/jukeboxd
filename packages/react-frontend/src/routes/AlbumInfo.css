@@ -40,8 +40,8 @@ img {
 
 /* songs list formatting */
 .track-list {
-    grid-column: 1; 
-    grid-row: 2; 
+  grid-column: 1;
+  grid-row: 2;
 }
 .song-list ul {
   list-style-type: none;
@@ -83,9 +83,9 @@ a {
   box-sizing: border-box;
 }
 
-.reviews h3{
+.reviews h3 {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial,
-  sans-serif;
+    sans-serif;
   margin-bottom: 10px;
   margin: 5px 0;
 }
@@ -104,7 +104,7 @@ a {
   padding: 20px;
   margin-bottom: 10px;
   border-radius: 5px;
-  width: 90%; 
+  width: 90%;
   max-width: 700px; /* set a maximum width for larger screens */
   box-sizing: border-box;
 }
