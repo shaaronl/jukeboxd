@@ -1,0 +1,10 @@
+.reviewsPage {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  position: fixed;
+  top: 175px;
+}
+
+.albumInfo {
+  text-align: center;
+}

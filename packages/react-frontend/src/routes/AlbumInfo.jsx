@@ -4,6 +4,9 @@ import Navbar from "./Navbar";
 import Rating from "@mui/material/Rating";
 import "./AlbumInfo.css";
 import { Link } from "react-router-dom";
+import Rating from "@mui/material/Rating";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import Avatar from "@mui/material/Avatar";
 
 export default function AlbumInfo() {
   const { id } = useParams(); // Get the album id from the URL
@@ -117,6 +120,40 @@ export default function AlbumInfo() {
             ) : (
               reviews.map((review) => (
                 <div key={review._id} className="review">
+
+                  <div className="reviewTop">
+                    <Link
+                      to={`/reviews/${review.written_by.username}`}
+                    >
+                      <Avatar
+                        alt={review.written_by.username}
+                        src={review.written_by.profilePic}
+                      />
+                    </Link>
+                    <div className="reviewTopRight">
+                      <Link
+                        to={`/reviews/${review.written_by.username}`}
+                        className="reviewUserName"
+                      >
+                        <h3>{review.written_by.username}</h3>
+                      </Link>
+                      <Rating
+                        name="half-rating-read"
+                        defaultValue={review.rating}
+                        precision={0.5}
+                        emptyIcon={
+                          <StarBorderIcon
+                            fontSize="inherit"
+                            sx={{
+                              color: "#d9d9d9"
+                            }}
+                          />
+                        }
+                        readOnly
+                      />
+                    </div>
+                  </div>
+                  <p>{review.content}</p>
                 </div>
               ))
             )}
