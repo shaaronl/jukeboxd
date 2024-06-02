@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
-import Rating from "@mui/material/Rating";
 import "./AlbumInfo.css";
 import { Link } from "react-router-dom";
 import Rating from "@mui/material/Rating";
