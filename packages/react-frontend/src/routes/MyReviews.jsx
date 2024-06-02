@@ -17,8 +17,16 @@ export default function MyReviews() {
   useEffect(() => {
     async function fetchData() {
       try {
+        const token = localStorage.getItem("token");
         const response = await fetch(
-          `http://localhost:8000/reviews/${username}`
+          `http://localhost:8000/reviews/${username}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`
+            }
+          }
         );
         if (!response.ok) {
           throw new Error(
@@ -37,13 +45,16 @@ export default function MyReviews() {
   }, [changed, username]);
 
   async function handleDelete(reviewId) {
+    const token = localStorage.getItem("token");
+
     try {
       const response = await fetch(
         `http://localhost:8000/reviews/user/${reviewId}`,
         {
           method: "DELETE",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
           }
         }
       );
@@ -62,13 +73,16 @@ export default function MyReviews() {
   }
 
   async function handleChangeImage() {
+    const token = localStorage.getItem("token");
+
     // change the user's image in the database
     const response = await fetch(
       `http://localhost:8000/user/picture/${localStorage.getItem("username")}`,
       {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({
           imageAddress: imageAddress
