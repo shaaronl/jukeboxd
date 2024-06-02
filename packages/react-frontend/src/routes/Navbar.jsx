@@ -37,6 +37,16 @@ export default function Navbar({ withLogo }) {
     setShowModalSignIn(false);
   };
 
+  const swapToLogin = () => {
+    setShowModal(false);
+    setShowModalSignIn(true);
+  };
+
+  const swapToCreate = () => {
+    setShowModal(true);
+    setShowModalSignIn(false);
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
@@ -66,7 +76,10 @@ export default function Navbar({ withLogo }) {
                 SIGN IN
               </button>
               {showModalSignIn && (
-                <SignIn onClose={handleCloseModalSignIn} />
+                <SignIn
+                  onClick={swapToCreate}
+                  onClose={handleCloseModalSignIn}
+                />
               )}
             </li>
             <li>
@@ -77,7 +90,10 @@ export default function Navbar({ withLogo }) {
                 CREATE ACCOUNT
               </button>
               {showModal && (
-                <CreateAccount onClose={handleCloseModal} />
+                <CreateAccount
+                  onClick={swapToLogin}
+                  onClose={handleCloseModal}
+                />
               )}
             </li>
             <li>
