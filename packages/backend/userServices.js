@@ -195,6 +195,41 @@ async function findReviewsByWrittenBy(userId) {
   }
 }
 
+// function to find artist genre and put it into album data
+async function updateAlbumGenres() {
+  try {
+    const albums = await Album.find();
+
+    for (const album of albums) {
+      console.log(`Processing album: ${album.album_name}`);
+      const artistId = album.artists[0];
+      const artist = await Artist.findOne({
+        spotify_id: artistId
+      });
+
+      if (artist) {
+        console.log(
+          `Found artist: ${artist.artist_name}, Genres: ${artist.genres}`
+        );
+        album.genres = artist.genres;
+        await album.save();
+        console.log(
+          `Updated album ${album.album_name} with genres: ${artist.genres}`
+        );
+      } else {
+        console.log(
+          `Artist with ID ${artistId} not found for album ${album.album_name}`
+        );
+      }
+    }
+
+    console.log("Finished updating album genres.");
+  } catch (error) {
+    console.error("Error updating album genres:", error);
+    throw error;
+  }
+}
+
 // function to delete a review by review id
 async function deleteReviewById(reviewId) {
   try {
@@ -237,6 +272,7 @@ async function updateReviewById(reviewId, newReview) {
   }
 }
 
+
 async function updateUserImage(username, imageAddress) {
   try {
     const user = await User.findOneAndUpdate(
@@ -266,6 +302,7 @@ export default {
   findAllSongs,
   findSongsBySpotifyId,
   findUserByName,
+  updateAlbumGenres,
   deleteReviewById,
   findReviewById,
   updateReviewById,
