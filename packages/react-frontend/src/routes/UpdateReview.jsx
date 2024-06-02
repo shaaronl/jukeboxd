@@ -15,8 +15,17 @@ export default function UpdateReview() {
   useEffect(() => {
     async function fetchData() {
       try {
+        const token = localStorage.getItem("token");
+
         let response = await fetch(
-          `http://localhost:8000/reviews/user/${id}`
+          `http://localhost:8000/reviews/user/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`
+            }
+          }
         );
         if (!response.ok) {
           throw new Error(
