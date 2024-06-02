@@ -39,11 +39,15 @@ img {
 }
 
 /* songs list formatting */
-<<<<<<< Updated upstream
+
 /* .track-list {
     grid-column: 1; 
     grid-row: 2; 
 } */
+.track-list {
+  grid-column: 1;
+  grid-row: 2;
+}
 .song-list ul {
   list-style-type: none;
   padding: 0;
@@ -89,6 +93,13 @@ a {
     sans-serif;
   margin-bottom: 10px;
   margin: 5px 0;
+}
+
+.reviews p {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  margin-bottom: 10px;
+  margin: 5px 0;
   word-wrap: break-word; /* wraps the review name, if too long */
   word-break: break-all;
 }
@@ -98,7 +109,8 @@ a {
   padding: 20px;
   margin-bottom: 10px;
   border-radius: 5px;
-  width: 100%; /* Ensure the review takes the full width of the parent */
+  width: 90%;
+  max-width: 700px; /* set a maximum width for larger screens */
   box-sizing: border-box;
 }
 

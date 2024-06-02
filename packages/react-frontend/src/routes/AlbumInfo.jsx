@@ -27,9 +27,18 @@ export default function AlbumInfo() {
   }, [id]);
 
   async function fetchReviewsByAlbumId(albumId) {
+    const token = localStorage.getItem("token");
+
     try {
       const response = await fetch(
-        `http://localhost:8000/reviews/albums/${albumId}`
+        `http://localhost:8000/reviews/albums/${albumId}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+          }
+        }
       );
       if (!response.ok) {
         throw new Error(
@@ -45,7 +54,15 @@ export default function AlbumInfo() {
   }
 
   function fetchAlbumById(id) {
-    return fetch(`http://localhost:8000/albums/${id}`)
+    const token = localStorage.getItem("token");
+
+    return fetch(`http://localhost:8000/albums/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error(
@@ -101,16 +118,12 @@ export default function AlbumInfo() {
               {album.release_date.split("-")[0] + " "}
               {artist.artist_name} |{"   "}
               <span className="rating-stars">
-<<<<<<< Updated upstream
-                {starRating}{" "}
-=======
                 <Rating
                   name="album-rating"
                   value={parseFloat(avgRating)}
                   precision={0.1}
                   readOnly
                 />
->>>>>>> Stashed changes
                 {avgRating !== "No reviews" && avgRating}
               </span>
             </p>
@@ -128,7 +141,6 @@ export default function AlbumInfo() {
             ) : (
               reviews.map((review) => (
                 <div key={review._id} className="review">
-
                   <div className="reviewTop">
                     <Link
                       to={`/reviews/${review.written_by.username}`}
@@ -171,14 +183,10 @@ export default function AlbumInfo() {
             <p>{album.popularity}</p>
           </div>
           <div className="spotify-link">
-            <h3>Spotify Link</h3>
-            <a
-              href={album.spotify_link}
+            <a href={album.spotify_link}
               target="_blank"
-              rel="noopener noreferrer"
-            >
-              {album.spotify_link}
-            </a>
+              rel="noopener noreferrer">
+                Listen here on Spotify!</a>
           </div>
         </div>
       </div>

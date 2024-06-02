@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import "./Album.css";
 import Footer from "./FooterFiles/Footer";
 // Assume you have a function to fetch artist data from an API
 async function fetchArtistBySpotifyId(spotifyId) {
+  const token = localStorage.getItem("token");
+
   try {
     const response = await fetch(
-      `http://localhost:8000/artists?spotify_id=${spotifyId}`
+      `http://localhost:8000/artists?spotify_id=${spotifyId}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      }
     );
     if (!response.ok) {
       throw new Error("Failed to fetch artist data");
@@ -57,6 +66,7 @@ async function fetchReviewsAndCalculateRatings() {
 }
 
 export default function Album() {
+  const navigate = useNavigate();
   const [albums, setAlbums] = useState([]);
   const [filteredAlbums, setFilteredAlbums] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -69,7 +79,19 @@ export default function Album() {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8000/albums")
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      navigate("/");
+    }
+
+    fetch("http://localhost:8000/albums", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    })
       .then((response) => response.json())
       .then((data) => {
         setAlbums(data);
@@ -78,19 +100,16 @@ export default function Album() {
       .catch((error) =>
         console.error("Error fetching albums:", error)
       );
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     const filterAlbums = async () => {
       setLoading(true); // Start loading
-<<<<<<< Updated upstream
-=======
 
       // Fetch average ratings
       const averageRatings =
         await fetchReviewsAndCalculateRatings();
 
->>>>>>> Stashed changes
       let filteredData = albums;
 
       // Filter by genre
@@ -128,76 +147,103 @@ export default function Album() {
       setLoading(false); // Finish loading
     };
     filterAlbums();
-  }, [selectedGenre, selectedYear, albums]);
+  }, [
+    selectedGenre,
+    selectedYear,
+    selectedRating,
+    searchQuery,
+    albums
+  ]);
+
+  const resetFilters = () => {
+    setSelectedGenre("");
+    setSelectedYear("");
+    setSelectedRating("");
+    setSearchQuery("");
+  };
 
   return (
     <>
-    <div>
-      <Navbar withLogo={true} />
-      <div className="content">
-        <div className="filter-container">
-          <select
-            id="ratingFilter"
-            value={selectedRating}
-            onChange={(e) => setSelectedRating(e.target.value)}
-          >
-            <option value="">RATING</option>
-            {ratings.map((rating) => (
-              <option key={rating} value={rating}>
-                {rating}
-              </option>
-            ))}
-          </select>
-          <select
-            id="genreFilter"
-            value={selectedGenre}
-            onChange={(e) => setSelectedGenre(e.target.value)}
-          >
-            <option value="">GENRE</option>
-            {genres.map((genre) => (
-              <option key={genre} value={genre}>
-                {genre}
-              </option>
-            ))}
-          </select>
-          <select
-            id="yearFilter"
-            value={selectedYear}
-            onChange={(e) => setSelectedYear(e.target.value)}
-          >
-            <option value="">YEAR</option>
-            {years.map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
-        </div>
-        {loading ? (
-          <div>Loading...</div>
-        ) : (
-          <div className="gallery-container">
-            {filteredAlbums.map((album) => (
-              <div className="gallery-item" key={album._id}>
-                <Link
-                  to={`/album/${album._id}`}
-                  className="album-link"
-                >
-                  <img
-                    src={album.album_cover}
-                    alt={`Album ${album.album_name}`}
-                  />
-                  <span className="album-name">
-                    {album.album_name}
-                  </span>
-                </Link>
-              </div>
-            ))}
+      <div>
+        <Navbar withLogo={true} />
+        <div className="content">
+          <div className="filter-container">
+            <select
+              id="ratingFilter"
+              value={selectedRating}
+              onChange={(e) =>
+                setSelectedRating(e.target.value)
+              }
+            >
+              <option value="">RATING</option>
+              {ratings.map((rating) => (
+                <option key={rating} value={rating}>
+                  {rating}
+                </option>
+              ))}
+            </select>
+            <select
+              id="genreFilter"
+              value={selectedGenre}
+              onChange={(e) => setSelectedGenre(e.target.value)}
+            >
+              <option value="">GENRE</option>
+              {genres.map((genre) => (
+                <option key={genre} value={genre}>
+                  {genre}
+                </option>
+              ))}
+            </select>
+            <select
+              id="yearFilter"
+              value={selectedYear}
+              onChange={(e) => setSelectedYear(e.target.value)}
+            >
+              <option value="">YEAR</option>
+              {years.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+            <input
+              type="text"
+              placeholder="Search Albums"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)} // Update search query state
+            />
+            <button
+              className="reset-button"
+              onClick={resetFilters}
+            >
+              Reset
+            </button>
           </div>
-        )}
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <div className="gallery-container">
+              {filteredAlbums.map((album) => (
+                <div className="gallery-item" key={album._id}>
+                  <Link
+                    to={`/album/${album._id}`}
+                    className="album-link"
+                  >
+                    <img
+                      src={album.album_cover}
+                      alt={`Album ${album.album_name}`}
+                    />
+                    <span className="album-name">
+                      {album.album_name}
+                    </span>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
-    <Footer />
+      <Footer />
     </>
   );
 }

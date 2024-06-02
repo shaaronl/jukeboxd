@@ -38,10 +38,8 @@ export default function Footer() {
         </div>
         <div className="footer-column">
           <h3>Help</h3>
-          <Link to="/help/create-account">
-            Creating An Account
-          </Link>
-          <Link to="/help/general">General</Link>
+          <Link to="/help">Creating An Account</Link>
+          <Link to="/help">General</Link>
         </div>
         <div className="footer-column">
           <h3>Terms and Conditions</h3>

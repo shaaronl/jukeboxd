@@ -25,9 +25,16 @@ export default function CreateReview() {
       });
   }, [id]);
 
-  // took from albuminfo. Get the album by id first to get image and other data
   function fetchAlbumById(id) {
-    return fetch(`http://localhost:8000/albums/${id}`)
+    const token = localStorage.getItem("token");
+
+    return fetch(`http://localhost:8000/albums/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error(
@@ -51,14 +58,16 @@ export default function CreateReview() {
   }
 
   async function handleSubmit(e) {
+    const token = localStorage.getItem("token");
+
     e.preventDefault();
     const response = await fetch(
       `http://localhost:8000/review/${id}`,
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           rating: rating,
