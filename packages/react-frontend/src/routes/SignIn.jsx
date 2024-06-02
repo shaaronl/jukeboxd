@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./SignIn.css";
 import PropTypes from "prop-types";
 
+/* eslint react/prop-types: 0 */
 export default function SignIn({ onClick, onClose }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

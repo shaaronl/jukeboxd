@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./CreateAccount.css";
 
+/* eslint react/prop-types: 0 */
 export default function CreateAccount({ onClick, onClose }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
