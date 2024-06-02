@@ -2,12 +2,8 @@ import { Link } from "react-router-dom";
 
 export default function TermsAndConditions() {
   return (
-
     <>
-      <div
-        
-        style={{ backgroundColor: "rgba(105,6,5,25)" }}
-      >
+      <div style={{ backgroundColor: "rgba(105,6,5,25)" }}>
         <div
           style={{
             display: "flex",
@@ -29,7 +25,7 @@ export default function TermsAndConditions() {
             I Have Read And Accept The Terms And Conditions
           </Link>{" "}
         </div>
-        <div   style={{ textAlign: "left" }}>
+        <div style={{ textAlign: "left" }}>
           <div
             className="MsoNormal"
             data-custom-class="title"
@@ -85,7 +81,7 @@ export default function TermsAndConditions() {
             </strong>
           </div>
         </div>
-        <div   style={{ textAlign: "left" }}>
+        <div style={{ textAlign: "left" }}>
           <div
             className="MsoNormal"
             id="agreement"
@@ -94,10 +90,10 @@ export default function TermsAndConditions() {
             <a name="_6aa3gkhykvst" />
           </div>
         </div>
-        <div   style={{ lineHeight: 1 }}>
+        <div style={{ lineHeight: 1 }}>
           <br />
         </div>
-        <div   style={{ textAlign: "left" }}>
+        <div style={{ textAlign: "left" }}>
           <div
             className="MsoNormal"
             data-custom-class="body_text"
@@ -108,7 +104,7 @@ export default function TermsAndConditions() {
                 fontSize: "12.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -131,7 +127,7 @@ export default function TermsAndConditions() {
                   fontSize: "11.0pt",
                   lineHeight: "115%",
                   msoFareastFontFamily: "Calibri",
-                   color: "white",
+                  color: "white",
                   msoThemecolor: "text1",
                   msoThemetint: 166
                 }}
@@ -141,7 +137,7 @@ export default function TermsAndConditions() {
                     fontSize: "11.0pt",
                     lineHeight: "115%",
                     msoFareastFontFamily: "Calibri",
-                     color: "white",
+                    color: "white",
                     msoThemecolor: "text1",
                     msoThemetint: 166
                   }}
@@ -151,7 +147,7 @@ export default function TermsAndConditions() {
                       fontSize: "11.0pt",
                       lineHeight: "115%",
                       msoFareastFontFamily: "Calibri",
-                       color: "white",
+                      color: "white",
                       msoThemecolor: "text1",
                       msoThemetint: 166
                     }}
@@ -164,7 +160,7 @@ export default function TermsAndConditions() {
                         fontSize: "11.0pt",
                         lineHeight: "115%",
                         msoFareastFontFamily: "Calibri",
-                         color: "white",
+                        color: "white",
                         msoThemecolor: "text1",
                         msoThemetint: 166
                       }}
@@ -180,7 +176,7 @@ export default function TermsAndConditions() {
                         fontSize: "11.0pt",
                         lineHeight: "115%",
                         msoFareastFontFamily: "Calibri",
-                         color: "white",
+                        color: "white",
                         msoThemecolor: "text1",
                         msoThemetint: 166
                       }}
@@ -190,7 +186,7 @@ export default function TermsAndConditions() {
                           fontSize: "11.0pt",
                           lineHeight: "115%",
                           msoFareastFontFamily: "Calibri",
-                           color: "white",
+                          color: "white",
                           msoThemecolor: "text1",
                           msoThemetint: 166
                         }}
@@ -217,7 +213,9 @@ export default function TermsAndConditions() {
               <span data-custom-class="body_text">
                 <span style={{ fontSize: 15 }}>
                   <span data-custom-class="body_text">
-                    <span style={{ color: "rgb(240, 240, 240)" }}>
+                    <span
+                      style={{ color: "rgb(240, 240, 240)" }}
+                    >
                       <bdt className="block-component" />
                       <bdt className="block-component" />,{" "}
                       <bdt className="question">CA</bdt>
@@ -236,7 +234,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 msoFareastFontFamily: "Calibri",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -246,7 +244,7 @@ export default function TermsAndConditions() {
                   fontSize: "11.0pt",
                   lineHeight: "115%",
                   msoFareastFontFamily: "Calibri",
-                   color: "white",
+                  color: "white",
                   msoThemecolor: "text1",
                   msoThemetint: 166
                 }}
@@ -258,10 +256,10 @@ export default function TermsAndConditions() {
             <bdt className="block-component" />
           </div>
         </div>
-        <div   style={{ lineHeight: 1 }}>
+        <div style={{ lineHeight: 1 }}>
           <br />
         </div>
-        <div   style={{ textAlign: "left" }}>
+        <div style={{ textAlign: "left" }}>
           <div
             className="MsoNormal"
             data-custom-class="body_text"
@@ -272,7 +270,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -321,7 +319,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -329,11 +327,11 @@ export default function TermsAndConditions() {
               You can contact us by{" "}
               <bdt className="block-component" />
               phone at{" "}
-              <bdt className="question">805-908-2061</bdt> or email
-              at{" "}
+              <bdt className="question">805-908-2061</bdt> or
+              email at{" "}
               <bdt className="question">
                 thebraedenmeister@gmail.com
-              </bdt>   
+              </bdt>
               <bdt className="block-component" />,{" "}
               <bdt className="question">San Luis Obispo</bdt>
               <bdt className="block-component" />
@@ -364,7 +362,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -399,7 +397,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -430,10 +428,10 @@ export default function TermsAndConditions() {
             </span>
           </div>
         </div>
-        <div   style={{ lineHeight: 1 }}>
+        <div style={{ lineHeight: 1 }}>
           <br />
         </div>
-        <div   style={{ textAlign: "left" }}>
+        <div style={{ textAlign: "left" }}>
           <div
             className="MsoNormal"
             data-custom-class="body_text"
@@ -451,7 +449,7 @@ export default function TermsAndConditions() {
                       fontSize: "11.0pt",
                       lineHeight: "115%",
                       fontFamily: "Arial",
-                       color: "white",
+                      color: "white",
                       msoThemecolor: "text1",
                       msoThemetint: 166
                     }}
@@ -685,9 +683,6 @@ export default function TermsAndConditions() {
             className="MsoNormal"
             style={{ lineHeight: "1.5" }}
           >
-     
-             
-            
             <a data-custom-class="link" href="#ugc" />
           </div>
           <div
@@ -1232,7 +1227,7 @@ export default function TermsAndConditions() {
             </a>
           </div>
         </div>
-        <div   style={{ textAlign: "left" }}>
+        <div style={{ textAlign: "left" }}>
           <div
             className="MsoNormal"
             data-custom-class="heading_1"
@@ -1327,7 +1322,6 @@ export default function TermsAndConditions() {
           </div>
         </div>
         <div
-           
           data-custom-class="heading_1"
           style={{ textAlign: "left", lineHeight: "1.5" }}
         >
@@ -1337,10 +1331,10 @@ export default function TermsAndConditions() {
             </span>
           </strong>
         </div>
-        <div   style={{ lineHeight: "1.5" }}>
+        <div style={{ lineHeight: "1.5" }}>
           <br />
         </div>
-        <div   style={{ textAlign: "left" }}>
+        <div style={{ textAlign: "left" }}>
           <div
             className="MsoNormal"
             data-custom-class="heading_2"
@@ -1364,7 +1358,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -1402,7 +1396,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -1430,7 +1424,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -1527,7 +1521,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -1555,7 +1549,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -1587,7 +1581,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -1609,10 +1603,10 @@ export default function TermsAndConditions() {
             </span>
           </div>
         </div>
-        <div   style={{ lineHeight: "1.5" }}>
+        <div style={{ lineHeight: "1.5" }}>
           <br />
         </div>
-        <div   style={{ textAlign: "left" }}>
+        <div style={{ textAlign: "left" }}>
           <div
             className="MsoNormal"
             data-custom-class="body_text"
@@ -1623,7 +1617,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -1648,7 +1642,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -1675,7 +1669,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -2073,7 +2067,7 @@ export default function TermsAndConditions() {
             <br />
           </div>
         </div>
-        <div   style={{ textAlign: "left" }}>
+        <div style={{ textAlign: "left" }}>
           <div
             className="MsoNormal"
             data-custom-class="heading_1"
@@ -2126,10 +2120,10 @@ export default function TermsAndConditions() {
             </strong>
           </div>
         </div>
-        <div   style={{ lineHeight: "1.5" }}>
+        <div style={{ lineHeight: "1.5" }}>
           <br />
         </div>
-        <div   style={{ textAlign: "left" }}>
+        <div style={{ textAlign: "left" }}>
           <div
             className="MsoNormal"
             data-custom-class="body_text"
@@ -2140,7 +2134,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -2361,10 +2355,10 @@ export default function TermsAndConditions() {
             </bdt>
           </div>
         </div>
-        <div   style={{ lineHeight: "1.5" }}>
+        <div style={{ lineHeight: "1.5" }}>
           <br />
         </div>
-        <div   style={{ textAlign: "left" }}>
+        <div style={{ textAlign: "left" }}>
           <div
             className="MsoNormal"
             style={{ textAlign: "justify", lineHeight: "115%" }}
@@ -2549,7 +2543,7 @@ export default function TermsAndConditions() {
             >
               <bdt className="block-component" />
             </div>
-           
+
             <div
               className="MsoNormal"
               style={{
@@ -2904,7 +2898,7 @@ export default function TermsAndConditions() {
               </bdt>
             </div>
           </div>
-          <div   style={{ textAlign: "left" }}>
+          <div style={{ textAlign: "left" }}>
             <div
               className="MsoNormal"
               style={{ lineHeight: "1.5" }}
@@ -4095,7 +4089,10 @@ export default function TermsAndConditions() {
             style={{ lineHeight: "1.5", textAlign: "left" }}
           >
             <span
-              style={{ fontSize: 19, color: "rgb(240, 240, 240)" }}
+              style={{
+                fontSize: 19,
+                color: "rgb(240, 240, 240)"
+              }}
             >
               <strong>
                 <span
@@ -4146,7 +4143,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -4270,7 +4267,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -4338,7 +4335,7 @@ export default function TermsAndConditions() {
                             fontSize: "11.0pt",
                             lineHeight: "115%",
                             fontFamily: "Arial",
-                             color: "white",
+                            color: "white",
                             msoThemecolor: "text1",
                             msoThemetint: 166
                           }}
@@ -4453,7 +4450,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -4587,7 +4584,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -4678,7 +4675,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -4784,7 +4781,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -4875,7 +4872,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -4992,7 +4989,7 @@ export default function TermsAndConditions() {
                 fontSize: "11.0pt",
                 lineHeight: "115%",
                 fontFamily: "Arial",
-                 color: "white",
+                color: "white",
                 msoThemecolor: "text1",
                 msoThemetint: 166
               }}
@@ -5076,7 +5073,9 @@ export default function TermsAndConditions() {
                 </bdt>
                 <strong>
                   <bdt className="statement-end-if-in-editor">
-                    <span style={{ color: "rgb(240, 240, 240)" }}>
+                    <span
+                      style={{ color: "rgb(240, 240, 240)" }}
+                    >
                       <strong>
                         <span style={{ fontSize: 15 }}>
                           <bdt className="statement-end-if-in-editor">
@@ -5118,7 +5117,7 @@ export default function TermsAndConditions() {
                       fontSize: "11.0pt",
                       lineHeight: "115%",
                       fontFamily: "Arial",
-                       color: "white",
+                      color: "white",
                       msoThemecolor: "text1",
                       msoThemetint: 166
                     }}
@@ -5147,7 +5146,7 @@ export default function TermsAndConditions() {
                     fontSize: "11.0pt",
                     lineHeight: "115%",
                     fontFamily: "Arial",
-                     color: "white",
+                    color: "white",
                     msoThemecolor: "text1",
                     msoThemetint: 166
                   }}
@@ -5170,7 +5169,7 @@ export default function TermsAndConditions() {
                   fontSize: "11.0pt",
                   lineHeight: "115%",
                   fontFamily: "Arial",
-                   color: "white",
+                  color: "white",
                   msoThemecolor: "text1",
                   msoThemetint: 166
                 }}

@@ -83,10 +83,14 @@ export default function Album() {
   useEffect(() => {
     const filterAlbums = async () => {
       setLoading(true); // Start loading
+<<<<<<< Updated upstream
+=======
 
       // Fetch average ratings
-      const averageRatings = await fetchReviewsAndCalculateRatings();
+      const averageRatings =
+        await fetchReviewsAndCalculateRatings();
 
+>>>>>>> Stashed changes
       let filteredData = albums;
 
       // Filter by genre
@@ -124,14 +128,7 @@ export default function Album() {
       setLoading(false); // Finish loading
     };
     filterAlbums();
-  }, [selectedGenre, selectedYear, selectedRating, searchQuery, albums]);
-
-  const resetFilters = () => {
-    setSelectedGenre("");
-    setSelectedYear("");
-    setSelectedRating("");
-    setSearchQuery("");
-  };
+  }, [selectedGenre, selectedYear, albums]);
 
   return (
     <>
@@ -175,18 +172,6 @@ export default function Album() {
               </option>
             ))}
           </select>
-          <input
-            type="text"
-            placeholder="Search Albums"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)} // Update search query state
-          />
-          <button
-            className="reset-button"
-            onClick={resetFilters}
-          >
-            Reset
-          </button>
         </div>
         {loading ? (
           <div>Loading...</div>

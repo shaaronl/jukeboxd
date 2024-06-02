@@ -1,72 +1,68 @@
 footer {
-    background-color: #690606;
-    padding-top: 6px; /* Only top padding */
-    width: 99vw;
-    box-sizing: content-box; /* Ensures padding is included in the width */
-    margin-top: 10%; /* Pushes footer to the bottom */
-    padding-bottom: 14  px; /* Ensure no padding at the bottom */
-    left: 0;
-    right: 0;
-    position: relative;
-    float: bottom;  
-    bottom: 0;
-  }
-  
-  .footer-container {
-    display: flex;
-    justify-content: space-around;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box; /* Ensures padding is included in the width */
-  }
-  
-  .footer-column {
-    flex: 1;
-    text-align: left;
-  }
-  
-  .footer-column h3 {
-    margin-bottom: 10px;
-  }
-  
-  .footer-column a {
-    display: block;
-    color: #dfbebe;
-    text-decoration: none;
-    margin-bottom: 5px;
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial,
-      sans-serif;
-    font-size: 18px;
-    font-weight: 400;
-  }
-  
-  .footer-column a:hover {
-    text-decoration: color-mix(
-      in hsl shorter hue,
-      color percentage,
-      color percentage
-    );
-    color: rgb(166, 106, 106);
-  }
-  
+  background-color: #690606;
+  padding-top: 6px; /* Only top padding */
+  width: 99vw;
+  box-sizing: content-box; /* Ensures padding is included in the width */
+  margin-top: 10%; /* Pushes footer to the bottom */
+  padding-bottom: 14 px; /* Ensure no padding at the bottom */
+  left: 0;
+  right: 0;
+  position: relative;
+  float: bottom;
+  bottom: 0;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+.footer-column {
+  flex: 1;
+  text-align: left;
+}
+
+.footer-column h3 {
+  margin-bottom: 10px;
+}
+
+.footer-column a {
+  display: block;
+  color: #dfbebe;
+  text-decoration: none;
+  margin-bottom: 5px;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.footer-column a:hover {
+  text-decoration: color-mix(
+    in hsl shorter hue,
+    color percentage,
+    color percentage
+  );
+  color: rgb(166, 106, 106);
+}
+
 .about-us {
-    display: inline-block;
-    transform: scale(
-      1
-    ); /* Adjust the scale to make the note bigger */
-    /* vertical-align: normal; /* Align it with the surrounding text */
-    margin-left: 8.3em; /* Adjust to fine-tune spacing */
-    margin-right: 8.3em; /* Adjust to fine-tune spacing */
-    position: relative; /* Required for adjusting vertical position */
-    text-indent: 30px;
-    top: 9.5em;
-    text-align:justify;
-    
-  }
-  .terms-and-conditions-bg {
-    background-color: #f0f0f0;
-  }
-  
-  
-  
+  display: inline-block;
+  transform: scale(
+    1
+  ); /* Adjust the scale to make the note bigger */
+  /* vertical-align: normal; /* Align it with the surrounding text */
+  margin-left: 8.3em; /* Adjust to fine-tune spacing */
+  margin-right: 8.3em; /* Adjust to fine-tune spacing */
+  position: relative; /* Required for adjusting vertical position */
+  text-indent: 30px;
+  top: 9.5em;
+  text-align: justify;
+}
+.terms-and-conditions-bg {
+  background-color: #f0f0f0;
+}
