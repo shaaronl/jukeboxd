@@ -60,32 +60,9 @@ export default function AlbumInfo() {
       });
   }
 
-  // function calculateAverage(reviews) {
-  //   if (reviews.length === 0) return 0;
-  //   // .reduce , iterates through array of reviews and sums up all ratings
-  //   const totalRating = reviews.reduce(
-  //     (sum, review) => sum + review.rating,
-  //     0
-  //   );
-  //   return totalRating / reviews.length;
-  // }
-
-  function getStarRating(rating) {
-    const fullStars = Math.floor(rating);
-    const halfStar = rating % 1 >= 0.5 ? 1 : 0;
-    const emptyStars = 5 - (fullStars + halfStar);
-    // half star is just going to be empty for now
-    return (
-      "★".repeat(fullStars) +
-      (halfStar ? "★" : "") +
-      "☆".repeat(emptyStars)
-    );
-  }
-
   if (error) return <div>Error: {error}</div>;
   if (!album || !artist) return <div>Loading...</div>;
 
-  // Calculate the average rating
   const avgRating =
     reviews.length > 0
       ? (
@@ -95,11 +72,6 @@ export default function AlbumInfo() {
           ) / reviews.length
         ).toFixed(1)
       : "No reviews";
-
-  const starRating =
-    avgRating !== "No reviews"
-      ? getStarRating(parseFloat(avgRating))
-      : "☆☆☆☆☆";
 
   return (
     <div className="album-info">
@@ -127,9 +99,9 @@ export default function AlbumInfo() {
             <h2 className="album-title">{album.album_name}</h2>
             <p>
               {album.release_date.split("-")[0] + " "}
-              {artist.artist_name} |{"  "}
+              {artist.artist_name} |{"   "}
               <span className="rating-stars">
-                {starRating}{" "}
+                <Rating name="album-rating" value={parseFloat(avgRating)} precision={0.1} readOnly/>
                 {avgRating !== "No reviews" && avgRating}
               </span>
             </p>
@@ -147,6 +119,7 @@ export default function AlbumInfo() {
             ) : (
               reviews.map((review) => (
                 <div key={review._id} className="review">
+
                   <div className="reviewTop">
                     <Link
                       to={`/reviews/${review.written_by.username}`}
@@ -189,14 +162,10 @@ export default function AlbumInfo() {
             <p>{album.popularity}</p>
           </div>
           <div className="spotify-link">
-            <h3>Spotify Link</h3>
-            <a
-              href={album.spotify_link}
+            <a href={album.spotify_link}
               target="_blank"
-              rel="noopener noreferrer"
-            >
-              {album.spotify_link}
-            </a>
+              rel="noopener noreferrer">
+                Listen here on Spotify!</a>
           </div>
         </div>
       </div>
