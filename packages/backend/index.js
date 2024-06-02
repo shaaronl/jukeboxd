@@ -5,13 +5,16 @@ import { loginUser } from "./auth.js";
 import Album from "./models/albumSchema.js";
 import User from "./models/userSchema.js";
 import Reviews from "./models/reviewsSchema.js";
+import { authenticateUser } from "./auth.js";
 
 const app = express();
 const port = 8000;
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
+// Public Route
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
@@ -22,8 +25,85 @@ app.listen(port, () => {
   );
 });
 
-/** Routes **/
+/** Public Routes **/
 
+/* User Accounts */
+// User Registration
+app.post("/users", async (req, res) => {
+  const { username, password } = req.body;
+  console.log(req.body);
+
+  try {
+    const savedUser = await userServices.addUser(
+      username,
+      password
+    );
+    res.status(201).send(savedUser);
+  } catch (error) {
+    if (error.message === "Username already taken") {
+      res
+        .status(400)
+        .send({ message: "Username already taken" });
+    } else if (error.message === "All fields are required") {
+      res
+        .status(400)
+        .send({ message: "All fields are required" });
+    } else {
+      res
+        .status(500)
+        .send({ message: "Internal Server Error" });
+    }
+  }
+});
+
+// User Sign In
+app.post("/api/sign-in", async (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.status(400).json({
+      success: false,
+      message: "Username and password are required"
+    });
+  }
+
+  try {
+    // Find the user by email
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid username or password"
+      });
+    }
+
+    // Compare the provided password with the stored hashed password
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid username or password"
+      });
+    }
+
+    res.json({
+      success: true,
+      message: "User logged in successfully"
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, message: error.message });
+  }
+});
+
+// User Login
+app.post("/login", loginUser);
+
+/** Protected Routes **/
+app.use(authenticateUser);
+
+/* Reviews */
 // getting reviews by album id
 app.get("/reviews/albums/:id", async (req, res) => {
   try {
@@ -60,7 +140,7 @@ app.get("/reviews/users/:id", async (req, res) => {
   }
 });
 
-//getting all reviews
+// getting all reviews
 app.get("/reviews/", async (req, res) => {
   try {
     const review = await userServices.findAllReviews(
@@ -78,6 +158,43 @@ app.get("/reviews/", async (req, res) => {
   }
 });
 
+// creating a review
+app.post("/review/:id", async (req, res) => {
+  try {
+    const reviewToAdd = req.body;
+    console.log(reviewToAdd);
+    // get the user of the person trying to write review
+    const user = await userServices.findUserByName(
+      reviewToAdd.username
+    );
+    // get the album the user wants to write a review on
+    const album = await userServices.findAlbumById(
+      req.params.id
+    );
+
+    // make a new review with the review schema
+    const newReview = new Reviews({
+      written_by: user._id,
+      rating: reviewToAdd.rating,
+      content: reviewToAdd.content,
+      likes: 0,
+      album_id: album._id
+    });
+    let reviewId;
+
+    await newReview.save().then((review) => {
+      reviewId = review._id;
+    });
+
+    res.status(201);
+    res.send(newReview);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+/* Albums */
 // Getting a single album
 app.get("/albums/:id", async (req, res) => {
   try {
@@ -127,7 +244,6 @@ app.get("/albums", async (req, res) => {
 });
 
 /* Artists */
-
 // Getting the artists
 app.get("/artists", async (req, res) => {
   try {
@@ -160,7 +276,6 @@ app.get("/artists", async (req, res) => {
 });
 
 /* Songs */
-
 // Getting the songs
 app.get("/songs", async (req, res) => {
   try {
@@ -193,7 +308,6 @@ app.get("/songs", async (req, res) => {
 });
 
 /* User Accounts */
-
 // Get all users
 app.get("/users", async (req, res) => {
   try {

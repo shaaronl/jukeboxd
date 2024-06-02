@@ -272,7 +272,6 @@ async function updateReviewById(reviewId, newReview) {
   }
 }
 
-
 async function updateUserImage(username, imageAddress) {
   try {
     const user = await User.findOneAndUpdate(

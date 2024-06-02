@@ -1,7 +1,17 @@
 import Navbar from "./Navbar";
 
 function fetchUsers() {
-  const promise = fetch("http://localhost:8000/albums/id");
+  const token = localStorage.getItem("token");
+  console.log(token);
+
+  const promise = fetch("http://localhost:8000/albums/id", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
+    }
+  });
+
   return promise;
 }
 
