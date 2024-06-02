@@ -1,4 +1,3 @@
-import { ObjectId } from "mongodb";
 import mongoose from "mongoose";
 
 const ReviewsSchema = new mongoose.Schema({
@@ -10,7 +9,7 @@ const ReviewsSchema = new mongoose.Schema({
   content: String,
   likes: Number,
   album_id: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.OjectId,
     ref: "Album"
   }
 });
