@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./SignIn.css";
 import PropTypes from "prop-types";
 
-export default function SignIn({ onClose }) {
+export default function SignIn({ onClick, onClose }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -67,7 +67,7 @@ export default function SignIn({ onClose }) {
             value="Sign In"
             className="submit-button"
           />
-          <Link to="/home" className="sign-up-link">
+          <Link onClick={onClick} className="sign-up-link">
             Not a User? Click here to sign up
           </Link>
         </form>
