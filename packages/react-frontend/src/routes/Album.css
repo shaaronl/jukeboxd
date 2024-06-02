@@ -45,6 +45,9 @@
   position: absolute;
   top: 150px; /* Distance from the top */
   left: 140px; /* Distance from the right */
+  display: flex; /* Use flexbox layout */
+  align-items: center; /* Align items vertically */
+  gap: 10px; /* Add gap between elements */
 }
 
 .reset-button {
@@ -72,6 +75,14 @@ select {
   outline: none; /* Remove default outline */
   cursor: pointer; /* Pointer cursor on hover */
   transition: border-color 0.3s ease-in-out; /* Transition effect on border color change */
+}
+
+input {
+  padding: 10px;
+  margin-left: 20px;
+  background-color: rgba(255, 255, 255, 0.919);
+  border-color: #fffcfc;
+  font-size: 16px;
 }
 
 select:hover {

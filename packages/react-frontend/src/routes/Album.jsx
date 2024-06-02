@@ -49,6 +49,7 @@ export default function Album() {
   const [selectedGenre, setSelectedGenre] = useState("");
   const ratings = ["1", "2", "3", "4", "5"];
   const [selectedRating, setSelectedRating] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:8000/albums")
@@ -67,8 +68,7 @@ export default function Album() {
       setLoading(true); // Start loading
 
       // Fetch average ratings
-      const averageRatings =
-        await fetchReviewsAndCalculateRatings();
+      const averageRatings = await fetchReviewsAndCalculateRatings();
 
       let filteredData = albums;
 
@@ -94,16 +94,26 @@ export default function Album() {
         });
       }
 
+      // Filter by searching
+      if (searchQuery !== "") {
+        filteredData = filteredData.filter((album) =>
+          album.album_name
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase())
+        );
+      }
+
       setFilteredAlbums(filteredData);
       setLoading(false); // Finish loading
     };
     filterAlbums();
-  }, [selectedGenre, selectedYear, selectedRating, albums]);
+  }, [selectedGenre, selectedYear, selectedRating, searchQuery, albums]);
 
   const resetFilters = () => {
     setSelectedGenre("");
     setSelectedYear("");
     setSelectedRating("");
+    setSearchQuery("");
   };
 
   return (
@@ -147,6 +157,12 @@ export default function Album() {
               </option>
             ))}
           </select>
+          <input
+            type="text"
+            placeholder="Search Albums"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)} // Update search query state
+          />
           <button
             className="reset-button"
             onClick={resetFilters}
