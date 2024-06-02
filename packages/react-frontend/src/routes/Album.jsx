@@ -20,6 +20,42 @@ async function fetchArtistBySpotifyId(spotifyId) {
   }
 }
 
+// Function to fetch reviews and calculate floored average rating
+async function fetchReviewsAndCalculateRatings() {
+  try {
+    const response = await fetch(
+      "http://localhost:8000/reviews"
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch reviews");
+    }
+    const reviews = await response.json();
+    const albumRatings = {};
+
+    // Calculate the total rating and count for each album
+    reviews.forEach((review) => {
+      const { album_id, rating } = review;
+      if (!albumRatings[album_id]) {
+        albumRatings[album_id] = { totalRating: 0, count: 0 };
+      }
+      albumRatings[album_id].totalRating += rating;
+      albumRatings[album_id].count += 1;
+    });
+
+    // Calculate the floored average rating for each album
+    const averageRatings = {};
+    for (const albumId in albumRatings) {
+      const { totalRating, count } = albumRatings[albumId];
+      averageRatings[albumId] = Math.floor(totalRating / count);
+    }
+
+    return averageRatings;
+  } catch (error) {
+    console.error("Error fetching reviews:", error);
+    return {};
+  }
+}
+
 export default function Album() {
   const [albums, setAlbums] = useState([]);
   const [filteredAlbums, setFilteredAlbums] = useState([]);
@@ -28,6 +64,9 @@ export default function Album() {
   const [selectedYear, setSelectedYear] = useState("");
   const genres = ["pop", "r&b", "rap", "hip hop", "rock"];
   const [selectedGenre, setSelectedGenre] = useState("");
+  const ratings = ["1", "2", "3", "4", "5"];
+  const [selectedRating, setSelectedRating] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:8000/albums")
@@ -44,27 +83,16 @@ export default function Album() {
   useEffect(() => {
     const filterAlbums = async () => {
       setLoading(true); // Start loading
+
+      // Fetch average ratings
+      const averageRatings = await fetchReviewsAndCalculateRatings();
+
       let filteredData = albums;
 
       // Filter by genre
       if (selectedGenre !== "") {
-        const filtered = await Promise.all(
-          albums.map(async (album) => {
-            for (const spotifyId of album.artists) {
-              const artist =
-                await fetchArtistBySpotifyId(spotifyId);
-              if (
-                artist &&
-                artist.genres.includes(selectedGenre)
-              ) {
-                return true;
-              }
-            }
-            return false;
-          })
-        );
-        filteredData = albums.filter(
-          (_, index) => filtered[index]
+        filteredData = filteredData.filter((album) =>
+          album.genres.includes(selectedGenre)
         );
       }
 
@@ -75,11 +103,35 @@ export default function Album() {
         );
       }
 
+      // Filter by average rating
+      if (selectedRating !== "") {
+        filteredData = filteredData.filter((album) => {
+          const albumRating = averageRatings[album._id] || 0;
+          return albumRating === parseFloat(selectedRating);
+        });
+      }
+
+      // Filter by searching
+      if (searchQuery !== "") {
+        filteredData = filteredData.filter((album) =>
+          album.album_name
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase())
+        );
+      }
+
       setFilteredAlbums(filteredData);
       setLoading(false); // Finish loading
     };
     filterAlbums();
-  }, [selectedGenre, selectedYear, albums]);
+  }, [selectedGenre, selectedYear, selectedRating, searchQuery, albums]);
+
+  const resetFilters = () => {
+    setSelectedGenre("");
+    setSelectedYear("");
+    setSelectedRating("");
+    setSearchQuery("");
+  };
 
   return (
     <>
@@ -87,6 +139,18 @@ export default function Album() {
       <Navbar withLogo={true} />
       <div className="content">
         <div className="filter-container">
+          <select
+            id="ratingFilter"
+            value={selectedRating}
+            onChange={(e) => setSelectedRating(e.target.value)}
+          >
+            <option value="">RATING</option>
+            {ratings.map((rating) => (
+              <option key={rating} value={rating}>
+                {rating}
+              </option>
+            ))}
+          </select>
           <select
             id="genreFilter"
             value={selectedGenre}
@@ -111,6 +175,18 @@ export default function Album() {
               </option>
             ))}
           </select>
+          <input
+            type="text"
+            placeholder="Search Albums"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)} // Update search query state
+          />
+          <button
+            className="reset-button"
+            onClick={resetFilters}
+          >
+            Reset
+          </button>
         </div>
         {loading ? (
           <div>Loading...</div>
