@@ -9,7 +9,8 @@ const AlbumSchema = new mongoose.Schema({
   track_list: [{ type: String }],
   album_cover: String,
   spotify_link: String,
-  popularity: Number
+  popularity: Number,
+  genres: [String]
 });
 
 const Album = mongoose.model("Album", AlbumSchema);
