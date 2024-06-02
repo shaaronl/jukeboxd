@@ -39,10 +39,17 @@ img {
 }
 
 /* songs list formatting */
+<<<<<<< Updated upstream
 /* .track-list {
     grid-column: 1; 
     grid-row: 2; 
 } */
+=======
+.track-list {
+  grid-column: 1;
+  grid-row: 2;
+}
+>>>>>>> Stashed changes
 .song-list ul {
   list-style-type: none;
   padding: 0;
@@ -83,6 +90,16 @@ a {
 }
 
 .reviews h3 {
+<<<<<<< Updated upstream
+=======
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  margin-bottom: 10px;
+  margin: 5px 0;
+}
+
+.reviews p {
+>>>>>>> Stashed changes
   font-family: Inter, system-ui, Avenir, Helvetica, Arial,
     sans-serif;
   margin-bottom: 10px;
@@ -96,7 +113,12 @@ a {
   padding: 20px;
   margin-bottom: 10px;
   border-radius: 5px;
+<<<<<<< Updated upstream
   width: 100%; /* Ensure the review takes the full width of the parent */
+=======
+  width: 90%;
+  max-width: 700px; /* set a maximum width for larger screens */
+>>>>>>> Stashed changes
   box-sizing: border-box;
 }
 
