@@ -117,7 +117,6 @@ export default function AlbumInfo() {
             ) : (
               reviews.map((review) => (
                 <div key={review._id} className="review">
-                    <Rating value={parseFloat(review.rating)} precision={0.1} readOnly/>
                   </span>
                   <p className = "review">{review.content}</p>
                 </div>
