@@ -101,7 +101,12 @@ export default function AlbumInfo() {
               {album.release_date.split("-")[0] + " "}
               {artist.artist_name} |{"   "}
               <span className="rating-stars">
-                <Rating name="album-rating" value={parseFloat(avgRating)} precision={0.1} readOnly/>
+                <Rating
+                  name="album-rating"
+                  value={parseFloat(avgRating)}
+                  precision={0.1}
+                  readOnly
+                />
                 {avgRating !== "No reviews" && avgRating}
               </span>
             </p>
@@ -119,7 +124,6 @@ export default function AlbumInfo() {
             ) : (
               reviews.map((review) => (
                 <div key={review._id} className="review">
-
                   <div className="reviewTop">
                     <Link
                       to={`/reviews/${review.written_by.username}`}
@@ -162,10 +166,13 @@ export default function AlbumInfo() {
             <p>{album.popularity}</p>
           </div>
           <div className="spotify-link">
-            <a href={album.spotify_link}
+            <a
+              href={album.spotify_link}
               target="_blank"
-              rel="noopener noreferrer">
-                Listen here on Spotify!</a>
+              rel="noopener noreferrer"
+            >
+              Listen here on Spotify!
+            </a>
           </div>
         </div>
       </div>
