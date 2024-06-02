@@ -31,9 +31,17 @@ async function fetchArtistBySpotifyId(spotifyId) {
 
 // Function to fetch reviews and calculate floored average rating
 async function fetchReviewsAndCalculateRatings() {
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(
-      "http://localhost:8000/reviews"
+      "http://localhost:8000/reviews",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      }
     );
     if (!response.ok) {
       throw new Error("Failed to fetch reviews");
