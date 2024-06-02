@@ -61,6 +61,7 @@ footer {
     position: relative; /* Required for adjusting vertical position */
     text-indent: 30px;
     top: 9.5em;
+    text-align:justify;
     
   }
   .terms-and-conditions-bg {

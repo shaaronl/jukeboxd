@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import Navbar from "../Navbar";
-//import "../../index.css";
 import Footer from "./Footer";
 import "./Footer.css"
 

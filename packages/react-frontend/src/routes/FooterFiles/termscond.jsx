@@ -19,7 +19,7 @@ export default function TermsAndConditions() {
           <Link
             to="/"
             style={{
-              color: "grey", // Change text color
+              color: "bisque", // Change text color
               textDecoration: "none", // Remove underline
               fontSize: "20px", // Change font size
               fontWeight: "bold", // Change font weight
