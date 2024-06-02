@@ -305,14 +305,117 @@ app.post("/review/:id", async (req, res) => {
       likes: 0,
       album_id: album._id
     });
-    let reviewId;
 
-    await newReview.save().then((review) => {
-      reviewId = review._id;
-    });
+    await newReview.save();
 
     res.status(201);
     res.send(newReview);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// get user info and reviews of user
+app.get("/reviews/:users", async (req, res) => {
+  try {
+    const username = req.params.users;
+    const user = await userServices.findUserByName(username);
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "User not found" });
+    }
+
+    const reviews = await userServices.findReviewsByWrittenBy(
+      user._id
+    );
+    if (!reviews) {
+      return res
+        .status(404)
+        .json({ message: "Reviews not found" });
+    }
+
+    return res.json({ user: user, reviews: reviews });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// deletes review by id
+app.delete("/reviews/user/:reviewId", async (req, res) => {
+  try {
+    const reviewId = req.params.reviewId;
+    const response =
+      await userServices.deleteReviewById(reviewId);
+
+    if (response === undefined) {
+      res.status(404).send("Resource not found.");
+    } else {
+      res.status(204).json({
+        message: `Item with ID ${reviewId} deleted successfully`
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// get review by id
+app.get("/reviews/user/:reviewId", async (req, res) => {
+  try {
+    const reviewId = req.params.reviewId;
+    const review = await userServices.findReviewById(reviewId);
+    if (!review) {
+      return res
+        .status(404)
+        .json({ message: "Review not found" });
+    }
+    res.json(review);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+//updating a review
+app.put("/review/:id", async (req, res) => {
+  try {
+    const reviewToUpdate = req.params.id;
+    const review = await userServices.updateReviewById(
+      reviewToUpdate,
+      req.body
+    );
+    if (!review) {
+      return res
+        .status(404)
+        .json({ message: "Couldn't update review" });
+    }
+    res.status(201);
+    res.send(review);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// update the user's profile picture
+app.put("/user/picture/:username", async (req, res) => {
+  try {
+    const userToUpdate = req.params.username;
+    const user = await userServices.updateUserImage(
+      userToUpdate,
+      req.body.imageAddress
+    );
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "Couldn't update user" });
+    }
+    res.status(201);
+    res.send(user);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
