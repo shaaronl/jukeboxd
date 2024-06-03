@@ -51,21 +51,17 @@ footer {
 }
 
 .about-us {
-    display: inline-block;
-    transform: scale(
-      1
-    ); /* Adjust the scale to make the note bigger */
-    /* vertical-align: normal; /* Align it with the surrounding text */
-    margin-left: 8.3em; /* Adjust to fine-tune spacing */
-    margin-right: 8.3em; /* Adjust to fine-tune spacing */
-    position: relative; /* Required for adjusting vertical position */
-    text-indent: 30px;
-    top: 9.5em;
-    
-  }
-  .terms-and-conditions-bg {
-    background-color: #f0f0f0;
-  }
-  
-  
-  
+  display: inline-block;
+  transform: scale(
+    1
+  ); /* Adjust the scale to make the note bigger */
+  /* vertical-align: normal; /* Align it with the surrounding text */
+  margin-left: 8.3em; /* Adjust to fine-tune spacing */
+  margin-right: 8.3em; /* Adjust to fine-tune spacing */
+  position: relative; /* Required for adjusting vertical position */
+  text-indent: 30px;
+  top: 9.5em;
+}
+.terms-and-conditions-bg {
+  background-color: #f0f0f0;
+}

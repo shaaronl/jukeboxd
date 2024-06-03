@@ -1,8 +1,8 @@
 .reviewsPage {
+  padding-top: 150px;
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  position: fixed;
-  top: 175px;
 }
 
 .albumInfo {

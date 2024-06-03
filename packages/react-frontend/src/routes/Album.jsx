@@ -172,9 +172,9 @@ export default function Album() {
 
   return (
     <>
-      <div>
+      <div className="extraDiv">
         <Navbar withLogo={true} />
-        <div className="content">
+        <div className="contentAlbum">
           <div className="filter-container">
             <select
               id="ratingFilter"
