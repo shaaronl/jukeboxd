@@ -4,7 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import "./Review.css";
 import { Link } from "react-router-dom";
-/* eslint-disable react/prop-types */ // TODO: upgrade to latest eslint tooling
+// TODO: upgrade to latest eslint tooling
 
 export default function Review(props) {
   const review = props.review;

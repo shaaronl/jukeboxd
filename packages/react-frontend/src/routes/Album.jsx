@@ -4,30 +4,30 @@ import Navbar from "./Navbar";
 import "./Album.css";
 import Footer from "./FooterFiles/Footer";
 // Assume you have a function to fetch artist data from an API
-async function fetchArtistBySpotifyId(spotifyId) {
-  const token = localStorage.getItem("token");
+// async function fetchArtistBySpotifyId(spotifyId) {
+//   const token = localStorage.getItem("token");
 
-  try {
-    const response = await fetch(
-      `http://localhost:8000/artists?spotify_id=${spotifyId}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        }
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch artist data");
-    }
-    const artistData = await response.json();
-    return artistData;
-  } catch (error) {
-    console.error("Error fetching artist data:", error);
-    return null; // Return null if an error occurs
-  }
-}
+//   try {
+//     const response = await fetch(
+//       `http://localhost:8000/artists?spotify_id=${spotifyId}`,
+//       {
+//         method: "GET",
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//           "Content-Type": "application/json"
+//         }
+//       }
+//     );
+//     if (!response.ok) {
+//       throw new Error("Failed to fetch artist data");
+//     }
+//     const artistData = await response.json();
+//     return artistData;
+//   } catch (error) {
+//     console.error("Error fetching artist data:", error);
+//     return null; // Return null if an error occurs
+//   }
+// }
 
 // Function to fetch reviews and calculate floored average rating
 async function fetchReviewsAndCalculateRatings() {
