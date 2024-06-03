@@ -165,3 +165,8 @@ a {
   position: relative;
   bottom: 5px;
 }
+
+.loading {
+  text-align: center;
+  padding-top: 40px;
+}

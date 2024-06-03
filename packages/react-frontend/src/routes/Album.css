@@ -93,3 +93,8 @@ select:hover {
 .extraDiv {
   min-height: 100vh;
 }
+
+.loading {
+  text-align: center;
+  padding-top: 40px;
+}

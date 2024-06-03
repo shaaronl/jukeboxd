@@ -228,7 +228,7 @@ export default function Album() {
             </button>
           </div>
           {loading ? (
-            <div>Loading...</div>
+            <div className="loading">Loading...</div>
           ) : (
             <div className="gallery-container">
               {filteredAlbums.map((album) => (

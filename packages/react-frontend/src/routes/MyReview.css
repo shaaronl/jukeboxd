@@ -30,3 +30,8 @@
   margin: 0.5em;
   font-size: 16pt;
 }
+
+.loading {
+  text-align: center;
+  padding-top: 40px;
+}

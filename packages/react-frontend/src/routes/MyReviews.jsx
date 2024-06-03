@@ -96,7 +96,13 @@ export default function MyReviews() {
     setChanged(true);
   }
 
-  if (!user || !reviews) return <div>Loading...</div>;
+  if (!user || !reviews)
+    return (
+      <div className="loading-text">
+        <Navbar withLogo={true} />
+        <div>Loading...</div>
+      </div>
+    );
 
   return (
     // copy pasted from loading page - fix later
