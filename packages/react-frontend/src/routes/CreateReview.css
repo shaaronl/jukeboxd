@@ -1,6 +1,6 @@
 .createReview {
   display: grid;
-  padding-top: 100px;
+  padding-top: 185px;
   grid-template-columns: 1fr 2fr;
   grid-template-rows: 2fr 1fr;
   gap: 70px; /* gap between album cover and content */
