@@ -36,7 +36,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  min-height: 100vh;
 }
 h1,
 h2 {
@@ -88,4 +88,10 @@ h2 {
 .record {
   font-size: inherit; /* Inherit font size from parent to keep proportions */
   color: rgb(134, 34, 34); /* Adjust color as needed */
+}
+
+/* Ensure full height for #root */
+body,
+#root {
+  min-height: 100vh;
 }

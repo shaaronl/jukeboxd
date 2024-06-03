@@ -78,7 +78,13 @@ export default function AlbumInfo() {
   }
 
   if (error) return <div>Error: {error}</div>;
-  if (!album || !artist) return <div>Loading...</div>;
+  if (!album || !artist)
+    return (
+      <div className="loading-text">
+        <Navbar withLogo={true} />
+        <div>Loading...</div>
+      </div>
+    );
 
   const avgRating =
     reviews.length > 0
@@ -183,10 +189,13 @@ export default function AlbumInfo() {
             <p>{album.popularity}</p>
           </div>
           <div className="spotify-link">
-            <a href={album.spotify_link}
+            <a
+              href={album.spotify_link}
               target="_blank"
-              rel="noopener noreferrer">
-                Listen here on Spotify!</a>
+              rel="noopener noreferrer"
+            >
+              Listen here on Spotify!
+            </a>
           </div>
         </div>
       </div>

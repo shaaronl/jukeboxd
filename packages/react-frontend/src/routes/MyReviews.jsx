@@ -96,7 +96,13 @@ export default function MyReviews() {
     setChanged(true);
   }
 
-  if (!user || !reviews) return <div>Loading...</div>;
+  if (!user || !reviews)
+    return (
+      <div className="loading-text">
+        <Navbar withLogo={true} />
+        <div>Loading...</div>
+      </div>
+    );
 
   return (
     // copy pasted from loading page - fix later
@@ -104,7 +110,11 @@ export default function MyReviews() {
       <Navbar withLogo={true} />
       <div className="reviewsPage">
         <div className="userSide">
-          <Avatar alt={username} src={user.profilePic} />
+          <Avatar
+            alt={username}
+            src={user.profilePic}
+            sx={{ height: "200px", width: "200px" }}
+          />
           <h1>{user.username}</h1>
           {localStorage.getItem("username") == username && (
             <button

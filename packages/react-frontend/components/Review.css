@@ -1,14 +1,15 @@
 .userReview {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  padding: 0.5em;
-  margin: 1em;
-  width: 100%;
+  padding: 1em 3em;
+  margin: 0 2em;
+  margin-bottom: 2em;
+  background-color: rgba(194, 122, 122, 0.2);
 }
 
 .userReview img {
-  height: 120px;
-  width: 120px;
+  height: 140px;
+  width: 140px;
 }
 
 .modifyIcons {
@@ -34,3 +35,4 @@
 .modifyIcons > *:hover {
   background-color: grey;
 }
+

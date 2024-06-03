@@ -172,9 +172,9 @@ export default function Album() {
 
   return (
     <>
-      <div>
+      <div className="extraDiv">
         <Navbar withLogo={true} />
-        <div className="content">
+        <div className="contentAlbum">
           <div className="filter-container">
             <select
               id="ratingFilter"
@@ -228,7 +228,7 @@ export default function Album() {
             </button>
           </div>
           {loading ? (
-            <div>Loading...</div>
+            <div className="loading">Loading...</div>
           ) : (
             <div className="gallery-container">
               {filteredAlbums.map((album) => (

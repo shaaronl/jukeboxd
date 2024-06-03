@@ -1,16 +1,17 @@
-.content {
-  padding-top: 120px;
+.contentAlbum {
+  padding-top: 220px;
+  align-self: flex-start;
 }
+
 .gallery-container {
   margin-top: 15px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  /* added this b/c it the albums were all skewed towards the left, but could just be only affecting me */
-  padding-left: 94px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
 }
+
 .gallery-item {
-  width: calc(33.33% - 10px);
+  width: 100%;
   margin-bottom: 25px;
   text-align: center;
   flex: 0 0 calc(33.33% - 10px);
@@ -87,4 +88,13 @@ input {
 
 select:hover {
   background-color: rgba(255, 255, 255, 0.283);
+}
+
+.extraDiv {
+  min-height: 100vh;
+}
+
+.loading {
+  text-align: center;
+  padding-top: 40px;
 }
