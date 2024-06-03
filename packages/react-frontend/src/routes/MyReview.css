@@ -3,8 +3,30 @@
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 2fr;
+  justify-content: center;
 }
 
 .albumInfo {
   text-align: center;
+}
+
+.reviewSide {
+  justify-content: center;
+}
+
+.userSide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userSide button {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  background-color: rgb(161, 19, 19);
+  border-radius: 6px;
+  color: white;
+  border-color: rgb(161, 19, 19);
+  margin: 0.5em;
+  font-size: 16pt;
 }

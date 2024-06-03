@@ -3,6 +3,7 @@
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 100px; /* gap between album cover and content */
+  width: 100%;
 }
 
 /* right section : album title, arrtist, ratings, reviews */
@@ -83,7 +84,7 @@ a {
 
 .reviews {
   margin-top: 20px;
-  width: 90%;
+  width: 100%;
   max-width: 700px; /* set a maximum width for larger screens */
   box-sizing: border-box;
 }
@@ -101,7 +102,6 @@ a {
   margin-bottom: 10px;
   margin: 5px 0;
   word-wrap: break-word; /* wraps the review name, if too long */
-  word-break: break-all;
 }
 
 .review {
@@ -109,7 +109,7 @@ a {
   padding: 20px;
   margin-bottom: 10px;
   border-radius: 5px;
-  width: 90%;
+  width: 100%;
   max-width: 700px; /* set a maximum width for larger screens */
   box-sizing: border-box;
 }
@@ -125,7 +125,7 @@ a {
   border-color: rgb(161, 19, 19);
   font-size: 20px;
   padding: 10px 20px; /* Adjust the padding for size */
-  width: 200px; /* Set a specific width */
+  width: 225px; /* Set a specific width */
   height: 50px; /* Set a specific height */
   border-radius: 6px;
   color: white;
