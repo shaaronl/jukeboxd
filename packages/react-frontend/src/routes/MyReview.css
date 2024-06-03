@@ -2,8 +2,10 @@
   padding-top: 150px;
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 30% 70%;
   justify-content: center;
+  max-width: 100%;
+  width: 100%;
 }
 
 .albumInfo {
@@ -34,4 +36,8 @@
 .loading {
   text-align: center;
   padding-top: 40px;
+}
+
+.userSide input {
+  color: black;
 }

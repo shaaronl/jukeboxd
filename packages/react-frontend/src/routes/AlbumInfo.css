@@ -3,7 +3,10 @@
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 100px; /* gap between album cover and content */
-  width: 100%;
+  width: 80%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-left: 5%;
 }
 
 /* right section : album title, arrtist, ratings, reviews */
@@ -102,6 +105,7 @@ a {
   margin-bottom: 10px;
   margin: 5px 0;
   word-wrap: break-word; /* wraps the review name, if too long */
+  word-break: break-all;
 }
 
 .review {
