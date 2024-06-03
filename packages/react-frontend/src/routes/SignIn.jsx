@@ -78,5 +78,6 @@ export default function SignIn({ onClick, onClose }) {
 
 // Define prop types for the component
 SignIn.propTypes = {
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired
 };
