@@ -36,10 +36,10 @@ describe("Footer Component", () => {
     );
 
     const links = screen.getAllByRole("link");
-
+    window.scrollTo = jest.fn();
     links.forEach((link) => {
       link.click();
-      //expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
+      expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
     });
   });
 });
