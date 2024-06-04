@@ -54,7 +54,7 @@ export default function UpdateReview() {
   async function handleSubmit(e) {
     e.preventDefault();
     const response = await fetch(
-      `https://jukeboxd-music.azurewebsites.net:8000/review/${id}`,
+      `https://jukeboxd-music.azurewebsites.net/review/${id}`,
       {
         method: "PUT",
         headers: {

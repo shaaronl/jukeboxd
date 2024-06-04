@@ -187,10 +187,6 @@ export default function AlbumInfo() {
               ))
             )}
           </div>
-          <div className="popularity">
-            <h3>Popularity</h3>
-            <p>{album.popularity}</p>
-          </div>
           <div className="spotify-link">
             <a
               href={album.spotify_link}
