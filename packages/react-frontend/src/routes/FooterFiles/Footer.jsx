@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./Footer.css";
+//import "./Footer.css";
 
 export default function Footer() {
   useEffect(() => {
@@ -38,7 +38,9 @@ export default function Footer() {
         </div>
         <div className="footer-column">
           <h3>Help</h3>
-          <Link to="/help/create-account">Creating An Account</Link>
+          <Link to="/help/create-account">
+            Creating An Account
+          </Link>
           <Link to="/help/general">General</Link>
         </div>
         <div className="footer-column">
