@@ -4,14 +4,13 @@ function fetchUsers() {
   const token = localStorage.getItem("token");
   console.log(token);
 
-  const promise = fetch("http://localhost:8000/albums/id", {
+  const promise = fetch("https://jukeboxd-music.azurewebsites.net/albums/id", {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json"
     }
   });
-
   return promise;
 }
 

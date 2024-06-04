@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import Artist from "../backend/models/artistSchema.js";
 import Song from "../backend/models/songSchema.js";
 import Album from "../backend/models/albumSchema.js";
+
 mongoose.set("debug", true);
 
 // run the curl to get access token, once you get the access token put it into the variable
@@ -13,10 +14,13 @@ curl -X POST "https://accounts.spotify.com/api/token" \
 const access_token = "";
 // drop all the collections at the start
 mongoose
-  .connect("mongodb://localhost:27017/jukeboxd", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+  .connect(
+    "mongodb://jukeboxd-music.azurewebsites.net/jukeboxd",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }
+  )
   .catch((error) => console.log(error));
 
 const db = mongoose.connection;
@@ -391,9 +395,9 @@ async function getAlbums() {
   const artistSet = new Set();
   for (const album of albumsList) {
     await sleep(1000);
-    let query = `album:${encodeURIComponent(album["albumName"])} artist:${encodeURIComponent(album["artistName"])}`;
+    const query = `album:${encodeURIComponent(album["albumName"])} artist:${encodeURIComponent(album["artistName"])}`;
 
-    let endpoint = `https://api.spotify.com/v1/search?q=${query}&type=album`;
+    const endpoint = `https://api.spotify.com/v1/search?q=${query}&type=album`;
     try {
       const response = await fetch(endpoint, {
         headers: {
@@ -407,7 +411,7 @@ async function getAlbums() {
       }
       await sleep(100);
       const data = await response.json();
-      let albumID = data.albums.items[0].id;
+      const albumID = data.albums.items[0].id;
       // do another fetch for more exact album info
       const endpoint2 = `https://api.spotify.com/v1/albums/${albumID}`;
       const response2 = await fetch(endpoint2, {
@@ -423,15 +427,15 @@ async function getAlbums() {
       const albumInfo = await response2.json();
       const tracklist = albumInfo.tracks.items;
       // a list of the trackIDs for the album
-      let trackIDs = [];
+      const trackIDs = [];
       // loop through all the tracks for the album
       for (const track of tracklist) {
         await sleep(100);
         // a list of artistsIDs for the artists that worked on the track
-        let artistIDs = [];
-        let trackID = track.id;
+        const artistIDs = [];
+        const trackID = track.id;
         trackIDs.push(trackID);
-        let artists = track.artists;
+        const artists = track.artists;
         for (const artist of artists) {
           await sleep(250);
           // create a new artist if that artist doesn't already exist
@@ -442,7 +446,7 @@ async function getAlbums() {
           artistIDs.push(artist.id);
         }
         // time to actually make the song we're currently on
-        let newSong = new Song({
+        const newSong = new Song({
           spotify_id: trackID,
           track_name: track.name,
           // should hold the artist's spotify ids
@@ -455,7 +459,7 @@ async function getAlbums() {
         await newSong.save();
       }
       // time to make the album methinks
-      let newAlbum = new Album({
+      const newAlbum = new Album({
         spotify_id: albumInfo.id,
         album_name: albumInfo.name,
         // should hold the artist's spotify ids
@@ -493,7 +497,7 @@ async function createNewArtist(id) {
 
   const data = await response.json();
 
-  let newArtist = new Artist({
+  const newArtist = new Artist({
     spotify_id: data.id,
     artist_name: data.name,
     artist_image: data.images[0].url,

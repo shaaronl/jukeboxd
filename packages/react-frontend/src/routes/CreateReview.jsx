@@ -28,7 +28,7 @@ export default function CreateReview() {
   function fetchAlbumById(id) {
     const token = localStorage.getItem("token");
 
-    return fetch(`http://localhost:8000/albums/${id}`, {
+    return fetch(`https://jukeboxd-music.azurewebsites.net/albums/${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -62,7 +62,7 @@ export default function CreateReview() {
 
     e.preventDefault();
     const response = await fetch(
-      `http://localhost:8000/review/${id}`,
+      `https://jukeboxd-music.azurewebsites.net/review/${id}`,
       {
         method: "POST",
         headers: {

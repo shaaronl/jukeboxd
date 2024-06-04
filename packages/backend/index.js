@@ -7,6 +7,11 @@ import User from "./models/userSchema.js";
 import Reviews from "./models/reviewsSchema.js";
 import { authenticateUser } from "./auth.js";
 
+//initially in main, not sure if still needed after merging w/ develop
+import dotenv from "dotenv";
+dotenv.config();
+
+
 const app = express();
 const port = 8000;
 
@@ -19,9 +24,9 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(
-    `Example app listening at http://localhost:${port}`
+    "Example app listening at http://jukeboxd-music.azurewebsites.net "
   );
 });
 

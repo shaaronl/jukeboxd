@@ -4,7 +4,7 @@ import Artist from "./models/artistSchema.js"; // Import the Artist model
 import Song from "./models/songSchema.js"; // Import the Song model
 import User from "./models/userSchema.js"; // Import the User Model
 import Reviews from "./models/reviewsSchema.js"; //Import the Reviews model
-import connectDB from "../helpers/connectDB.js";
+import connectDB from "./connectDB.js";
 
 import bcrypt from "bcrypt"; // Import to encrypt passwords
 

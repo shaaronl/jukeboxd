@@ -34,7 +34,7 @@ async function fetchReviewsAndCalculateRatings() {
   const token = localStorage.getItem("token");
   try {
     const response = await fetch(
-      "http://localhost:8000/reviews",
+      "https://jukeboxd-music.azurewebsites.net/reviews",
       {
         method: "GET",
         headers: {
@@ -93,7 +93,7 @@ export default function Album() {
       navigate("/");
     }
 
-    fetch("http://localhost:8000/albums", {
+    fetch("https://jukeboxd-music.azurewebsites.net/albums", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
