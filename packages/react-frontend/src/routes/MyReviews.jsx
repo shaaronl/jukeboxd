@@ -19,7 +19,7 @@ export default function MyReviews() {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          `http://localhost:8000/reviews/${username}`,
+          `https://jukeboxd-music.azurewebsites.net/reviews/${username}`,
           {
             method: "GET",
             headers: {
@@ -49,7 +49,7 @@ export default function MyReviews() {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/reviews/user/${reviewId}`,
+        `https://jukeboxd-music.azurewebsites.net/reviews/user/${reviewId}`,
         {
           method: "DELETE",
           headers: {
@@ -77,7 +77,7 @@ export default function MyReviews() {
 
     // change the user's image in the database
     const response = await fetch(
-      `http://localhost:8000/user/picture/${localStorage.getItem("username")}`,
+      `https://jukeboxd-music.azurewebsites.net/user/picture/${localStorage.getItem("username")}`,
       {
         method: "PUT",
         headers: {

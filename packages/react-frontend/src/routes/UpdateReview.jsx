@@ -18,7 +18,7 @@ export default function UpdateReview() {
         const token = localStorage.getItem("token");
 
         let response = await fetch(
-          `http://localhost:8000/reviews/user/${id}`,
+          `https://jukeboxd-music.azurewebsites.net/reviews/user/${id}`,
           {
             method: "GET",
             headers: {
@@ -54,7 +54,7 @@ export default function UpdateReview() {
   async function handleSubmit(e) {
     e.preventDefault();
     const response = await fetch(
-      `http://localhost:8000/review/${id}`,
+      `https://jukeboxd-music.azurewebsites.net:8000/review/${id}`,
       {
         method: "PUT",
         headers: {
