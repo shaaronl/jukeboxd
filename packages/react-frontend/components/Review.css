@@ -1,0 +1,38 @@
+.userReview {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: 1em 3em;
+  margin: 0 2em;
+  margin-bottom: 2em;
+  background-color: rgba(194, 122, 122, 0.2);
+}
+
+.userReview img {
+  height: 140px;
+  width: 140px;
+}
+
+.modifyIcons {
+  float: right;
+}
+
+.modifyIcons > * {
+  padding: 0.3em;
+}
+
+.modifyIcons {
+  color: white;
+  display: flex;
+}
+.reviewContent {
+  margin-left: 1em;
+}
+
+.reviewContent h3 {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.modifyIcons > *:hover {
+  background-color: grey;
+}

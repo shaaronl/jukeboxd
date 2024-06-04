@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import "./AlbumInfo.css";
 import { Link } from "react-router-dom";
+import Rating from "@mui/material/Rating";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import Avatar from "@mui/material/Avatar";
 
 export default function AlbumInfo() {
   const { id } = useParams(); // Get the album id from the URL
@@ -24,9 +27,18 @@ export default function AlbumInfo() {
   }, [id]);
 
   async function fetchReviewsByAlbumId(albumId) {
+    const token = localStorage.getItem("token");
+
     try {
       const response = await fetch(
-        `https://jukeboxd-music.azurewebsites.net/reviews/albums/${albumId}`
+        `https://jukeboxd-music.azurewebsites.net/reviews/albums/${albumId}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+          }
+        }
       );
       if (!response.ok) {
         throw new Error(
@@ -42,8 +54,17 @@ export default function AlbumInfo() {
   }
 
   function fetchAlbumById(id) {
+    const token = localStorage.getItem("token");
+
     return fetch(
-      `https://jukeboxd-music.azurewebsites.net/albums/${id}`
+      `https://jukeboxd-music.azurewebsites.net/albums/${id}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      }
     )
       .then((response) => {
         if (!response.ok) {
@@ -59,22 +80,15 @@ export default function AlbumInfo() {
       });
   }
 
-  function getStarRating(rating) {
-    const fullStars = Math.floor(rating);
-    const halfStar = rating % 1 >= 0.5 ? 1 : 0;
-    const emptyStars = 5 - (fullStars + halfStar);
-    // half star is just going to be empty for now
-    return (
-      "★".repeat(fullStars) +
-      (halfStar ? "★" : "") +
-      "☆".repeat(emptyStars)
-    );
-  }
-
   if (error) return <div>Error: {error}</div>;
-  if (!album || !artist) return <div>Loading...</div>;
+  if (!album || !artist)
+    return (
+      <div className="loading-text">
+        <Navbar withLogo={true} />
+        <div>Loading...</div>
+      </div>
+    );
 
-  // Calculate the average rating
   const avgRating =
     reviews.length > 0
       ? (
@@ -84,11 +98,6 @@ export default function AlbumInfo() {
           ) / reviews.length
         ).toFixed(1)
       : "No reviews";
-
-  const starRating =
-    avgRating !== "No reviews"
-      ? getStarRating(parseFloat(avgRating))
-      : "☆☆☆☆☆";
 
   return (
     <div className="album-info">
@@ -116,9 +125,14 @@ export default function AlbumInfo() {
             <h2 className="album-title">{album.album_name}</h2>
             <p>
               {album.release_date.split("-")[0] + " "}
-              {artist.artist_name} |{"  "}
+              {artist.artist_name} |{"   "}
               <span className="rating-stars">
-                {starRating}{" "}
+                <Rating
+                  name="album-rating"
+                  value={parseFloat(avgRating)}
+                  precision={0.1}
+                  readOnly
+                />
                 {avgRating !== "No reviews" && avgRating}
               </span>
             </p>
@@ -136,11 +150,38 @@ export default function AlbumInfo() {
             ) : (
               reviews.map((review) => (
                 <div key={review._id} className="review">
-                  <span className="rating-stars">
-                    {Array.from({ length: 5 }, (_, i) =>
-                      i < review.rating ? "★" : "☆"
-                    ).join("")}
-                  </span>
+                  <div className="reviewTop">
+                    <Link
+                      to={`/reviews/${review.written_by.username}`}
+                    >
+                      <Avatar
+                        alt={review.written_by.username}
+                        src={review.written_by.profilePic}
+                      />
+                    </Link>
+                    <div className="reviewTopRight">
+                      <Link
+                        to={`/reviews/${review.written_by.username}`}
+                        className="reviewUserName"
+                      >
+                        <h3>{review.written_by.username}</h3>
+                      </Link>
+                      <Rating
+                        name="half-rating-read"
+                        defaultValue={review.rating}
+                        precision={0.5}
+                        emptyIcon={
+                          <StarBorderIcon
+                            fontSize="inherit"
+                            sx={{
+                              color: "#d9d9d9"
+                            }}
+                          />
+                        }
+                        readOnly
+                      />
+                    </div>
+                  </div>
                   <p>{review.content}</p>
                 </div>
               ))
@@ -151,13 +192,12 @@ export default function AlbumInfo() {
             <p>{album.popularity}</p>
           </div>
           <div className="spotify-link">
-            <h3>Spotify Link</h3>
             <a
               href={album.spotify_link}
               target="_blank"
               rel="noopener noreferrer"
             >
-              {album.spotify_link}
+              Listen here on Spotify!
             </a>
           </div>
         </div>

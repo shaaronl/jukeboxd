@@ -156,7 +156,10 @@ async function findUserByName(username) {
 
 async function findReviewsByAlbumId(album_id) {
   try {
-    const review = await Reviews.find({ album_id });
+    const review = await Reviews.find({ album_id }).populate({
+      path: "written_by",
+      model: "User"
+    });
     return review;
   } catch (error) {
     console.error("Error finding album:", error);
@@ -178,11 +181,108 @@ async function findAllReviews() {
 // function to find reviews by userId
 async function findReviewsByWrittenBy(userId) {
   try {
-    const reviews = await Reviews.find({ written_by: userId });
-    console.log("Found reviews:", reviews);
+    // also populate the album
+    const reviews = await Reviews.find({
+      written_by: userId
+    }).populate({
+      path: "album_id",
+      model: "Album"
+    });
     return reviews;
   } catch (error) {
     console.error("Error finding reviews:", error);
+    throw error;
+  }
+}
+
+// function to find artist genre and put it into album data
+async function updateAlbumGenres() {
+  try {
+    const albums = await Album.find();
+
+    for (const album of albums) {
+      console.log(`Processing album: ${album.album_name}`);
+      const artistId = album.artists[0];
+      const artist = await Artist.findOne({
+        spotify_id: artistId
+      });
+
+      if (artist) {
+        console.log(
+          `Found artist: ${artist.artist_name}, Genres: ${artist.genres}`
+        );
+        album.genres = artist.genres;
+        await album.save();
+        console.log(
+          `Updated album ${album.album_name} with genres: ${artist.genres}`
+        );
+      } else {
+        console.log(
+          `Artist with ID ${artistId} not found for album ${album.album_name}`
+        );
+      }
+    }
+
+    console.log("Finished updating album genres.");
+  } catch (error) {
+    console.error("Error updating album genres:", error);
+    throw error;
+  }
+}
+
+// function to delete a review by review id
+async function deleteReviewById(reviewId) {
+  try {
+    const result = await Reviews.findByIdAndDelete(reviewId);
+    return result;
+  } catch (error) {
+    console.error("Error finding reviews:", error);
+    throw error;
+  }
+}
+
+// find review by review id
+async function findReviewById(reviewId) {
+  try {
+    const review = await Reviews.findById(reviewId).populate({
+      path: "album_id",
+      model: "Album"
+    });
+    return review;
+  } catch (error) {
+    console.error("Error finding reviews:", error);
+    throw error;
+  }
+}
+
+//find and update a review by id
+async function updateReviewById(reviewId, newReview) {
+  try {
+    const review = await Reviews.findOneAndUpdate(
+      { _id: reviewId },
+      {
+        rating: newReview.rating,
+        content: newReview.content
+      }
+    );
+    return review;
+  } catch (error) {
+    console.error("Error finding review:", error);
+    throw error;
+  }
+}
+
+async function updateUserImage(username, imageAddress) {
+  try {
+    const user = await User.findOneAndUpdate(
+      {
+        username: username
+      },
+      { profilePic: imageAddress }
+    );
+    return user;
+  } catch (error) {
+    console.error("Error finding user:", error);
     throw error;
   }
 }
@@ -200,5 +300,10 @@ export default {
   findAlbumBySpotifyId,
   findAllSongs,
   findSongsBySpotifyId,
-  findUserByName
+  findUserByName,
+  updateAlbumGenres,
+  deleteReviewById,
+  findReviewById,
+  updateReviewById,
+  updateUserImage
 };

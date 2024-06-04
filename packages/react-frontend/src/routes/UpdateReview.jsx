@@ -5,52 +5,43 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import "./CreateReview.css";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function CreateReview() {
+export default function UpdateReview() {
   const navigate = useNavigate();
-
-  const { id } = useParams(); // Get the album id from the URL
-  const [album, setAlbum] = useState({});
-  const [artist, setArtist] = useState("");
+  const { id } = useParams(); // Get the review id from the URL
+  const [review, setReview] = useState(null);
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
 
   useEffect(() => {
-    fetchAlbumById(id)
-      .then((data) => {
-        setAlbum(data);
-        setArtist(data.artists[0]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [id]);
+    async function fetchData() {
+      try {
+        const token = localStorage.getItem("token");
 
-  function fetchAlbumById(id) {
-    const token = localStorage.getItem("token");
-
-    return fetch(
-      `https://jukeboxd-music.azurewebsites.net/albums/${id}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        }
-      }
-    )
-      .then((response) => {
+        let response = await fetch(
+          `https://jukeboxd-music.azurewebsites.net/reviews/user/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`
+            }
+          }
+        );
         if (!response.ok) {
           throw new Error(
             `Network response was not ok: ${response.statusText}`
           );
         }
-        return response.json();
-      })
-      .catch((error) => {
-        console.error("Error fetching album:", error);
-        throw error;
-      });
-  }
+        let data = await response.json();
+        setReview(data);
+        setRating(data.rating);
+        setReviewText(data.content);
+      } catch {
+        console.error("Error fetching review");
+      }
+    }
+    fetchData();
+  }, [id]);
 
   function updateRating(value) {
     setRating(value);
@@ -61,16 +52,14 @@ export default function CreateReview() {
   }
 
   async function handleSubmit(e) {
-    const token = localStorage.getItem("token");
-
     e.preventDefault();
     const response = await fetch(
-      `https://jukeboxd-music.azurewebsites.net/review/${id}`,
+      `https://jukeboxd-music.azurewebsites.net:8000/review/${id}`,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`
         },
         body: JSON.stringify({
           rating: rating,
@@ -80,35 +69,33 @@ export default function CreateReview() {
       }
     );
     if (!response) {
-      throw Error("Error adding review");
+      throw Error("Error updating review");
     } else {
-      console.log("here");
-      navigate(`/album/${album._id}`);
+      navigate(`/reviews/${localStorage.getItem("username")}`);
     }
   }
 
-  if (!album || !artist) return <div>Loading...</div>;
+  if (!review) return <div>Loading...</div>;
 
   return (
     <div>
       <Navbar withLogo={true} />
       <div className="createReview">
         <img
-          src={album.album_cover}
-          alt={album.album_name + "cover"}
+          src={review.album_id.album_cover}
+          alt={review.album_id.album_name + "cover"}
           className="coverImage"
         />
         <form className="reviewRight" onSubmit={handleSubmit}>
           <p>I STREAMED...</p>
-          <h2 className="albumName">{album.album_name}</h2>
-          <p>
-            {album.release_date.split("-")[0] +
-              " " +
-              artist.artist_name}
-          </p>
+          <h2 className="albumName">
+            {review.album_id.album_name}
+          </h2>
+          <p>{review.album_id.release_date.split("-")[0]}</p>
           <textarea
             placeholder="Add a review"
             onChange={updateReviewText}
+            defaultValue={review.content}
           ></textarea>
           <p className="ratingText" htmlFor="rating">
             Rating
@@ -118,7 +105,7 @@ export default function CreateReview() {
             onChange={(event, newValue) =>
               updateRating(newValue)
             }
-            defaultValue={0}
+            defaultValue={review.rating}
             precision={0.5}
             sx={{
               fontSize: "2rem",

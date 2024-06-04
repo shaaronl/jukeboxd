@@ -12,8 +12,12 @@ import AlbumInfo from "./routes/AlbumInfo";
 import MyReviews from "./routes/MyReviews.jsx";
 import CreateReview from "./routes/CreateReview.jsx";
 import CreateAccount from "./routes/CreateAccount.jsx";
-// import TermsAndConditions from "./routes/FooterFiles/termscond.jsx";
-
+import About from "./routes/FooterFiles/AboutUs.jsx";
+import Faqs from "./routes/FooterFiles/faqs.jsx";
+import TermsAndConditions from "./routes/FooterFiles/termscond.jsx";
+import UpdateReview from "./routes/UpdateReview.jsx";
+import CrAccHelp from "./routes/FooterFiles/crAccHelp.jsx";
+import GeneralHelp from "./routes/FooterFiles/GeneralHelp.jsx";
 // import App from './App.jsx';
 
 const router = createBrowserRouter([
@@ -42,11 +46,35 @@ const router = createBrowserRouter([
   {
     path: "Album/:id",
     element: <AlbumInfo />
+  },
+  {
+    path: "about",
+    element: <About />
+  },
+  {
+    path: "faqs",
+    element: <Faqs />
+  },
+  {
+    path: "terms-and-conditions",
+    element: <TermsAndConditions />
+  },
+  {
+    path: "help/create-account",
+    element: <CrAccHelp />
+  },
+  {
+    path: "help/general",
+    element: <GeneralHelp />
+  },
+  {
+    path: "reviews/:username",
+    element: <MyReviews />
+  },
+  {
+    path: "UpdateReview/:id",
+    element: <UpdateReview />
   }
-  // {
-  //   path: "terms-and-conditions",
-  //   element: <TermsAndConditions />
-  // }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

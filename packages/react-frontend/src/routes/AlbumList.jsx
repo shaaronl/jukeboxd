@@ -1,8 +1,18 @@
 import Navbar from "./Navbar";
 
 function fetchUsers() {
+  const token = localStorage.getItem("token");
+  console.log(token);
+
   const promise = fetch(
-    "https://jukeboxd-music.azurewebsites.net/albums/id"
+    "https://jukeboxd-music.azurewebsites.net/albums/id",
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    }
   );
   return promise;
 }

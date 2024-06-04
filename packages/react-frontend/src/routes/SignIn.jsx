@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./SignIn.css";
 import PropTypes from "prop-types";
 
-export default function SignIn({ onClose }) {
+export default function SignIn({ onClick, onClose }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,11 +23,11 @@ export default function SignIn({ onClose }) {
     );
     const result = await response.json();
     if (result) {
+      console.log(result);
       // Store the jwt token
       localStorage.setItem("token", result.token);
       localStorage.setItem("username", result.username);
-      console.log(localStorage.getItem("token"));
-      console.log(localStorage.getItem("username"));
+      localStorage.setItem("profilePic", result.profilePic);
       window.location.reload();
 
       alert("Login!");
@@ -67,7 +67,7 @@ export default function SignIn({ onClose }) {
             value="Sign In"
             className="submit-button"
           />
-          <Link to="/home" className="sign-up-link">
+          <Link onClick={onClick} className="sign-up-link">
             Not a User? Click here to sign up
           </Link>
         </form>
@@ -78,5 +78,6 @@ export default function SignIn({ onClose }) {
 
 // Define prop types for the component
 SignIn.propTypes = {
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired
 };

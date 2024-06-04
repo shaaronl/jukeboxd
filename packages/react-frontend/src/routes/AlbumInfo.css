@@ -3,6 +3,10 @@
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 100px; /* gap between album cover and content */
+  width: 80%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-left: 5%;
 }
 
 /* right section : album title, arrtist, ratings, reviews */
@@ -39,10 +43,15 @@ img {
 }
 
 /* songs list formatting */
+
 /* .track-list {
     grid-column: 1; 
     grid-row: 2; 
 } */
+.track-list {
+  grid-column: 1;
+  grid-row: 2;
+}
 .song-list ul {
   list-style-type: none;
   padding: 0;
@@ -79,10 +88,18 @@ a {
 .reviews {
   margin-top: 20px;
   width: 100%;
-  max-width: 700px;
+  max-width: 700px; /* set a maximum width for larger screens */
+  box-sizing: border-box;
 }
 
 .reviews h3 {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  margin-bottom: 10px;
+  margin: 5px 0;
+}
+
+.reviews p {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial,
     sans-serif;
   margin-bottom: 10px;
@@ -96,7 +113,8 @@ a {
   padding: 20px;
   margin-bottom: 10px;
   border-radius: 5px;
-  width: 100%; /* Ensure the review takes the full width of the parent */
+  width: 100%;
+  max-width: 700px; /* set a maximum width for larger screens */
   box-sizing: border-box;
 }
 
@@ -111,7 +129,7 @@ a {
   border-color: rgb(161, 19, 19);
   font-size: 20px;
   padding: 10px 20px; /* Adjust the padding for size */
-  width: 200px; /* Set a specific width */
+  width: 225px; /* Set a specific width */
   height: 50px; /* Set a specific height */
   border-radius: 6px;
   color: white;
@@ -128,4 +146,31 @@ a {
 }
 .rating-stars {
   color: rgb(253, 192, 38);
+}
+
+.reviewTop {
+  display: flex;
+  width: 100%;
+}
+
+.reviewUserName {
+  color: white;
+  text-decoration: none;
+  margin-top: auto;
+  font-size: 9pt;
+}
+
+.reviewUserName h3 {
+  margin: 0;
+}
+
+.reviewTopRight {
+  margin-left: 1em;
+  position: relative;
+  bottom: 5px;
+}
+
+.loading {
+  text-align: center;
+  padding-top: 40px;
 }

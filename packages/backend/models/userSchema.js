@@ -15,6 +15,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
       maxlength: 60
+    },
+    profilePic: {
+      type: String,
+      default: ""
     }
   },
   { collection: "users" }

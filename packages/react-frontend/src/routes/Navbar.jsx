@@ -4,7 +4,7 @@ import CreateAccount from "./CreateAccount";
 import "./Navbar.css";
 import SignIn from "./SignIn";
 import PropTypes from "prop-types";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Avatar from "@mui/material/Avatar";
 
 export default function Navbar({ withLogo }) {
   const [showModal, setShowModal] = useState(false);
@@ -37,6 +37,16 @@ export default function Navbar({ withLogo }) {
     setShowModalSignIn(false);
   };
 
+  const swapToLogin = () => {
+    setShowModal(false);
+    setShowModalSignIn(true);
+  };
+
+  const swapToCreate = () => {
+    setShowModal(true);
+    setShowModalSignIn(false);
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
@@ -66,7 +76,10 @@ export default function Navbar({ withLogo }) {
                 SIGN IN
               </button>
               {showModalSignIn && (
-                <SignIn onClose={handleCloseModalSignIn} />
+                <SignIn
+                  onClick={swapToCreate}
+                  onClose={handleCloseModalSignIn}
+                />
               )}
             </li>
             <li>
@@ -77,7 +90,10 @@ export default function Navbar({ withLogo }) {
                 CREATE ACCOUNT
               </button>
               {showModal && (
-                <CreateAccount onClose={handleCloseModal} />
+                <CreateAccount
+                  onClick={swapToLogin}
+                  onClose={handleCloseModal}
+                />
               )}
             </li>
             <li>
@@ -89,7 +105,10 @@ export default function Navbar({ withLogo }) {
           <>
             <li>
               <Link to="/">
-                <AccountCircleIcon />
+                <Avatar
+                  alt={username}
+                  src={localStorage.getItem("profilePic")}
+                />
                 {username}
               </Link>
             </li>
@@ -97,7 +116,9 @@ export default function Navbar({ withLogo }) {
               <Link to="/Albums">ALBUMS</Link>
             </li>
             <li>
-              <Link to="/MyReviews">MY REVIEWS</Link>
+              <Link to={`/reviews/${username}`}>
+                MY REVIEWS
+              </Link>
             </li>
             <li>
               <Link

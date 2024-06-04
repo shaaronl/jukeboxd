@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./CreateAccount.css";
 
-export default function CreateAccount({ onClose }) {
+export default function CreateAccount({ onClick, onClose }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -60,7 +60,7 @@ export default function CreateAccount({ onClose }) {
             value="Create Account"
             className="submit-button"
           />
-          <Link to="/home" className="sign-in-link">
+          <Link onClick={onClick} className="sign-in-link">
             Already a User? Click here to sign in
           </Link>
         </form>
@@ -71,5 +71,6 @@ export default function CreateAccount({ onClose }) {
 
 // Define prop types for the component
 CreateAccount.propTypes = {
-  onClose: PropTypes.func.isRequired // Add onClose to prop types
+  onClose: PropTypes.func.isRequired, // Add onClose to prop types
+  onClick: PropTypes.func.isRequired
 };

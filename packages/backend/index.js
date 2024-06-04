@@ -5,16 +5,20 @@ import { loginUser } from "./auth.js";
 import Album from "./models/albumSchema.js";
 import User from "./models/userSchema.js";
 import Reviews from "./models/reviewsSchema.js";
-import dotenv from "dotenv";
+import { authenticateUser } from "./auth.js";
 
+//initially in main, not sure if still needed after merging w/ develop
+import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
 const port = 8000;
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
+// Public Route
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
@@ -25,8 +29,85 @@ app.listen(process.env.PORT || port, () => {
   );
 });
 
-/** Routes **/
+/** Public Routes **/
 
+/* User Accounts */
+// User Registration
+app.post("/users", async (req, res) => {
+  const { username, password } = req.body;
+  console.log(req.body);
+
+  try {
+    const savedUser = await userServices.addUser(
+      username,
+      password
+    );
+    res.status(201).send(savedUser);
+  } catch (error) {
+    if (error.message === "Username already taken") {
+      res
+        .status(400)
+        .send({ message: "Username already taken" });
+    } else if (error.message === "All fields are required") {
+      res
+        .status(400)
+        .send({ message: "All fields are required" });
+    } else {
+      res
+        .status(500)
+        .send({ message: "Internal Server Error" });
+    }
+  }
+});
+
+// User Sign In
+app.post("/api/sign-in", async (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.status(400).json({
+      success: false,
+      message: "Username and password are required"
+    });
+  }
+
+  try {
+    // Find the user by email
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid username or password"
+      });
+    }
+
+    // Compare the provided password with the stored hashed password
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid username or password"
+      });
+    }
+
+    res.json({
+      success: true,
+      message: "User logged in successfully"
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, message: error.message });
+  }
+});
+
+// User Login
+app.post("/login", loginUser);
+
+/** Protected Routes **/
+app.use(authenticateUser);
+
+/* Reviews */
 // getting reviews by album id
 app.get("/reviews/albums/:id", async (req, res) => {
   try {
@@ -63,7 +144,7 @@ app.get("/reviews/users/:id", async (req, res) => {
   }
 });
 
-//getting all reviews
+// getting all reviews
 app.get("/reviews/", async (req, res) => {
   try {
     const review = await userServices.findAllReviews(
@@ -81,6 +162,43 @@ app.get("/reviews/", async (req, res) => {
   }
 });
 
+// creating a review
+app.post("/review/:id", async (req, res) => {
+  try {
+    const reviewToAdd = req.body;
+    console.log(reviewToAdd);
+    // get the user of the person trying to write review
+    const user = await userServices.findUserByName(
+      reviewToAdd.username
+    );
+    // get the album the user wants to write a review on
+    const album = await userServices.findAlbumById(
+      req.params.id
+    );
+
+    // make a new review with the review schema
+    const newReview = new Reviews({
+      written_by: user._id,
+      rating: reviewToAdd.rating,
+      content: reviewToAdd.content,
+      likes: 0,
+      album_id: album._id
+    });
+    let reviewId;
+
+    await newReview.save().then((review) => {
+      reviewId = review._id;
+    });
+
+    res.status(201);
+    res.send(newReview);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+/* Albums */
 // Getting a single album
 app.get("/albums/:id", async (req, res) => {
   try {
@@ -130,7 +248,6 @@ app.get("/albums", async (req, res) => {
 });
 
 /* Artists */
-
 // Getting the artists
 app.get("/artists", async (req, res) => {
   try {
@@ -163,7 +280,6 @@ app.get("/artists", async (req, res) => {
 });
 
 /* Songs */
-
 // Getting the songs
 app.get("/songs", async (req, res) => {
   try {
@@ -196,7 +312,6 @@ app.get("/songs", async (req, res) => {
 });
 
 /* User Accounts */
-
 // Get all users
 app.get("/users", async (req, res) => {
   try {
@@ -308,21 +423,117 @@ app.post("/review/:id", async (req, res) => {
       likes: 0,
       album_id: album._id
     });
-    let reviewId;
 
-    await newReview.save().then((review) => {
-      reviewId = review._id;
-    });
+    await newReview.save();
 
-    console.log(reviewId);
-    // add the review to just the album
-    await Album.updateOne(
-      { _id: album._id },
-      { $push: { reviews: reviewId } },
-      { upsert: true }
-    );
     res.status(201);
     res.send(newReview);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// get user info and reviews of user
+app.get("/reviews/:users", async (req, res) => {
+  try {
+    const username = req.params.users;
+    const user = await userServices.findUserByName(username);
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "User not found" });
+    }
+
+    const reviews = await userServices.findReviewsByWrittenBy(
+      user._id
+    );
+    if (!reviews) {
+      return res
+        .status(404)
+        .json({ message: "Reviews not found" });
+    }
+
+    return res.json({ user: user, reviews: reviews });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// deletes review by id
+app.delete("/reviews/user/:reviewId", async (req, res) => {
+  try {
+    const reviewId = req.params.reviewId;
+    const response =
+      await userServices.deleteReviewById(reviewId);
+
+    if (response === undefined) {
+      res.status(404).send("Resource not found.");
+    } else {
+      res.status(204).json({
+        message: `Item with ID ${reviewId} deleted successfully`
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// get review by id
+app.get("/reviews/user/:reviewId", async (req, res) => {
+  try {
+    const reviewId = req.params.reviewId;
+    const review = await userServices.findReviewById(reviewId);
+    if (!review) {
+      return res
+        .status(404)
+        .json({ message: "Review not found" });
+    }
+    res.json(review);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+//updating a review
+app.put("/review/:id", async (req, res) => {
+  try {
+    const reviewToUpdate = req.params.id;
+    const review = await userServices.updateReviewById(
+      reviewToUpdate,
+      req.body
+    );
+    if (!review) {
+      return res
+        .status(404)
+        .json({ message: "Couldn't update review" });
+    }
+    res.status(201);
+    res.send(review);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// update the user's profile picture
+app.put("/user/picture/:username", async (req, res) => {
+  try {
+    const userToUpdate = req.params.username;
+    const user = await userServices.updateUserImage(
+      userToUpdate,
+      req.body.imageAddress
+    );
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "Couldn't update user" });
+    }
+    res.status(201);
+    res.send(user);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
