@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import "./CreateAccount.css";
 
 export default function CreateAccount({ onClick, onClose }) {
@@ -72,5 +72,5 @@ export default function CreateAccount({ onClick, onClose }) {
 // Define prop types for the component
 CreateAccount.propTypes = {
   onClose: PropTypes.func.isRequired, // Add onClose to prop types
-  onClick: PropTypes.func.isRequired 
+  onClick: PropTypes.func.isRequired
 };

@@ -28,13 +28,16 @@ export default function CreateReview() {
   function fetchAlbumById(id) {
     const token = localStorage.getItem("token");
 
-    return fetch(`https://jukeboxd-music.azurewebsites.net/albums/${id}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
+    return fetch(
+      `https://jukeboxd-music.azurewebsites.net/albums/${id}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
       }
-    })
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error(

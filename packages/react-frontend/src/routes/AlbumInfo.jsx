@@ -31,7 +31,7 @@ export default function AlbumInfo() {
 
     try {
       const response = await fetch(
-       `https://jukeboxd-music.azurewebsites.net/reviews/albums/${albumId}`,
+        `https://jukeboxd-music.azurewebsites.net/reviews/albums/${albumId}`,
         {
           method: "GET",
           headers: {
@@ -56,13 +56,16 @@ export default function AlbumInfo() {
   function fetchAlbumById(id) {
     const token = localStorage.getItem("token");
 
-    return fetch( `https://jukeboxd-music.azurewebsites.net/albums/${id}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
+    return fetch(
+      `https://jukeboxd-music.azurewebsites.net/albums/${id}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
       }
-    })
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error(
@@ -76,7 +79,6 @@ export default function AlbumInfo() {
         throw error;
       });
   }
-
 
   if (error) return <div>Error: {error}</div>;
   if (!album || !artist)

@@ -2,7 +2,7 @@ import Rating from "@mui/material/Rating";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import "./Review.css";
 import { Link } from "react-router-dom";
 
@@ -60,12 +60,12 @@ Review.propTypes = {
     album_id: PropTypes.shape({
       _id: PropTypes.string.isRequired,
       album_cover: PropTypes.string.isRequired,
-      album_name: PropTypes.string.isRequired,
+      album_name: PropTypes.string.isRequired
     }).isRequired,
     rating: PropTypes.number.isRequired,
     content: PropTypes.string.isRequired,
-    _id: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired
   }).isRequired,
   rightUser: PropTypes.bool.isRequired,
-  handleDelete: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired
 };
