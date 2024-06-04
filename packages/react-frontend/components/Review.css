@@ -30,7 +30,7 @@
 
 .reviewContent h3 {
   word-wrap: break-word;
-  word-break: break-all;
+  word-break: break-word;
 }
 
 .modifyIcons > *:hover {
