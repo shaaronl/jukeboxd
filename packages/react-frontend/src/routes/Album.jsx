@@ -31,14 +31,12 @@ import Footer from "./FooterFiles/Footer";
 
 // Function to fetch reviews and calculate floored average rating
 async function fetchReviewsAndCalculateRatings() {
-  const token = localStorage.getItem("token");
   try {
     const response = await fetch(
       "http://localhost:8000/reviews",
       {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json"
         }
       }
@@ -87,16 +85,10 @@ export default function Album() {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      navigate("/");
-    }
 
     fetch("http://localhost:8000/albums", {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json"
       }
     })

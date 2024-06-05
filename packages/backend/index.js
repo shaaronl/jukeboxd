@@ -100,100 +100,6 @@ app.post("/api/sign-in", async (req, res) => {
 // User Login
 app.post("/login", loginUser);
 
-/** Protected Routes **/
-app.use(authenticateUser);
-
-/* Reviews */
-// getting reviews by album id
-app.get("/reviews/albums/:id", async (req, res) => {
-  try {
-    const review = await userServices.findReviewsByAlbumId(
-      req.params.id
-    );
-    if (!review) {
-      return res
-        .status(404)
-        .json({ message: "review not found" });
-    }
-    res.json(review);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
-
-// getting reviews by user id -- currently not working.
-app.get("/reviews/users/:id", async (req, res) => {
-  try {
-    const review = await userServices.findReviewsByWrittenBy(
-      req.params.id
-    );
-    if (!review) {
-      return res
-        .status(404)
-        .json({ message: "review not found" });
-    }
-    res.json(review);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
-
-// getting all reviews
-app.get("/reviews/", async (req, res) => {
-  try {
-    const review = await userServices.findAllReviews(
-      req.params.id
-    );
-    if (!review) {
-      return res
-        .status(404)
-        .json({ message: "Reviews not found" });
-    }
-    res.json(review);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
-
-// creating a review
-app.post("/review/:id", async (req, res) => {
-  try {
-    const reviewToAdd = req.body;
-    console.log(reviewToAdd);
-    // get the user of the person trying to write review
-    const user = await userServices.findUserByName(
-      reviewToAdd.username
-    );
-    // get the album the user wants to write a review on
-    const album = await userServices.findAlbumById(
-      req.params.id
-    );
-
-    // make a new review with the review schema
-    const newReview = new Reviews({
-      written_by: user._id,
-      rating: reviewToAdd.rating,
-      content: reviewToAdd.content,
-      likes: 0,
-      album_id: album._id
-    });
-    let reviewId;
-
-    await newReview.save().then((review) => {
-      reviewId = review._id;
-    });
-
-    res.status(201);
-    res.send(newReview);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
-
 /* Albums */
 // Getting a single album
 app.get("/albums/:id", async (req, res) => {
@@ -301,6 +207,103 @@ app.get("/songs", async (req, res) => {
       }
       return res.json(songs);
     }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+/** Reviews **/
+
+// getting all reviews
+app.get("/reviews/", async (req, res) => {
+  try {
+    const review = await userServices.findAllReviews(
+      req.params.id
+    );
+    if (!review) {
+      return res
+        .status(404)
+        .json({ message: "Reviews not found" });
+    }
+    res.json(review);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// getting reviews by album id
+app.get("/reviews/albums/:id", async (req, res) => {
+  try {
+    const review = await userServices.findReviewsByAlbumId(
+      req.params.id
+    );
+    if (!review) {
+      return res
+        .status(404)
+        .json({ message: "review not found" });
+    }
+    res.json(review);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+/** Protected Routes **/
+app.use(authenticateUser);
+
+/** Reviews **/
+
+// getting reviews by user id -- currently not working.
+app.get("/reviews/users/:id", async (req, res) => {
+  try {
+    const review = await userServices.findReviewsByWrittenBy(
+      req.params.id
+    );
+    if (!review) {
+      return res
+        .status(404)
+        .json({ message: "review not found" });
+    }
+    res.json(review);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// creating a review
+app.post("/review/:id", async (req, res) => {
+  try {
+    const reviewToAdd = req.body;
+    console.log(reviewToAdd);
+    // get the user of the person trying to write review
+    const user = await userServices.findUserByName(
+      reviewToAdd.username
+    );
+    // get the album the user wants to write a review on
+    const album = await userServices.findAlbumById(
+      req.params.id
+    );
+
+    // make a new review with the review schema
+    const newReview = new Reviews({
+      written_by: user._id,
+      rating: reviewToAdd.rating,
+      content: reviewToAdd.content,
+      likes: 0,
+      album_id: album._id
+    });
+    let reviewId;
+
+    await newReview.save().then((review) => {
+      reviewId = review._id;
+    });
+
+    res.status(201);
+    res.send(newReview);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

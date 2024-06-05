@@ -27,7 +27,6 @@ export default function AlbumInfo() {
   }, [id]);
 
   async function fetchReviewsByAlbumId(albumId) {
-    const token = localStorage.getItem("token");
 
     try {
       const response = await fetch(
@@ -35,7 +34,6 @@ export default function AlbumInfo() {
         {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json"
           }
         }
