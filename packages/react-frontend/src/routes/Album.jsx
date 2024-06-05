@@ -6,14 +6,12 @@ import Footer from "./FooterFiles/Footer";
 
 // Function to fetch reviews and calculate floored average rating
 async function fetchReviewsAndCalculateRatings() {
-  const token = localStorage.getItem("token");
   try {
     const response = await fetch(
       "https://jukeboxd-music.azurewebsites.net/reviews",
       {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json"
         }
       }
@@ -49,7 +47,6 @@ async function fetchReviewsAndCalculateRatings() {
 }
 
 export default function Album() {
-  const navigate = useNavigate();
   const [albums, setAlbums] = useState([]);
   const [filteredAlbums, setFilteredAlbums] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -62,11 +59,6 @@ export default function Album() {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      navigate("/");
-    }
 
     fetch("https://jukeboxd-music.azurewebsites.net/albums", {
       method: "GET",
@@ -83,7 +75,7 @@ export default function Album() {
       .catch((error) =>
         console.error("Error fetching albums:", error)
       );
-  }, [navigate]);
+  }, []);
 
   useEffect(() => {
     const filterAlbums = async () => {

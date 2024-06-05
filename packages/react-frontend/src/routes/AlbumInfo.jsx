@@ -27,15 +27,12 @@ export default function AlbumInfo() {
   }, [id]);
 
   async function fetchReviewsByAlbumId(albumId) {
-    const token = localStorage.getItem("token");
-
     try {
       const response = await fetch(
         `https://jukeboxd-music.azurewebsites.net/reviews/albums/${albumId}`,
         {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json"
           }
         }
