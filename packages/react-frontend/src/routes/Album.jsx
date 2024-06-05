@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import "./Album.css";
 import Footer from "./FooterFiles/Footer";
@@ -59,11 +59,9 @@ export default function Album() {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-
     fetch("https://jukeboxd-music.azurewebsites.net/albums", {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json"
       }
     })
