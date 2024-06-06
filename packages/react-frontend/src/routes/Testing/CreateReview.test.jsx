@@ -109,7 +109,7 @@ describe("CreateReview Component", () => {
 
     const ratingInput = screen.getByTestId("rating");
     const ratingStars = ratingInput.querySelectorAll("input");
-    fireEvent.click(ratingStars[4]); 
+    fireEvent.click(ratingStars[4]);
 
     expect(ratingStars[4]).toBeChecked();
   });

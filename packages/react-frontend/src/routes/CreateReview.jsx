@@ -136,7 +136,9 @@ export default function CreateReview() {
             }
             data-testid="rating"
           />
-          <button type="submit" data-testid="submit-button">SAVE</button>
+          <button type="submit" data-testid="submit-button">
+            SAVE
+          </button>
         </form>
       </div>
     </div>
