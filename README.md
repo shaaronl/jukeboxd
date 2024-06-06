@@ -17,8 +17,6 @@ And the **backend** can be accessed from: https://jukeboxd-music.azurewebsites.n
 ### UI Prototype
 The UI Prototype can be accessed here: https://www.figma.com/design/BpFj1NG2oKtV8Dxo4gEHn8/Jukebox'd?node-id=0-1&t=Mt7yFI4xg6dEh0z8-1
 
- [uml link](https://app.diagrams.net/#G1Owf_aSlQJI1wfX4vNaw9SJqupQmAUZAv#%7B%22pageId%22%3A%22C5RBs43oDa-KdzZeNtuy%22%7D) (last edited : 06/04/24)
-
 ## Development
 
 Follow these steps to clone the repository, set up your environment, and start the development servers. 
