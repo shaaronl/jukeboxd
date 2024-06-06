@@ -1,6 +1,6 @@
 # UML Class Diagram
 
-![UML Class Diagram](./docs/UML_Class_Diagram.png)
+![UML Class Diagram](./UML_Class_Diagram.png)
 
 **Last Updated:** June 5, 2024
 
