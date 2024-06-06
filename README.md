@@ -51,5 +51,7 @@ npm run lint
 npx prettier --write .
 ```
 
+## Documentation
 
+For more details, refer to the [UML Class Diagram](./docs/UML_Diagram.md).
 
