@@ -27,7 +27,7 @@ function generateAccessToken(username) {
 // middleware function to authenticate users
 export function authenticateUser(req, res, next) {
   const authHeader = req.headers["authorization"];
-  //Getting the 2nd part of the auth header (the token)
+  // gets the 2nd part of the auth header (the token)
   const token = authHeader && authHeader.split(" ")[1];
 
   if (!token) {

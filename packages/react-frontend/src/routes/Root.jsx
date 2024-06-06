@@ -1,7 +1,6 @@
 import "../index.css";
 import Navbar from "./Navbar";
 import Footer from "./FooterFiles/Footer";
-// import { Link } from "react-router-dom";
 import { MdMusicNote } from "react-icons/md";
 import { PiVinylRecordDuotone } from "react-icons/pi";
 
