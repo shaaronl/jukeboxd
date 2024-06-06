@@ -53,5 +53,5 @@ npx prettier --write .
 
 ## Documentation
 
-For more details, refer to the [UML Class Diagram](./docs/UML_Class_Diagram.md).
+For more details, refer to the [UML Class Diagram](./UML_Class_Diagram.md).
 
