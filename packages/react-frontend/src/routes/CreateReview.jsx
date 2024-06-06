@@ -97,6 +97,7 @@ export default function CreateReview() {
           src={album.album_cover}
           alt={album.album_name + "cover"}
           className="coverImage"
+          data-testid="album-cover"
         />
         <form className="reviewRight" onSubmit={handleSubmit}>
           <p>I STREAMED...</p>
@@ -109,6 +110,7 @@ export default function CreateReview() {
           <textarea
             placeholder="Add a review"
             onChange={updateReviewText}
+            data-testid="review-textarea"
           ></textarea>
           <p className="ratingText" htmlFor="rating">
             Rating
@@ -132,8 +134,9 @@ export default function CreateReview() {
                 }}
               />
             }
+            data-testid="rating"
           />
-          <button type="submit">SAVE</button>
+          <button type="submit" data-testid="submit-button">SAVE</button>
         </form>
       </div>
     </div>
