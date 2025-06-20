@@ -7,15 +7,13 @@
 
 **Unlike Letterboxd**, which focuses on movies, Jukeboxd is dedicated to the world of music, providing a space for in-depth reviews and ratings of individual songs and albums.
 
-
-The **deployed app** can be viewed at: https://kind-pebble-01340fc1e.5.azurestaticapps.net/
-
-And the **backend** can be accessed from: https://jukeboxd-music.azurewebsites.net/
+## Live Demo + Walkthrough
+[![Watch Demo](https://img.shields.io/badge/Watch-Demo-blue?logo=google-drive)](https://drive.google.com/file/d/1wF-uEJe96MVm8eUI-Ubf_tm6CVYqwYmt/view?usp=sharing)
 
 ## Artifacts
-
-### UI Prototype
-The UI Prototype can be accessed here: https://www.figma.com/design/BpFj1NG2oKtV8Dxo4gEHn8/Jukebox'd?node-id=0-1&t=Mt7yFI4xg6dEh0z8-1
+- **UI Prototype:** https://www.figma.com/design/BpFj1NG2oKtV8Dxo4gEHn8/Jukebox'd?node-id=0-1&t=Mt7yFI4xg6dEh0z8-1
+- **Deployed App:** https://kind-pebble-01340fc1e.5.azurestaticapps.net/
+- **Backend API:** https://jukeboxd-music.azurewebsites.net/
 
 ## Development
 
